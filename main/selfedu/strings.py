@@ -132,3 +132,48 @@ str.isupper() - Состоит ли строка из символов в вер
 # print(s.isdigit())  # False
 # print(s.isalpha())  # False (потому, что есть запятая и пробел)
 
+# Форматирование
+
+name = 'John'
+age = 30
+
+# print('My name is ' + name + '. I`m ' + str(age))  # My name is John. I`m 30
+
+# именные маркеры
+# print('My name is %(name)s. I`m %(age)d' % {'name': name, 'age': age})  # My name is John. I`m 30
+# %(name)s - маркер переменной name, s - string (тип данных).
+# %(age)d - маркер переменной age, d - digit.
+
+# позиционные маркеры
+# print('My name is %s. I`m %d' % (name, age))  # My name is John. I`m 30
+
+# Именные маркеры можно использовать в любой последовательности и сколько угодно раз.
+
+# print('Title: %s, Price: %f' % ('Sony', 40))  # Title: Sony, Price: 40.000000
+# print('Title: %s, Price: %.2f' % ('Sony', 40))  # Title: Sony, Price: 40.00
+# %.2f - число знаков после запятой 2 (в нашем случае)
+
+# Функция format()
+
+# позиционные маркеры
+# print('My name is {}. I`m {}'.format(name, age))  # My name is John. I`m 30
+# по-умолчанию     0       1
+# print('My name is {0}. I`m {1}'.format(name, age))  # My name is John. I`m 30
+# print('My {1} name is {0}. I`m {1}'.format(name, age))  # My 30 name is John. I`m 30
+
+# именные маркеры
+# print('My name is {name}. I`m {age}'.format(name=name, age=age))  # My name is John. I`m 30
+# print('My name is {name}. I`m {age}'.format(name='Boris', age=age))  # My name is Boris. I`m 30
+
+# F-Strings (Ф-строки)
+
+print(f'My name is {name}. I`m {age}')  # My name is John. I`m 30
+# f'My name is {name}. I`m {age}' - объявление ф-строки (f' ')
+
+# можно производить операции над переменными в самой строке
+print(f'My name is {name}. I`m {age + 5}')  # My name is John. I`m 35
+# аналогичная операция с помощью метода format()
+print('5 + 2 = {}'.format(5 + 2))  # 5 + 2 = 7
+print(f'5 + 2 = {5 + 2}')  # 5 + 2 = 7
+
+
