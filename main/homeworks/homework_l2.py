@@ -96,11 +96,11 @@ def guess_num():
             print('Загаданное число равно:', middle)
             break
         else:
-            question = 'Ваше число больше (+) или меньше (-) ' + str(middle) + '?'
+            question = 'Ваше число больше (у - да, n - нет) ' + str(middle) + '?'
             answer = input(question)
-            if answer == '+':
+            if answer == 'y':
                 low = middle + 1
-            elif answer == '-':
+            elif answer == 'n':
                 high = middle - 1
             else:
                 print('Ответ неверный, отвечайте y - да или n - нет.')
