@@ -93,14 +93,14 @@ def build_pyramid_1(height):
 
 
 def guess_num():
-    hidden_number = int(input('Загадайте число и введите его:'))
+    hidden_number = int(input('Загадайте число от 0 до 100 и введите его:'))
     # алгоритм определения участка поиска
-    low = 1
+    low = 0
     high = 100
     while True:
         middle = (high + low) // 2
         if middle == hidden_number:
-            print('Загаданное число равно:', middle)
+            print('Вы загадали:', middle)
             break
         else:
             question = 'Ваше число больше (у - да, n - нет) ' + str(middle) + '?'
