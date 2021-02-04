@@ -44,6 +44,8 @@ https://pythonworld.ru/tipy-dannyx-v-python/stroki-funkcii-i-metody-strok.html
 пирамиды.
 Также можно было реализовать отрисовку другими символами, спросив
 об этом пользователя, но в рамках домашнего задания я этого не делал.
+
+Также можно реализовать построение пирамиды через цикл for.
 """
 
 
@@ -58,6 +60,11 @@ def build_pyramid():
         print(result_string)
         multiplier_one -= 1
         multiplier_two += 1
+
+
+def build_pyramid_1(height):
+    for i in range(height):
+        print(' ' * (height - 1 - i) + '#' * (i + 1))
 
 
 # Задача 2
@@ -108,6 +115,7 @@ def guess_num():
 
 def main():
     build_pyramid()
+    build_pyramid_1(10)
     guess_num()
 
 
