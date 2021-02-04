@@ -51,12 +51,12 @@
 
 # 5. с помощью генератора
 
-nums = {i: i + 1 for i in range(1, 10)}
+# nums = {i: i + 1 for i in range(1, 10)}
 # print(nums)  # {1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 7, 7: 8, 8: 9, 9: 10}
 
 
-product1 = {'title': 'Sony', 'price': 100}
-product2 = dict(title='iPhone', price=110)
+# product1 = {'title': 'Sony', 'price': 100}
+# product2 = dict(title='iPhone', price=110)
 
 # получение значений
 
@@ -92,11 +92,11 @@ product2 = dict(title='iPhone', price=110)
 # title Sony
 # price 100
 
-products = [
-    {'title': 'Sony', 'price': 100},
-    {'title': 'iPhone', 'price': 110},
-    {'title': 'Samsung', 'price': 90}
-]
+# products = [
+#     {'title': 'Sony', 'price': 100},
+#     {'title': 'iPhone', 'price': 110},
+#     {'title': 'Samsung', 'price': 90}
+# ]
 # print(products)
 # [{'title': 'Sony', 'price': 100}, {'title': 'iPhone', 'price': 110}, {'title': 'Samsung', 'price': 90}]
 
@@ -106,4 +106,55 @@ products = [
 # iPhone 110
 # Samsung 90
 
+"""
+Методы словарей.
+
+# dict.clear() - очищает словарь.
+
+# dict.copy() - возвращает копию словаря.
+
+# dict.get(key[, default]) - возвращает значение ключа, но если его нет,
+не бросает исключение, а возвращает default (по умолчанию None).
+
+# dict.items() - возвращает пары (ключ, значение).
+
+# dict.keys() - возвращает ключи в словаре.
+
+# dict.pop(key[, default]) - удаляет ключ и возвращает значение.
+Если ключа нет, возвращает default (по умолчанию бросает исключение).
+
+# dict.popitem() - удаляет и возвращает пару (ключ, значение). Если словарь пуст,
+бросает исключение KeyError. Помните, что словари неупорядочены.
+
+# dict.setdefault(key[, default]) - возвращает значение ключа, но если его нет,
+не бросает исключение, а создает ключ с значением default (по умолчанию None).
+
+# dict.update([other]) - обновляет словарь, добавляя пары (ключ, значение) из other.
+Существующие ключи перезаписываются. Возвращает None (не новый словарь!).
+
+# dict.values() - возвращает значения в словаре
+"""
+
+product1 = {'title': 'Sony', 'price': 100}
+# print(product1.items())  # dict_items([('title', 'Sony'), ('price', 100)])
+# print(product1.keys())  # dict_keys(['title', 'price'])
+# print(product1.pop('title'))  # Sony
+# print(product1.pop('title2'))  # KeyError: 'title2'
+# print(product1)  # {'price': 100}
+
+# print(product1)
+# print(product1.setdefault('title'))
+# print(product1.setdefault('title2'))  # None
+# print(product1)  # {'title': 'Sony', 'price': 100, 'title2': None}
+# print(product1.setdefault('title2', 'TEST'))  # TEST
+# print(product1)  # {'title': 'Sony', 'price': 100, 'title2': 'TEST'}
+
+print(product1)
+product1.update({'test': 'value'})  # добавится test
+product1.update({'price': 200})  # перезапишется price
+print(product1)
+# {'title': 'Sony', 'price': 100}
+# {'title': 'Sony', 'price': 200, 'test': 'value'}
+
+print(product1.values())  # dict_values(['Sony', 200, 'value'])
 
