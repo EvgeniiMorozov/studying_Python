@@ -33,14 +33,22 @@ def is_triangle(side1, side2, side3):
     if (side1 + side2 <= side3 and side1 + side3 <= side2
             and side2 + side3 <= side1):
         print('Треугольника с такими сторонами не существует!')
-    else:
-        # Проверки на различные типы треугольников.
+
+    else:  # Проверки на различные типы треугольников.
+
+        # Проверка на равные стороны.
         if side1 == side2 and side2 == side3 and side1 == side3:
             print('Треугольник равносторонний.')
+
+        # Проверка на равнобедренность.
         elif check_isosceles(side1, side2, side3):
             print('Треугольник равнобедренный.')
+
+        # Проверка на соответсвие теореме Пифагора.
         elif check_pythagoras(side1, side2, side3):
             print('Треугольник прямоугольный.')
+
+        # Значит треугольник разносторонний.
         else:
             print('Треугольник разносторонний.')
 
