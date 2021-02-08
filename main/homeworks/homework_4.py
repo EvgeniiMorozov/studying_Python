@@ -1,3 +1,6 @@
+import random
+
+
 # Задача 1.
 
 # По длинам трех отрезков, введенных пользователем, определить возможность существования
@@ -32,31 +35,31 @@ def is_triangle(side1, side2, side3):
     # Проверяем, существует ли вообще такой треугольник.
     if (side1 + side2 <= side3 and side1 + side3 <= side2
             and side2 + side3 <= side1):
-        print('Треугольника с такими сторонами не существует!')
+        print('\nТреугольника с такими сторонами не существует!')
 
     else:  # Проверки на различные типы треугольников.
 
         # Проверка на равные стороны.
         if side1 == side2 and side2 == side3 and side1 == side3:
-            print('Треугольник равносторонний.')
+            print('\nТреугольник равносторонний.')
 
         # Проверка на равнобедренность.
         elif check_isosceles(side1, side2, side3):
-            print('Треугольник равнобедренный.')
+            print('\nТреугольник равнобедренный.')
 
         # Проверка на соответсвие теореме Пифагора.
         elif check_pythagoras(side1, side2, side3):
-            print('Треугольник прямоугольный.')
+            print('\nТреугольник прямоугольный.')
 
         # Значит треугольник разносторонний.
         else:
-            print('Треугольник разносторонний.')
+            print('\nТреугольник разносторонний.')
 
 
 # Проверка на выполнение теоремы Пифагора.
 def check_pythagoras(a, b, c):
     lst = [a, b, c]
-    hyp = max(lst)
+    hyp = max(lst)  # гипотенуза
     lst.remove(hyp)
     return True if hyp**2 == lst[0]**2 + lst[1]**2 else False
 
@@ -98,16 +101,36 @@ def reverse_arr_2(arr):
 
 # Вводятся строки. Определить самую длинную строку и вывести ее номер на
 # экран. Если самых длинных строк несколько, то вывести номера всех таких строк.
-def get_pos_maxlen_strings():
-    pass
+def get_pos_maxlen_strings(lst):
+    max_string = max(lst)
+    counter = lst.count(max_string)
+    print('Список: ', lst)
+    print(f'Строка максимальной длины: {max_string}')
+    if counter == 1:
+        print(f'Не повторяется и находится в списке под номером {lst.index(max_string)}')
+    else:
+        index_list = []
+        for i in range(len(lst)):
+            if max_string == lst[i]:
+                index_list.append(i)
+        print(f'Повторов: {counter}')
+        print(f'Находится в списке под номерами: {index_list}')
+
+
+# Функция-генератор списка строк (понадобится для проверки).
+def list_of_strings_gen(n, m):
+    lst = []
+    for _ in range(n):
+        lst.append(random.randint(1, m) * '#')
+    return lst
 
 
 def main():
     # Задача 1.
-    side1 = float(input('Введите 1 сторону треугольника: '))
-    side2 = float(input('Введите 2 сторону треугольника: '))
-    side3 = float(input('Введите 3 сторону треугольника: '))
-    is_triangle(side1, side2, side3)
+    # side1 = float(input('Введите 1 сторону треугольника: '))
+    # side2 = float(input('Введите 2 сторону треугольника: '))
+    # side3 = float(input('Введите 3 сторону треугольника: '))
+    # is_triangle(side1, side2, side3)
     # Для проверки прямоугольного треугольника, можно ввести 3, 4, 5.
 
     # Задача 2.
@@ -117,6 +140,8 @@ def main():
     # print(reverse_arr_2(arr))
 
     # Задача 3.
+    rand_list = list_of_strings_gen(10, 10)
+    get_pos_maxlen_strings(rand_list)
     # pass
 
 
