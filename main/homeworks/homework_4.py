@@ -1,3 +1,5 @@
+# Морозов Е.И. группа: Python026
+
 import random
 
 
