@@ -136,7 +136,7 @@ def get_pos_maxlen_strings(lst):
     print('Список: ', lst)
     print(f'Строка c максимальной длиной: {max_length}')
     if counter == 1:
-        print(f'Не повторяется и находится в списке под номером {lst.index(max_length)}')
+        print(f'Не повторяется и находится в списке под номером {length_list.index(max_length)}')
     else:
         # Если больше 1го раза, то:
         index_list = []  # список, куда будут складываться индексы строк c max_length
