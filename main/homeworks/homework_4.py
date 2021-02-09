@@ -101,21 +101,49 @@ def reverse_arr_2(arr):
     return new_arr
 
 
+# Задача 3.
+
 # Вводятся строки. Определить самую длинную строку и вывести ее номер на
 # экран. Если самых длинных строк несколько, то вывести номера всех таких строк.
 # В дополнение к этой задаче, я написал функцию-генератор списка строк list_of_strings_gen(),
 # чтоб удобно было проверять.
+# def get_pos_maxlen_strings(lst):
+#     # Определяем строку максимальной длины с помощью функции max().
+#     max_string = max(lst)
+#     # Определяем, сколько раз строка max_string повторяется в списке.
+#     counter = lst.count(max_string)
+#     print('Список: ', lst)
+#     print(f'Строка максимальной длины: {max_string}')
+#     if counter == 1:
+#         # Если строка появляется 1 раз, то:
+#         print(f'Не повторяется и находится в списке под номером {lst.index(max_string)}')
+#     else:
+#         # Если больше 1го раза, то:
+#         index_list = []  # список, куда будут складываться индексы строки max_string
+#         # С помощью цикла, пройдемся по всем элементам и сравним их с max_string.
+#         for i in range(len(lst)):
+#             # Если строки совпали
+#             if max_string == lst[i]:
+#                 index_list.append(i)
+#         print(f'Повторов: {counter}')
+#         print(f'Находится в списке под номерами: {index_list}')
 def get_pos_maxlen_strings(lst):
-    max_string = max(lst)
-    counter = lst.count(max_string)
+    length_list = []
+    for i in range(len(lst)):
+        length_list.append(len(lst[i]))
+    max_length = max(length_list)
+    counter = length_list.count(max_length)
     print('Список: ', lst)
-    print(f'Строка максимальной длины: {max_string}')
+    print(f'Строка c максимальной длиной: {max_length}')
     if counter == 1:
-        print(f'Не повторяется и находится в списке под номером {lst.index(max_string)}')
+        print(f'Не повторяется и находится в списке под номером {lst.index(max_length)}')
     else:
-        index_list = []
+        # Если больше 1го раза, то:
+        index_list = []  # список, куда будут складываться индексы строк c max_length
+        # С помощью цикла, пройдемся по всем элементам и сравним их с max_length.
         for i in range(len(lst)):
-            if max_string == lst[i]:
+            # Если строки совпали
+            if max_length == length_list[i]:
                 index_list.append(i)
         print(f'Повторов: {counter}')
         print(f'Находится в списке под номерами: {index_list}')
@@ -124,8 +152,14 @@ def get_pos_maxlen_strings(lst):
 # Функция-генератор списка строк (понадобится для проверки).
 def list_of_strings_gen(n, m):
     lst = []
+
+    def random_letter():
+        letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+        rnd = random.randint(0, 52)
+        return letters[rnd]
+
     for _ in range(n):
-        lst.append(random.randint(1, m) * '#')
+        lst.append(random.randint(1, m) * random_letter())
     return lst
 
 
@@ -144,7 +178,7 @@ def main():
     # print(reverse_arr_2(arr))
 
     # Задача 3.
-    rand_list = list_of_strings_gen(10, 10)
+    rand_list = list_of_strings_gen(20, 15)
     get_pos_maxlen_strings(rand_list)
     # pass
 
