@@ -103,63 +103,69 @@ def reverse_arr_2(arr):
 
 # Задача 3.
 
+
 # Вводятся строки. Определить самую длинную строку и вывести ее номер на
 # экран. Если самых длинных строк несколько, то вывести номера всех таких строк.
-# В дополнение к этой задаче, я написал функцию-генератор списка строк list_of_strings_gen(),
-# чтоб удобно было проверять.
-# def get_pos_maxlen_strings(lst):
-#     # Определяем строку максимальной длины с помощью функции max().
-#     max_string = max(lst)
-#     # Определяем, сколько раз строка max_string повторяется в списке.
-#     counter = lst.count(max_string)
-#     print('Список: ', lst)
-#     print(f'Строка максимальной длины: {max_string}')
-#     if counter == 1:
-#         # Если строка появляется 1 раз, то:
-#         print(f'Не повторяется и находится в списке под номером {lst.index(max_string)}')
-#     else:
-#         # Если больше 1го раза, то:
-#         index_list = []  # список, куда будут складываться индексы строки max_string
-#         # С помощью цикла, пройдемся по всем элементам и сравним их с max_string.
-#         for i in range(len(lst)):
-#             # Если строки совпали
-#             if max_string == lst[i]:
-#                 index_list.append(i)
-#         print(f'Повторов: {counter}')
-#         print(f'Находится в списке под номерами: {index_list}')
-def get_pos_maxlen_strings(lst):
-    length_list = []
-    for i in range(len(lst)):
-        length_list.append(len(lst[i]))
-    max_length = max(length_list)
-    counter = length_list.count(max_length)
-    print('Список: ', lst)
+"""
+Решение:
+Так как по условию задачи сказано, найти строки с максимальной длиной, то преобразуем
+список строк strings_list в список длин строк lengths_list. Очевидно, что индексы строк
+будут будут совпадать с индексами их длин. И исходя из этого:
+- в списке длин определиммаксимальную длину max_length (с помощью функции max());
+- определим количество совпадений length_counter (с помощью list.count()), если их
+  будет больше 1, то с помощью цикла for подсчитаем их и запишем индексы в список index_list.
+
+В дополнение к этой задаче, я написал функцию-генератор списка строк list_of_strings_gen(),
+чтоб удобно было проверять.
+"""
+
+
+def get_pos_maxlen_strings(strings_list):
+    # for i in range(len(strings_list)):
+    #     lengths_list.append(len(strings_list[i]))
+
+    # В оконочательном варианте, я сформировал список длин с помощью генератора списка.
+    lengths_list = [len(strings_list[i]) for i in range(len(strings_list))]
+    max_length = max(lengths_list)
+    length_counter = lengths_list.count(max_length)
+    print('Список: ', strings_list)
     print(f'Строка c максимальной длиной: {max_length}')
-    if counter == 1:
-        print(f'Не повторяется и находится в списке под номером {length_list.index(max_length)}')
+    # Определяем, сколько раз повторяются строки с max_length.
+    if length_counter == 1:
+        # Если нет повторений:
+        print(f'Не повторяется и находится в списке под номером {lengths_list.index(max_length)}')
     else:
         # Если больше 1го раза, то:
         index_list = []  # список, куда будут складываться индексы строк c max_length
         # С помощью цикла, пройдемся по всем элементам и сравним их с max_length.
-        for i in range(len(lst)):
-            # Если строки совпали
-            if max_length == length_list[i]:
+        for i in range(len(strings_list)):
+            # Если длины совпали
+            if max_length == lengths_list[i]:
+                # записываем их индексы в список
                 index_list.append(i)
-        print(f'Повторов: {counter}')
+        print(f'Повторов: {length_counter}')
         print(f'Находится в списке под номерами: {index_list}')
 
 
 # Функция-генератор списка строк (понадобится для проверки).
 def list_of_strings_gen(n, m):
+    """
+    Возвращает список псевдослучайных строк различной длины.
+
+    :param n: количество строк в списке.
+    :type n: int
+    :param m: максимальная длина строки.
+    :type m: int
+    :return: list[str]
+    """
     lst = []
 
-    def random_letter():
-        letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-        rnd = random.randint(0, 52)
-        return letters[rnd]
+    def random_symbol():
+        letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890'
+        return letters[random.randint(0, 61)]
 
     for _ in range(n):
-        lst.append(random.randint(1, m) * random_letter())
+        lst.append(random.randint(1, m) * random_symbol())
     return lst
 
 
@@ -169,7 +175,7 @@ def main():
     # side2 = float(input('Введите 2 сторону треугольника: '))
     # side3 = float(input('Введите 3 сторону треугольника: '))
     # is_triangle(side1, side2, side3)
-    # Для проверки прямоугольного треугольника, можно ввести 3, 4, 5.
+    # # Для проверки прямоугольного треугольника, можно ввести 3, 4, 5.
 
     # Задача 2.
     # arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
