@@ -147,6 +147,16 @@ def get_pos_maxlen_strings(strings_list):
         print(f'Находится в списке под номерами: {index_list}')
 
 
+def get_pos_maxlen_strings_1(arr):
+    ids_arr = [0]
+    for i in range(1, len(arr)):
+        if len(arr[i]) > len(arr[ids_arr[0]]):
+            ids_arr = [i]
+        elif len(arr[i]) == len(arr[ids_arr[0]]):
+            ids_arr.append(i)
+    return ids_arr
+
+
 # Функция-генератор списка строк (понадобится для проверки).
 def list_of_strings_gen(n, m):
     """
@@ -184,8 +194,10 @@ def main():
     # print(reverse_arr_2(arr))
 
     # Задача 3.
-    rand_list = list_of_strings_gen(20, 15)
-    get_pos_maxlen_strings(rand_list)
+    # rand_list = list_of_strings_gen(20, 15)
+    # get_pos_maxlen_strings(rand_list)
+    strings = input('Введите строки: ').split(' ')
+    print(get_pos_maxlen_strings_1(strings))
     # pass
 
 
