@@ -51,6 +51,11 @@ def capitalize_strings(arr: list) -> list:
 # Для решения задачи, запустим рекурсию вычисления квадратного корня из
 # полученного результата. Выходом из рекурсии будет служить результат равный 2.
 def exact_degree_two(num):
+    """
+    Определяет, является ли заданное число точной степенью числа 2.
+    :param num: заданное число.
+    :return: string
+    """
     result = num / 2
     while result % 2 == 0 and result != 2:
         exact_degree_two(result)
