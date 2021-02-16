@@ -88,11 +88,13 @@ def min_neib_els_sum(arr):
 def get_num(num):
     for k in range(10**7):
         mul_k = 1
-        while k > 0:
-            mul_k *= k % 10
-            k //= 10
+        k_copy = k
+        while k_copy > 0:
+            mul_k *= k_copy % 10
+            k_copy //= 10
         if mul_k == num:
-            print(f'Для числа: {num} подходит {mul_k}')
+            print(f'Для числа: {num} подходит {k}')
+            break
 
 
 def get_num_1(num):
