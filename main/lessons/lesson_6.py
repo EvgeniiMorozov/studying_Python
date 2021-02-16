@@ -86,20 +86,22 @@ def min_neib_els_sum(arr):
 
 
 def get_num(num):
-    # mul_k = 1
-    # delimetr = 10
-    # for k in range(10**7):
-    #     bitness = 0
-    #     copy_k= k
-    #     while copy_k > 0:
-    #         copy_k //= 10**bitness
-    #         bitness += 1
-    #     while k > 0:
-    #         mul_k += k //
+    for k in range(10**7):
+        mul_k = 1
+        while k > 0:
+            mul_k *= k % 10
+            k //= 10
+        if mul_k == num:
+            print(f'Для числа: {num} подходит {mul_k}')
 
 
 def get_num_1(num):
-    pass
+    min_num_k = 1
+    while (reduce(lambda x, y: x * y, [int(i) for i in str(min_num_k)]) != num
+           and min_num_k != 10 ** 7):
+        min_num_k += 1
+    print(f'Заданное число: {num}')
+    print(f'Искомое число: {min_num_k}')
 
 
 def main():
