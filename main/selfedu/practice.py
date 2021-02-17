@@ -99,12 +99,34 @@ def end_zeros(number):
 """
 
 
+# Task_3
+# Проверить все ли символы в строке являются заглавными.
+# Если строка пустая или в ней нет букв - функция должна вернуть True.
+# Входные данные: Строка.
+# Выходные данные: Логический тип.
+# Условия: a-z, A-Z, 1-9 и пробелы
+def is_all_upper(text: str) -> bool:
+    # if text.isupper():
+    #     return True
+    # elif text == '':
+    #     return True
+    # elif len(text) == text.count(' '):
+    #     return True
+    # else:
+    #     return False
+    return True if text.isupper() or text == '' or len(text) == text.count(' ') else False
+
+
 def main():
     # Task_1
     # lst = random_turns(23)
     # counting_rotates(lst)
+
+    # Task_2
     # print(end_zeros(1200))
     print(end_zeros_1(1200))
+
+    # Task_3
 
 
 if __name__ == '__main__':
