@@ -57,10 +57,10 @@ def exact_degree_two(num):
     :return: string
     """
     result = num / 2
-    while result % 2 == 0 and result != 2:
+    while result % 2 == 0 and result >= 2:
         exact_degree_two(result)
         result /= 2
-    return 'YES' if result == 2 else 'NO'
+    return 'YES' if result == 2 or result == 1 else 'NO'
 
 
 def main():
