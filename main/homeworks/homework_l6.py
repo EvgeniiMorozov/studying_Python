@@ -24,6 +24,7 @@ def sort_sum(arr: list[int]) -> int:
 def list_of_integers(n: int) -> list[int]:
     """
     Генерирует список из натуральных чисел.
+
     :param n: количество элементов списка.
     :return: list[int]
     """
@@ -53,6 +54,7 @@ def capitalize_strings(arr: list) -> list:
 def exact_degree_two(num):
     """
     Определяет, является ли заданное число точной степенью числа 2.
+
     :param num: заданное число.
     :return: string
     """
