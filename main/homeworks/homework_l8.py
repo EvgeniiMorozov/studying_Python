@@ -18,6 +18,7 @@
 
 # Задача 4. Реализуйте функцию get_sign, которая извлекает из переданного текста строку
 # номерного знака автомобиля (РФ).
+
 from re import findall
 
 
@@ -54,7 +55,7 @@ def get_time(string: str) -> str:
 
 # Задача 4
 def get_sign(string: str) -> str:
-    res = findall(r'[ ]?[\w\D]{1}[ ]?\d{3}[ ]?[\w\D]{2}[ ]?\d{2,3}[ ]?', string)
+    res = findall(r'[ ]?[А-Яа-яЁё][ ]?\d{3}[ ]?[А-Яа-яЁё]{2}[ ]?\d{2,3}[RUSrus]?[ ]?', string)
     return str(res)
 
 
