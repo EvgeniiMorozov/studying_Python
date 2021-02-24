@@ -55,8 +55,8 @@ def get_time(string: str) -> str:
 
 # Задача 4
 def get_sign(string: str) -> str:
-    res = findall(r'[ ]?[А-Яа-яЁё][ ]?\d{3}[ ]?[А-Яа-яЁё]{2}[ ]?\d{2,3}[RUSrus]?[ ]?', string)
-    return str(res)
+    res = findall(r'[ ]([А-Яа-яЁё]\d{3}[А-Яа-яЁё]{2}\d{2,3})[ ]', string)
+    return res[0] if len(res) != 0 else 'Номеров нет!'
 
 
 def main():
@@ -74,10 +74,10 @@ def main():
 
     # Задача 4
     numbers = [
-        'ц123ук45',
-        'ц 123 ук 45',
-        'ц 123 ук 456',
-        'ц123ук456',
+        'grwtrth ц123ук45 321412345',
+        '21342134 ц 123 ук 45 asdfgwehg',
+        '213434fsdcsdfrefg ц 123 ук 456 dfsgewxbxdfs',
+        '234вапвап234вапвапwedfsdf ц123ук456 wqe213rqwedf',
     ]
     for number in numbers:
         print(get_sign(number))
