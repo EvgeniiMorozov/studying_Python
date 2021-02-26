@@ -17,7 +17,7 @@
 # Задача 4. Реализуйте функцию get_sign, которая извлекает из переданного текста строку
 # номерного знака автомобиля (РФ).
 
-from re import IGNORECASE
+# from re import IGNORECASE
 from re import findall
 
 
@@ -75,8 +75,7 @@ def get_sign(string: str) -> str:
 
 
 def get_sign_1(string: str) -> str:
-    res = findall(r'[ ]([абвгдежзиклмнопрстуфхцчшщэюя]\d{3}[абвгдежзиклмнопрстуфхцчшщэюя]{2}\d{2,3})[ ]',
-                  string, flags=IGNORECASE)
+    res = findall(r'[ ]([АВЕКМНОРСТУХ]\d{3}[АВЕКМНОРСТУХ]{2}\d{2,3})[ ]', string)
     return res[0] if len(res) != 0 else 'Номеров нет!'
 
 
