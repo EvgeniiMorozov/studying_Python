@@ -17,6 +17,7 @@
 # Задача 4. Реализуйте функцию get_sign, которая извлекает из переданного текста строку
 # номерного знака автомобиля (РФ).
 
+from re import IGNORECASE
 from re import findall
 
 
@@ -51,9 +52,31 @@ def get_time(string: str) -> str:
     return (findall(r'\d{2}[:]\d{2}[:]\d{2}', string))[0]
 
 
+def get_time_1(string: str) -> str:
+
+    if len(findall(r'\d{2}[:]\d{2}[:]\d{2}', string)) != 0:
+        # Преобразуем и распакуем полученный список в переменные
+        dd, mm, ss = findall(r'\d{2}[:]\d{2}[:]\d{2}', string)[0].split(':')
+
+        if int(dd) < 24 and int(mm) <= 60 and int(ss) <= 60:
+            return (findall(r'\d{2}[:]\d{2}[:]\d{2}', string))[0]
+
+        # elif int(dd) == 24 and int(mm) != 0 and int(ss) != 0:
+        #     return 'Время не обнаружено!'
+
+        else:
+            return 'Время не обнаружено!'
+
+
 # Задача 4
 def get_sign(string: str) -> str:
     res = findall(r'[ ]([А-Яа-яЁё]\d{3}[А-Яа-яЁё]{2}\d{2,3})[ ]', string)
+    return res[0] if len(res) != 0 else 'Номеров нет!'
+
+
+def get_sign_1(string: str) -> str:
+    res = findall(r'[ ]([абвгдежзиклмнопрстуфхцчшщэюя]\d{3}[абвгдежзиклмнопрстуфхцчшщэюя]{2}\d{2,3})[ ]',
+                  string, flags=IGNORECASE)
     return res[0] if len(res) != 0 else 'Номеров нет!'
 
 
@@ -67,18 +90,42 @@ def main():
     # print(splice_nums(100, 500))
 
     # Задача 3
-    string = '1232453 2656d fgfghdfg7578 868678 12:23:41 ds fv rgh4534 23 34 23 435'
-    print(get_time(string))
+    # string = '1232453 2656d fgfghdfg7578 868678 12:23:41 ds fv rgh4534 23 34 23 435'
+    # print(get_time(string))
 
     # Задача 4
+    # numbers = [
+    #     'grwtrth ц123ук45 321412345',
+    #     '21342134 ц 123 ук 45 asdfgwehg',
+    #     '213434fsdcsdfrefg ц 123 ук 456 dfsgewxbxdfs',
+    #     '234вапвап234вапвапwedfsdf ц123ук456 wqe213rqwedf',
+    # ]
+    # for number in numbers:
+    #     print(get_sign(number))
+
+    times = [
+        '12:23:59',
+        '00:23:59',
+        '24:00:00',
+        '00:00:00',
+        '24:00:02',
+        '69:96:91',
+    ]
+    for time in times:
+        print(get_time_1(time))
+
+    print('\n==============================\n')
+
     numbers = [
         'grwtrth ц123ук45 321412345',
         '21342134 ц 123 ук 45 asdfgwehg',
         '213434fsdcsdfrefg ц 123 ук 456 dfsgewxbxdfs',
         '234вапвап234вапвапwedfsdf ц123ук456 wqe213rqwedf',
+        'цуаукее Ъ232ЬЁ45 цукакер437768',
+        'цуаукее ъ232ыЁ45 цукакер437768'
     ]
     for number in numbers:
-        print(get_sign(number))
+        print(get_sign_1(number))
 
 
 if __name__ == '__main__':
