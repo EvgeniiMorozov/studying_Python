@@ -79,7 +79,7 @@ def get_sign(string: str) -> str:
 
 
 def get_sign_1(string: str) -> str:
-    res = findall(r'[ ]([АВЕКМНОРСТУХ]\d{3}[АВЕКМНОРСТУХ]{2}\d{2,3})[ ]', string, flags=IGNORECASE)
+    res = findall(r'\b[АВЕКМНОРСТУХ]\d{3}[АВЕКМНОРСТУХ]{2}\d{2,3}', string, flags=IGNORECASE)
     return res[0] if len(res) != 0 else 'Номеров нет!'
 
 
