@@ -17,7 +17,7 @@
 # Задача 4. Реализуйте функцию get_sign, которая извлекает из переданного текста строку
 # номерного знака автомобиля (РФ).
 
-# from re import IGNORECASE
+from re import IGNORECASE
 from re import findall
 
 
@@ -52,20 +52,29 @@ def get_time(string: str) -> str:
     return (findall(r'\d{2}[:]\d{2}[:]\d{2}', string))[0]
 
 
-def get_time_1(string: str) -> str:
+# def get_time_1(string: str) -> str:
+#
+#     if len(findall(r'\d{2}[:]\d{2}[:]\d{2}', string)) != 0:
+#         # Преобразуем и распакуем полученный список в переменные
+#         dd, mm, ss = findall(r'\d{2}[:]\d{2}[:]\d{2}', string)[0].split(':')
+#
+#         if int(dd) <= 24 and int(mm) <= 60 and int(ss) <= 60:
+#             return (findall(r'\d{2}[:]\d{2}[:]\d{2}', string))[0]
+#
+#         elif int(dd) == 24 and int(mm) != 0 and int(ss) != 0:
+#             return 'Время не обнаружено!'
+#
+#         else:
+#             return 'Время не обнаружено!'
 
-    if len(findall(r'\d{2}[:]\d{2}[:]\d{2}', string)) != 0:
-        # Преобразуем и распакуем полученный список в переменные
-        dd, mm, ss = findall(r'\d{2}[:]\d{2}[:]\d{2}', string)[0].split(':')
 
-        if int(dd) < 24 and int(mm) <= 60 and int(ss) <= 60:
-            return (findall(r'\d{2}[:]\d{2}[:]\d{2}', string))[0]
-
-        # elif int(dd) == 24 and int(mm) != 0 and int(ss) != 0:
-        #     return 'Время не обнаружено!'
-
-        else:
-            return 'Время не обнаружено!'
+def get_time_1(string: str):
+    # if len(findall(r'([01][0-9]|[2][0123])[:]([0-5][0-9])[:]([0-5][0-9])', string)) != 0:
+    #     return findall(r'([01][0-9]|[2][0123])[:]([0-5][0-9])[:]([0-5][0-9])', string)
+    if len(findall(r'[01][0-9]|[2][0123]:[0-5][0-9]:[0-5][0-9]', string)) != 0:
+        return findall(r'[01][0-9]|[2][0123]:[0-5][0-9]:[0-5][0-9]', string)
+    else:
+        return 'Error'
 
 
 # Задача 4
@@ -75,7 +84,7 @@ def get_sign(string: str) -> str:
 
 
 def get_sign_1(string: str) -> str:
-    res = findall(r'[ ]([АВЕКМНОРСТУХ]\d{3}[АВЕКМНОРСТУХ]{2}\d{2,3})[ ]', string)
+    res = findall(r'[ ]([АВЕКМНОРСТУХ]\d{3}[АВЕКМНОРСТУХ]{2}\d{2,3})[ ]', string, flags=IGNORECASE)
     return res[0] if len(res) != 0 else 'Номеров нет!'
 
 
@@ -113,18 +122,18 @@ def main():
     for time in times:
         print(get_time_1(time))
 
-    print('\n==============================\n')
+    # print('\n==============================\n')
 
-    numbers = [
-        'grwtrth ц123ук45 321412345',
-        '21342134 ц 123 ук 45 asdfgwehg',
-        '213434fsdcsdfrefg ц 123 ук 456 dfsgewxbxdfs',
-        '234вапвап234вапвапwedfsdf ц123ук456 wqe213rqwedf',
-        'цуаукее Ъ232ЬЁ45 цукакер437768',
-        'цуаукее ъ232ыЁ45 цукакер437768'
-    ]
-    for number in numbers:
-        print(get_sign_1(number))
+    # numbers = [
+    #     'grwtrth ц123ук45 321412345',
+    #     '21342134 ц 123 ук 45 asdfgwehg',
+    #     '213434fsdcsdfrefg ц 123 ук 456 dfsgewxbxdfs',
+    #     '234вапвап234вапвапwedfsdf ц123ук456 wqe213rqwedf',
+    #     'цуаукее Ъ232ЬЁ45 цукакер437768',
+    #     'цуаукее ъ232ыЁ45 цукакер437768'
+    # ]
+    # for number in numbers:
+    #     print(get_sign_1(number))
 
 
 if __name__ == '__main__':
