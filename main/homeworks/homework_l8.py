@@ -69,12 +69,7 @@ def get_time(string: str) -> str:
 
 
 def get_time_1(string: str):
-    # if len(findall(r'([01][0-9]|[2][0123])[:]([0-5][0-9])[:]([0-5][0-9])', string)) != 0:
-    #     return findall(r'([01][0-9]|[2][0123])[:]([0-5][0-9])[:]([0-5][0-9])', string)
-    if len(findall(r'[01][0-9]|[2][0123]:[0-5][0-9]:[0-5][0-9]', string)) != 0:
-        return findall(r'[01][0-9]|[2][0123]:[0-5][0-9]:[0-5][0-9]', string)
-    else:
-        return 'Error'
+    return findall(r'\b[01]\d:[0-5]\d:[0-5]\d|\b2[0-3]:[0-5]\d:[0-5]\d', string)
 
 
 # Задача 4
@@ -118,6 +113,7 @@ def main():
         '00:00:00',
         '24:00:02',
         '69:96:91',
+        '201:10:10'
     ]
     for time in times:
         print(get_time_1(time))
