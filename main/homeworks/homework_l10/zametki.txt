@@ -1,0 +1,31 @@
+# def delete_even_nums_in_file(file):
+#
+#     def _read(file):
+#
+#         f = open(f'{file}', 'r')
+#         # Формируем генератор словаря строк файла при помощи методов enumerate() и readlines():
+#         # ключ словаря: i - итератор enumerate()
+#         # значение словаря: отдельная строка файла, причем необходимо
+#         unsort_dict = {i: line.strip('\n \t') for i, line in enumerate(f.readlines())}
+#         f.close()
+#         print(unsort_dict)
+#
+#         return unsort_dict
+#
+#     def _del_even(dct):
+#         # for key, value in dct.items():
+#         #     nv = list(filter(lambda i: int(i) % 2 != 0, value.split()))
+#         #     print(f'{key} : {nv}')
+#
+#         sort_dict = {key: ' '.join(list(filter(lambda i: int(i) % 2 != 0, value.split()))) for key, value in dct.items()}
+#         print(sort_dict)
+#         return sort_dict
+#
+#     def _rewrite(file, dct):
+#         shutil.copy(f'{file}', 'template.txt')
+#         f = open(f'{file}', 'a')
+#
+#         f.close()
+#         pass
+#
+#     return _rewrite(file, _del_even(_read(file)))
