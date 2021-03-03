@@ -25,13 +25,11 @@ def delete_even_nums_in_file(file):
         f = open(f'{file}', 'r', encoding='UTF-8')
         lst = [line.strip('\t\n').split() for line in f.readlines()]
         f.close()
-        # print(lst)
         return lst
 
     # Сортируем подсписки с помощью функции filter().
     def _sort(arrays):
         sort_arr = [' '.join(list(filter(lambda el: int(el) % 2 != 0, array))) for array in arrays]
-        # print(sort_arr)
         return sort_arr
 
     # Записываем отсортированные данные в файл.
@@ -70,7 +68,31 @@ def get_rnd_file(file_name, number_of_lines):
         file.write(get_string_of_rnd_nums(randint(0, 20)) + '\n')
     file.close()
 
+
 # Задача 2.
+def search_string(file, target_string):
+
+    def _read(file):
+        f = open(f'{file}', 'r', encoding='UTF-8')
+        lines = [line.strip('\n') for line in f.readlines()]
+
+        return lines
+
+    def _search_and_sort(array, string):
+        new_array = []
+        for arr in array:
+            if len(findall(string, arr)) != 0:
+                new_array.append(arr)
+        print(new_array)
+        return new_array
+
+    def _write_file(lst):
+        f = open('ex3_result.txt', 'w', encoding='UTF-8')
+        for line in lst:
+            f.write(line + '\n')
+        f.close()
+
+    return _write_file(_search_and_sort(_read(file), target_string))
 
 
 # Задача 3.
@@ -112,10 +134,11 @@ def main():
     # delete_even_nums_in_file('example.txt')
 
     # Задача 2.
+    search_string('text_1.txt', 'Главный герой')
 
     # Задача 3.
-    print(find_intersections('text_1.txt', 'text_2.txt'))
-    print(find_intersections_1('text_1.txt', 'text_2.txt'))
+    # print(find_intersections('text_1.txt', 'text_2.txt'))
+    # print(find_intersections_1('text_1.txt', 'text_2.txt'))
 
 
 if __name__ == '__main__':
