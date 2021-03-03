@@ -10,6 +10,8 @@
 
 from functools import reduce
 from random import randint
+from re import IGNORECASE
+from re import findall
 import shutil
 
 
@@ -18,7 +20,7 @@ def delete_even_nums_in_file(file):
     # создаем копию исходного файла для сравнения
     shutil.copy(f'{file}', 'template.txt')
 
-    # Считываем строки в список и разбиваем их на подписки
+    # Считываем строки в список и разбиваем их на подписки.
     def _read(file):
         f = open(f'{file}', 'r', encoding='UTF-8')
         lst = [line.strip('\t\n').split() for line in f.readlines()]
@@ -26,13 +28,14 @@ def delete_even_nums_in_file(file):
         # print(lst)
         return lst
 
-    # Сортируем подсписки с помощью функции filter()
+    # Сортируем подсписки с помощью функции filter().
     def _sort(arrays):
         sort_arr = [' '.join(list(filter(lambda el: int(el) % 2 != 0, array))) for array in arrays]
         # print(sort_arr)
         return sort_arr
 
-    # Записываем отсортированные данные в файл (по сути, мы создаем новый файл с таким же именем и туда заливаем данные)
+    # Записываем отсортированные данные в файл.
+    # (но по сути, мы создаем новый файл с таким же именем и туда заливаем данные)
     def _write(file, arrays):
         f = open(f'{file}', 'w', encoding='UTF-8')
         for arr in arrays:
@@ -42,7 +45,7 @@ def delete_even_nums_in_file(file):
     return _write(file, _sort(_read(file)))
 
 
-# Генератор строки со случайными числами
+# Генератор строки со случайными числами.
 def get_string_of_rnd_nums(n):
     """
     Генерирует строку из n случайных чисел.
@@ -53,7 +56,7 @@ def get_string_of_rnd_nums(n):
     return ' '.join(str(el) for el in [randint(0, 100) for _ in range(n)])
 
 
-# Генератор файла со случайными числами
+# Генератор файла со случайными числами.
 def get_rnd_file(file_name, number_of_lines):
     """
     Создаёт файл с заданными количеством строк, состоящих из случайных чисел.
@@ -82,11 +85,25 @@ def find_intersections(file_1, file_2):
 
     # Сортируем полученный список и преобразуем в множество.
     def _receive_set(lst):
-        array = list(filter(lambda el: len(el) > 1, reduce(lambda arr, el: arr + el, lst)))
+        array = list(filter(lambda el: len(el.strip('-.,\'\"')) > 0, reduce(lambda arr, el: arr + el, lst)))
         new_arr = list(map(lambda el: el.strip('-.,\'\"'), array))
         return {el for el in new_arr}
 
     return _receive_set(_read_file(file_1)) & _receive_set(_read_file(file_2))
+
+
+def find_intersections_1(file_1, file_2):
+
+    def _receive_set_from_file(file):
+        f = open(f'{file}', 'r', encoding='UTF-8')
+        lines = f.readlines()
+        f.close()
+        new_lst = []
+        for line in lines:
+            new_lst.append(findall(f'[А-ЯЁ]+', line, flags=IGNORECASE))
+        return set(reduce(lambda arr, el: arr + el, new_lst))
+
+    return _receive_set_from_file(file_1) & _receive_set_from_file(file_2)
 
 
 def main():
@@ -98,6 +115,7 @@ def main():
 
     # Задача 3.
     print(find_intersections('text_1.txt', 'text_2.txt'))
+    print(find_intersections_1('text_1.txt', 'text_2.txt'))
 
 
 if __name__ == '__main__':
