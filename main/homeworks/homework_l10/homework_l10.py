@@ -16,6 +16,7 @@ import shutil
 
 
 # Задача 1.
+# Для проверки этой задачи, я сделал генератор файла со строками чисел get_rnd_file.
 def delete_even_nums_in_file(file):
     # создаем копию исходного файла для сравнения
     shutil.copy(f'{file}', 'template.txt')
@@ -23,9 +24,11 @@ def delete_even_nums_in_file(file):
     # Считываем строки в список и разбиваем их на подписки.
     def _read(file):
         f = open(f'{file}', 'r', encoding='UTF-8')
-        lst = [line.strip('\t\n').split() for line in f.readlines()]
+        lines = []
+        for line in f.readlines():
+            lines.append(findall(r'\d+', line))
         f.close()
-        return lst
+        return lines
 
     # Сортируем подсписки с помощью функции filter().
     def _sort(arrays):
@@ -43,17 +46,6 @@ def delete_even_nums_in_file(file):
     return _write(file, _sort(_read(file)))
 
 
-# Генератор строки со случайными числами.
-def get_string_of_rnd_nums(n):
-    """
-    Генерирует строку из n случайных чисел.
-
-    :param n: количество чисел в строке
-    :return: string
-    """
-    return ' '.join(str(el) for el in [randint(0, 100) for _ in range(n)])
-
-
 # Генератор файла со случайными числами.
 def get_rnd_file(file_name, number_of_lines):
     """
@@ -63,29 +55,66 @@ def get_rnd_file(file_name, number_of_lines):
     :param number_of_lines: количество строк
     :return: file
     """
+
+    def _get_string_of_rnd_nums(n):
+        """Генерирует строку из n случайных чисел."""
+        return ' '.join(str(el) for el in [randint(0, 100) for _ in range(n)])
+
     file = open(f'{file_name}', 'w')
     for num in range(number_of_lines):
-        file.write(get_string_of_rnd_nums(randint(0, 20)) + '\n')
+        file.write(_get_string_of_rnd_nums(randint(0, 20)) + '\n')
     file.close()
 
 
 # Задача 2.
+# В этой задаче, для поиска заданной строки воспользуюсь методом findall() из модуля re.
 def search_string(file, target_string):
 
+    # Считываем информацию из файла построчно и возвращаем список.
     def _read(file):
         f = open(f'{file}', 'r', encoding='UTF-8')
+        # для формирования списка воспользуемся генератором списка, попутно удалив из строк перенос строки (\n)
         lines = [line.strip('\n') for line in f.readlines()]
 
         return lines
 
+    # Ищем совпадение заданной строки в строках файла.
     def _search_and_sort(array, string):
         new_array = []
+        # с помощью цикла for пройдемся по всем строкам файла, ища совпадения с заданной строкой
         for arr in array:
+            # условие совпадения - если у нас в строке есть совпадение с заданной строкой, то метод findall возвратит
+            # нам НЕ пустую строку, эти строку, мы помещаем в список
             if len(findall(string, arr)) != 0:
                 new_array.append(arr)
-        print(new_array)
+
         return new_array
 
+
+def search_string_1(file, target_string):
+
+    # Считываем информацию из файла построчно и возвращаем список.
+    def _read(file):
+        f = open(f'{file}', 'r', encoding='UTF-8')
+        # для формирования списка воспользуемся генератором списка, попутно удалив из строк перенос строки (\n)
+        lines = [line.strip('\n') for line in f.readlines()]
+
+        return lines
+
+    # Ищем совпадение заданной строки в строках файла.
+    def _search_and_sort(array, string):
+        new_array = []
+        # с помощью цикла for пройдемся по всем строкам файла, ища совпадения с заданной строкой
+        for arr in array:
+            # условие совпадения - если у нас в строке есть совпадение с заданной строкой, то метод findall возвратит
+            # нам НЕ пустую строку, эти строку, мы помещаем в список
+            if string in arr:
+                new_array.append(arr)
+
+        return new_array
+
+
+    # Записываем получивщийся список со строками в новый файл.
     def _write_file(lst):
         f = open('ex3_result.txt', 'w', encoding='UTF-8')
         for line in lst:
@@ -96,6 +125,11 @@ def search_string(file, target_string):
 
 
 # Задача 3.
+# Эту задачу я решил двумя способами, второй способ отличается от первого тем, что для извлечения слов из текста
+# я пользуюсь регулярным выражением, из-за этого код получился более читаемым, чем в первом способе, и как мне кажется,
+# более понятным для другого человека.
+
+# Первый способ (для извлечения слов из текста, пользуюсь методами работы со строками)
 def find_intersections(file_1, file_2):
 
     # Считываем файл в список.
@@ -114,6 +148,7 @@ def find_intersections(file_1, file_2):
     return _receive_set(_read_file(file_1)) & _receive_set(_read_file(file_2))
 
 
+# Второй способ (для извлечения слов, воспользуюсь регулярным выражением)
 def find_intersections_1(file_1, file_2):
 
     def _receive_set_from_file(file):
@@ -122,7 +157,7 @@ def find_intersections_1(file_1, file_2):
         f.close()
         new_lst = []
         for line in lines:
-            new_lst.append(findall(f'[А-ЯЁ]+', line, flags=IGNORECASE))
+            new_lst.append(findall(r'[A-ZА-ЯЁ]+', line, flags=IGNORECASE))
         return set(reduce(lambda arr, el: arr + el, new_lst))
 
     return _receive_set_from_file(file_1) & _receive_set_from_file(file_2)
@@ -134,7 +169,8 @@ def main():
     # delete_even_nums_in_file('example.txt')
 
     # Задача 2.
-    search_string('text_1.txt', 'Главный герой')
+    # search_string('task2.txt', 'Моррель')
+    search_string_1('task2.txt', 'капитан')
 
     # Задача 3.
     # print(find_intersections('text_1.txt', 'text_2.txt'))
