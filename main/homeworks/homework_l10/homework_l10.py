@@ -18,7 +18,7 @@ import shutil
 # Задача 1.
 # Для проверки этой задачи, я сделал генератор файла со строками чисел get_rnd_file.
 def delete_even_nums_in_file(file):
-    # создаем копию исходного файла для сравнения
+    # создаем копию исходного файла-template.txt для сравнения
     shutil.copy(f'{file}', 'template.txt')
 
     # Считываем строки в список и разбиваем их на подписки.
@@ -90,33 +90,9 @@ def search_string(file, target_string):
 
         return new_array
 
-
-def search_string_1(file, target_string):
-
-    # Считываем информацию из файла построчно и возвращаем список.
-    def _read(file):
-        f = open(f'{file}', 'r', encoding='UTF-8')
-        # для формирования списка воспользуемся генератором списка, попутно удалив из строк перенос строки (\n)
-        lines = [line.strip('\n') for line in f.readlines()]
-
-        return lines
-
-    # Ищем совпадение заданной строки в строках файла.
-    def _search_and_sort(array, string):
-        new_array = []
-        # с помощью цикла for пройдемся по всем строкам файла, ища совпадения с заданной строкой
-        for arr in array:
-            # условие совпадения - если у нас в строке есть совпадение с заданной строкой, то метод findall возвратит
-            # нам НЕ пустую строку, эти строку, мы помещаем в список
-            if string in arr:
-                new_array.append(arr)
-
-        return new_array
-
-
     # Записываем получивщийся список со строками в новый файл.
     def _write_file(lst):
-        f = open('ex3_result.txt', 'w', encoding='UTF-8')
+        f = open('task2_result.txt', 'w', encoding='UTF-8')
         for line in lst:
             f.write(line + '\n')
         f.close()
@@ -165,16 +141,15 @@ def find_intersections_1(file_1, file_2):
 
 def main():
     # Задача 1.
-    # get_rnd_file('example.txt', 5)
+    # get_rnd_file('example.txt', 10)
     # delete_even_nums_in_file('example.txt')
 
     # Задача 2.
     # search_string('task2.txt', 'Моррель')
-    search_string_1('task2.txt', 'капитан')
 
     # Задача 3.
-    # print(find_intersections('text_1.txt', 'text_2.txt'))
-    # print(find_intersections_1('text_1.txt', 'text_2.txt'))
+    print(find_intersections('task3_text1.txt', 'task3_text2.txt'))
+    print(find_intersections_1('task3_text1.txt', 'task3_text2.txt'))
 
 
 if __name__ == '__main__':
