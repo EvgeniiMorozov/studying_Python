@@ -90,6 +90,15 @@ def search_string(file, target_string):
 
         return new_array
 
+    # Записываем получивщийся список со строками в новый файл.
+    def _write_file(lst):
+        f = open('ex3_result.txt', 'w', encoding='UTF-8')
+        for line in lst:
+            f.write(line + '\n')
+        f.close()
+
+    return _write_file(_search_and_sort(_read(file), target_string))
+
 
 def search_string_1(file, target_string):
 
@@ -112,7 +121,6 @@ def search_string_1(file, target_string):
                 new_array.append(arr)
 
         return new_array
-
 
     # Записываем получивщийся список со строками в новый файл.
     def _write_file(lst):
