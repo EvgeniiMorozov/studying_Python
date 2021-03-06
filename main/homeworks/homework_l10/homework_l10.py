@@ -139,6 +139,18 @@ def find_intersections_1(file_1, file_2):
     return _receive_set_from_file(file_1) & _receive_set_from_file(file_2)
 
 
+def get_count_word_stat(filename1, filename2):
+    with open(filename1, encoding='UTF-8') as f:
+        data1 = f.read().split()
+    with open(filename2, encoding='UTF-8') as f:
+        data2 = f.read().split()
+    # print(data1)
+    # print(data2)
+    repeated_words = set(data1) & set(data2)
+    result = {word: (data1.count(word), data2.count(word)) for word in repeated_words}
+    print(result)
+
+
 def main():
     # Задача 1.
     # get_rnd_file('example.txt', 10)
@@ -148,8 +160,10 @@ def main():
     # search_string('task2.txt', 'Моррель')
 
     # Задача 3.
-    print(find_intersections('task3_text1.txt', 'task3_text2.txt'))
-    print(find_intersections_1('task3_text1.txt', 'task3_text2.txt'))
+    # print(find_intersections('task3_text1.txt', 'task3_text2.txt'))
+    # print(find_intersections_1('task3_text1.txt', 'task3_text2.txt'))
+
+    get_count_word_stat('task3_text1.txt', 'task3_text2.txt')
 
 
 if __name__ == '__main__':
