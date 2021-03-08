@@ -27,6 +27,17 @@
 from random import choice
 
 
+# Задача 1.
+def check_words(filename):
+    with open(filename, 'r', encoding='UTF-8') as file1:
+        with open('result.txt', 'w', encoding='UTF-8') as file2:
+            for line in file1:
+                if line.strip('\n') == 'Привет':
+                    file2.write(line + f'{"Мир"}\n')
+                if line.strip('\n') == 'Мир':
+                    file2.write(line + f'{"Привет"}\n')
+
+
 def gen_file(num):
     with open('sample.txt', 'w', encoding='UTF-8') as f:
         for _ in range(num):
@@ -40,7 +51,8 @@ def check_parentheses(string: str) -> bool:
 
 def main():
     # Задача 1.
-    gen_file(20)
+    # gen_file(20)
+    check_words('sample.txt')
 
     # Задача 2.
     # arr = [
