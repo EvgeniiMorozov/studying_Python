@@ -29,3 +29,37 @@
 #         pass
 #
 #     return _rewrite(file, _del_even(_read(file)))
+
+
+
+
+def search_string_1(file, target_string):
+
+    # Считываем информацию из файла построчно и возвращаем список.
+    def _read(file):
+        f = open(f'{file}', 'r', encoding='UTF-8')
+        # для формирования списка воспользуемся генератором списка, попутно удалив из строк перенос строки (\n)
+        lines = [line.strip('\n') for line in f.readlines()]
+
+        return lines
+
+    # Ищем совпадение заданной строки в строках файла.
+    def _search_and_sort(array, string):
+        new_array = []
+        # с помощью цикла for пройдемся по всем строкам файла, ища совпадения с заданной строкой
+        for arr in array:
+            # условие совпадения - если у нас в строке есть совпадение с заданной строкой, то метод findall возвратит
+            # нам НЕ пустую строку, эти строку, мы помещаем в список
+            if string in arr:
+                new_array.append(arr)
+
+        return new_array
+
+    # Записываем получивщийся список со строками в новый файл.
+    def _write_file(lst):
+        f = open('ex3_result.txt', 'w', encoding='UTF-8')
+        for line in lst:
+            f.write(line + '\n')
+        f.close()
+
+    return _write_file(_search_and_sort(_read(file), target_string))
