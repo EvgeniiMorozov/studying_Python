@@ -117,6 +117,20 @@ def is_all_upper(text: str) -> bool:
     return True if text.isupper() or text == '' or len(text) == text.count(' ') else False
 
 
+# Task_4
+def square_digits(num):
+    lst = [int(i)**2 for i in str(num)]
+    res = ''
+    for el in lst:
+        res += str(el)
+    return res
+
+
+# Task_5
+def accum(string):
+    return '-'.join((el*(i+1)).capitalize() for i, el in enumerate(string.lower()))
+
+
 def main():
     # Task_1
     # lst = random_turns(23)
@@ -124,9 +138,15 @@ def main():
 
     # Task_2
     # print(end_zeros(1200))
-    print(end_zeros_1(1200))
+    # print(end_zeros_1(1200))
 
     # Task_3
+
+    # Task_4
+    # square_digits(456)
+
+    # Task_5
+    accum('Brrt')
 
 
 if __name__ == '__main__':
