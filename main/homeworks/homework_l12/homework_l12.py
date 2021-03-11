@@ -43,6 +43,16 @@ def check_words(filename):
     print(f'Слово "Мир" упоминается\t{counter_world} раз.\nСлово "Привет" упоминается\t{counter_hello} раз.')
 
 
+def check_words_1(filename):
+    state = ''
+    with open(filename, 'r', encoding='UTF-8') as file1:
+        with open('result_1.txt', 'w', encoding='UTF-8') as file2:
+            for line in file1:
+                if line.strip('\n') != state:
+                    file2.write(line)
+                    state = line.strip('\n')
+
+
 def gen_sample_file(num):
     with open('sample.txt', 'w', encoding='UTF-8') as f:
         for _ in range(num):
@@ -50,14 +60,21 @@ def gen_sample_file(num):
 
 
 # Задача 2.
+# )))(((
 def check_parentheses(string: str) -> bool:
     return True if string.count('(') == string.count(')') else False
+
+
+def check_parentheses_1(string: str) -> bool:
+    start = ''
+    pass
 
 
 def main():
     # Задача 1.
     # gen_sample_file(20)
-    check_words('sample.txt')
+    # check_words('sample.txt')
+    check_words_1('sample.txt')
 
     # Задача 2.
     # arr = [
