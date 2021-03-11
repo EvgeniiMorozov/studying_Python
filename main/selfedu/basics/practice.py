@@ -131,6 +131,26 @@ def accum(string):
     return '-'.join((el*(i+1)).capitalize() for i, el in enumerate(string.lower()))
 
 
+# Task_6
+def to_camel_case(text: str):
+    camel_text = ''
+    if text.count('-') > 0:
+        lst = text.split('-_')
+        if lst[0][0].isupper():
+            camel_text = ''.join((string.capitalize() for string in lst))
+        else:
+            camel_text = lst[0].lower() + ''.join((lst[i].capitalize() for i in range(1, len(lst))))
+
+    if text.count('_') > 0:
+        lst = text.split('_')
+        if lst[0][0].isupper():
+            camel_text = ''.join((string.capitalize() for string in lst))
+        else:
+            camel_text = lst[0].lower() + ''.join((lst[i].capitalize() for i in range(1, len(lst))))
+
+    return camel_text
+
+
 def main():
     # Task_1
     # lst = random_turns(23)
@@ -146,7 +166,12 @@ def main():
     # square_digits(456)
 
     # Task_5
-    accum('Brrt')
+    # accum('Brrt')
+
+    # Task_6
+    strings = ["the-stealth-warrior", "The_Stealth_Warrior"]
+    for string in strings:
+        print(to_camel_case(string))
 
 
 if __name__ == '__main__':
