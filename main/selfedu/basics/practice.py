@@ -151,6 +151,33 @@ def to_camel_case(text: str):
     return camel_text
 
 
+# Task_7
+def sum_numbers(text: str) -> int:
+    # your code here
+    accumulator = 0
+    for el in text.split():
+        if el.isdigit():
+            accumulator += int(el)
+    return accumulator
+
+
+# Task_8
+# Дан массив целых чисел. Нужно найти сумму элементов с четными индексами (0-й, 2-й, 4-й итд),
+# затем перемножить эту сумму и последний элемент исходного массива.
+# Не забудьте, что первый элемент массива имеет индекс 0.
+# Для пустого массива результат всегда 0 (ноль).
+# Входные данные: Список (list) целых чисел (int).
+# Выходные данные: Число как целочисленное (int).
+# Предусловия: 0 ≤ len(array) ≤ 20
+# all(isinstance(x, int) for x in array)
+# all(-100 < x < 100 for x in array)
+def checkio(array: list) -> int:
+    """
+        sums even-indexes elements and multiply at the last
+    """
+    return 0 if len(array) == 0 else sum(array[::2]) * array[-1]
+
+
 def main():
     # Task_1
     # lst = random_turns(23)
@@ -169,9 +196,19 @@ def main():
     # accum('Brrt')
 
     # Task_6
-    strings = ["the-stealth-warrior", "The_Stealth_Warrior"]
-    for string in strings:
-        print(to_camel_case(string))
+    # strings = ["the-stealth-warrior", "The_Stealth_Warrior"]
+    # for string in strings:
+    #     print(to_camel_case(string))
+
+    # Task_7
+    arrays = [
+        [0, 1, 2, 3, 4, 5],
+        [1, 3, 5],
+        [6],
+        []
+    ]
+    for arr in arrays:
+        print(checkio(arr))
 
 
 if __name__ == '__main__':
