@@ -28,58 +28,92 @@ from random import choice
 
 
 # Задача 1.
+# Вобщем, я не правильно понял условие задачи и написал 2 функции:
+# 1. check_words() - читает файл построчно и там где встречаются повторяющиеся строки, между ними вставляются
+#                   недостающая строка, чтоб не было повторений. Результат записывается в файл: result.txt;
+# 2. check_words_1() - читает файл построчно и удаляет повторяющиеся строки.
+#                       Результат записывается в файл: result_1.txt.
+
+# Дополнительно, я написал функцию gen_sample_file(), которая формирует файл "sample.txt",
+# состоящий из строк "Привет" и "Мир".
 def check_words(filename):
-    with open(filename, 'r', encoding='UTF-8') as file1:
-        with open('result.txt', 'w', encoding='UTF-8') as file2:
-            counter_hello = 0
-            counter_world = 0
-            for line in file1:
-                if line.strip('\n') == 'Привет':
-                    file2.write(line + f'{"Мир"}\n')
-                    counter_hello += 1
-                if line.strip('\n') == 'Мир':
-                    file2.write(f'{"Привет"}\n' + line)
-                    counter_world += 1
-    print(f'Слово "Мир" упоминается\t{counter_world} раз.\nСлово "Привет" упоминается\t{counter_hello} раз.')
 
-
-def check_words_1(filename):
+    # В переменную state будем записывать предыдущую строку.
     state = ''
     with open(filename, 'r', encoding='UTF-8') as file1:
-        with open('result_1.txt', 'w', encoding='UTF-8') as file2:
+        with open('result.txt', 'w', encoding='UTF-8') as file2:
+            # C помощью цикла поочередно считываем строки из файла.
             for line in file1:
+                # Если state не совпадает с текущей строкой line, то записываем строку во второй файл.
                 if line.strip('\n') != state:
                     file2.write(line)
                     state = line.strip('\n')
+                # Если state совпадает с line, то определяем, чему равна переменная state:
+                else:
+                    if state == 'Привет':
+
+                        # Первой строкой печатаем "Мир", а за ней текущую строку.
+                        file2.write('Мир\n' + line)
+                        # file2.write('*Мир\n' + line)  # для наглядности перед недостающей строкой вставил *
+
+                        # Переменной state присвоим значение "Привет".
+                        state = 'Привет'
+
+                    else:
+
+                        # Первой строкой печатаем "Мир", а за ней текущую строку.
+                        file2.write('Привет\n' + line)
+                        # file2.write('*Привет\n' + line)  # для наглядности перед недостающей строкой вставил *
+
+                        # Переменной state присвоим значение "Мир".
+                        state = 'Мир'
 
 
-def gen_sample_file(num):
+def check_words_1(filename):
+    # В переменную state будем записывать предыдущую строку.
+    state = ''
+    with open(filename, 'r', encoding='UTF-8') as file1:
+        with open('result_1.txt', 'w', encoding='UTF-8') as file2:
+
+            # C помощью цикла поочередно считываем строки из файла.
+            for line in file1:
+
+                # Если state не совпадает с текущей строкой line, то записываем строку во второй файл.
+                if line.strip('\n') != state:
+                    file2.write(line)
+
+                    # Переменной state присвоим значение текущей строки.
+                    state = line.strip('\n')
+
+
+def gen_sample_file(n):
+    """
+    Создаёт файл "sample.txt" из n строк, состоящих из слов "Привет" или "Мир".
+
+    :param n: количество строк
+    :return: file
+    """
     with open('sample.txt', 'w', encoding='UTF-8') as f:
-        for _ in range(num):
+        for _ in range(n):
             f.write(f'{choice(["Привет", "Мир"])}\n')
 
 
 # Задача 2.
-# )))(((
 def check_parentheses(string: str) -> bool:
     return True if string.count('(') == string.count(')') else False
-
-
-def check_parentheses_1(string: str) -> bool:
-    start = ''
-    pass
 
 
 def main():
     # Задача 1.
     # gen_sample_file(20)
-    # check_words('sample.txt')
-    check_words_1('sample.txt')
+    check_words('sample.txt')
+    # check_words_1('sample.txt')
 
     # Задача 2.
     # arr = [
     #     '(()(()))',
-    #     '())'
+    #     '())',
+    #     '(((()))))))'
     # ]
     # for line in arr:
     #     print(check_parentheses(line))
