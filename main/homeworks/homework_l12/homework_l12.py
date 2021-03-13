@@ -88,6 +88,16 @@ def check_words_1(filename):
                     state = line.strip('\n')
 
 
+# Работа над ошибками.
+def get_lines(file: str) -> None:
+    with open(file, 'r', encoding='UTF-8') as file:
+        buffer = None
+        for line in file:
+            if buffer != line:
+                print(line, end='')
+                buffer = line
+
+
 def gen_sample_file(n):
     """
     Создаёт файл "sample.txt" из n строк, состоящих из слов "Привет" или "Мир".
@@ -105,20 +115,38 @@ def check_parentheses(string: str) -> bool:
     return True if string.count('(') == string.count(')') else False
 
 
+# Работа над ошибками.
+def check_parentheses_1(string: str) -> bool:
+    buffer = []
+    for parenthes in string:
+        if parenthes == '(':
+            buffer.append(parenthes)
+        elif parenthes == ')':
+            if not buffer:  # аналог len(buffer) == 0
+                return False
+        buffer.remove('(')
+    print(buffer)
+    return True if not buffer else False
+
+
 def main():
     # Задача 1.
     # gen_sample_file(20)
-    check_words('sample.txt')
-    check_words_1('sample.txt')
+    # check_words('sample.txt')
+    # check_words_1('sample.txt')
+    # get_lines('sample.txt')
 
     # Задача 2.
-    # arr = [
-    #     '(()(()))',
-    #     '())',
-    #     '(((()))))))'
-    # ]
-    # for line in arr:
-    #     print(check_parentheses(line))
+    arr = [
+        '(()(()))',
+        '())',
+        '(((()))))))',
+        '))((',
+        '()()('
+    ]
+    for line in arr:
+        # print(check_parentheses(line))
+        print(check_parentheses_1(line))
 
 
 if __name__ == '__main__':
