@@ -210,6 +210,20 @@ def left_join(phrases: tuple) -> str:
     return ','.join(phrase for phrase in phrases).replace('right', 'left')
 
 
+# Task_11
+# Дана строка и нужно найти ее первое слово.
+# При решении задачи обратите внимание на следующие моменты:
+# В строке могут встречатся точки и запятые
+# Строка может начинаться с буквы или, к примеру, с пробела или точки
+# В слове может быть апостроф и он является частью слова
+# Весь текст может быть представлен только одним словом и все
+# Входные параметры: Строка.
+# Выходные параметры: Строка.
+# Precondition: text can contain a-z A-Z , . '
+def first_word(text: str) -> str:
+    return text.replace('.', ' ').replace(',', ' ').split()[0]
+
+
 def main():
     # Task_1
     # lst = random_turns(23)
@@ -255,14 +269,27 @@ def main():
     #     print(f'{words}: {checkio_1(words)}')
 
     # Task_10
+    # phrases = (
+    #     ("left", "right", "left", "stop"),
+    #     ("bright aright", "ok"),
+    #     ("brightness wright",),
+    #     ("enough", "jokes")
+    # )
+    # for phrase in phrases:
+    #     print(left_join(phrase))
+
+    #Task_11
     phrases = (
-        ("left", "right", "left", "stop"),
-        ("bright aright", "ok"),
-        ("brightness wright",),
-        ("enough", "jokes")
+        "Hello world",
+        " a word ",
+        "don't touch it",
+        "greetings, friends",
+        "... and so on...",
+        "hi",
+        "Hello.World"
     )
     for phrase in phrases:
-        print(left_join(phrase))
+        print(first_word(phrase))
 
 
 if __name__ == '__main__':
