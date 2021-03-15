@@ -200,6 +200,18 @@ def checkio_1(words: str) -> bool:
     return True if counter >= 3 else False
 
 
+# Task_10
+# Дана последовательность строк. Вы должны объединить эти строки в блок текста, разделив изначальные строки запятыми.
+# В качестве шутки над праворукими роботами, вы должны заменить все вхождения слова "right" на слова "left",
+# даже если это часть другого слова. Все строки даны в нижнем регистре.
+# Входные данные: Последовательность строк.
+# Выходные данные: Текст, как строка.
+# Предусловие:
+# 0 < len(phrases) < 42
+def left_join(phrases: tuple) -> str:
+    return ','.join(phrase for phrase in phrases).replace('right', 'left')
+
+
 def main():
     # Task_1
     # lst = random_turns(23)
@@ -233,16 +245,26 @@ def main():
     #     print(checkio(arr))
 
     # Task_9
-    array = [
-        "Hello World hello",
-        "He is 123 man",
-        "1 2 3 4",
-        "bla bla bla bla",
-        "Hi",
-        "sdadsf dsfsdfs sdfdsf 1 sdfsdf"
-    ]
-    for words in array:
-        print(f'{words}: {checkio_1(words)}')
+    # array = [
+    #     "Hello World hello",
+    #     "He is 123 man",
+    #     "1 2 3 4",
+    #     "bla bla bla bla",
+    #     "Hi",
+    #     "sdadsf dsfsdfs sdfdsf 1 sdfsdf"
+    # ]
+    # for words in array:
+    #     print(f'{words}: {checkio_1(words)}')
+
+    # Task_10
+    phrases = (
+        ("left", "right", "left", "stop"),
+        ("bright aright", "ok"),
+        ("brightness wright",),
+        ("enough", "jokes")
+    )
+    for phrase in phrases:
+        print(left_join(phrase))
 
 
 if __name__ == '__main__':
