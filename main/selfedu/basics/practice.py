@@ -1,6 +1,4 @@
 import random
-import collections
-from functools import reduce
 
 
 # Task_1
