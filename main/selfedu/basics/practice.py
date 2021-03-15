@@ -178,6 +178,28 @@ def checkio(array: list) -> int:
     return 0 if len(array) == 0 else sum(array[::2]) * array[-1]
 
 
+# Task_9
+# Давайте научим наших роботов отличать слова от чисел.
+# Дана строка со словами и числами, разделенными пробелами (один пробел между словами и/или числами).
+# Слова состоят только из букв. Вам нужно проверить есть ли в исходной строке три слова подряд.
+# Для примера, в строке "start 5 one two three 7 end" есть три слова подряд.
+# Входные данные: Строка со словами (str).
+# Выходные данные: Ответ как логическое выражение (bool), True или False.
+# Предусловия: Исходная строка содержит только слова и/или числа. Смешанных слов нет (перемешанные цифры и буквы).
+# 0 < len(words) < 100
+def checkio_1(words: str) -> bool:
+    counter = 0
+    for arr in words.split():
+        if counter == 3:
+            break
+        else:
+            if arr.isalpha():
+                counter += 1
+            else:
+                counter = 0
+    return True if counter >= 3 else False
+
+
 def main():
     # Task_1
     # lst = random_turns(23)
@@ -201,14 +223,26 @@ def main():
     #     print(to_camel_case(string))
 
     # Task_7
-    arrays = [
-        [0, 1, 2, 3, 4, 5],
-        [1, 3, 5],
-        [6],
-        []
+    # arrays = [
+    #     [0, 1, 2, 3, 4, 5],
+    #     [1, 3, 5],
+    #     [6],
+    #     []
+    # ]
+    # for arr in arrays:
+    #     print(checkio(arr))
+
+    # Task_9
+    array = [
+        "Hello World hello",
+        "He is 123 man",
+        "1 2 3 4",
+        "bla bla bla bla",
+        "Hi",
+        "sdadsf dsfsdfs sdfdsf 1 sdfsdf"
     ]
-    for arr in arrays:
-        print(checkio(arr))
+    for words in array:
+        print(f'{words}: {checkio_1(words)}')
 
 
 if __name__ == '__main__':
