@@ -1,5 +1,4 @@
 from collections import Counter
-from re import IGNORECASE
 from re import findall
 from typing import Any
 
@@ -19,7 +18,7 @@ def get_10_popular_password(file: str) -> Any:
     with open(file, 'r', encoding='UTF-8') as f:
         for line in f:
             if len(line.strip("\n")) != 0:
-                passwords.append(''.join(findall(r'[@]\w+[.]\w{2,3}[;](.+)$', line, flags=IGNORECASE)))
+                passwords.append(''.join(findall(r'[@]\w+[.]\w{2,3}[;](.+)$', line)))
 
     return print(f'Десятка часто встречающихся паролей:\n{Counter(passwords).most_common(10)}')
 
