@@ -1,5 +1,6 @@
 from collections import Counter
 from re import findall
+from re import sub
 from typing import Any
 
 
@@ -32,7 +33,7 @@ def get_10_popular_password(file: str) -> Any:
 # Чем больше разных вариантов будет придумано, тем лучше, но без фанатизма.
 # Для простоты, ограничьте набор доменов верхнего уровня (штуки 4-7 достаточно).
 def censor_link(string: str) -> str:
-    pass
+    return sub(r'(http[s]?://)?(www[.])?[a-z]{1,63}[.][a-z]{2,3}', '*****', string)
 
 
 # Здесь писать тесты для функций с решениями
@@ -47,6 +48,17 @@ def main():
 
     # Задача 2.
     get_10_popular_password('pwd.txt')
+
+    # Задача 3.
+    strings = [
+        'vc.com',
+        'vc.ru',
+        'www.example.org',
+        'http://example.su',
+        'https://example.su'
+    ]
+    for string in strings:
+        print(censor_link(string))
 
 
 if __name__ == '__main__':
