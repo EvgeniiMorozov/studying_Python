@@ -1,5 +1,7 @@
-from typing import Any
 from collections import Counter
+from re import IGNORECASE
+from re import findall
+from typing import Any
 
 
 # Решить задачи, выложить .py файл с решениями на github. В личный кабинет прикрепить .txt файл с ссылкой на профиль.
@@ -13,7 +15,13 @@ def count_unique_elems(arr: list[Any]) -> int:
 # Задача 2. Дан файл с логинами и паролями. Найдите топ10 самых популярных паролей.
 # Ссылка на файл: https://yadi.sk/i/6ywJqzm93HGmy9
 def get_10_popular_password(file: str) -> Any:
-    pass
+    passwords = []  # в этот список будем "складывать" пароли
+    with open(file, 'r', encoding='UTF-8') as f:
+        for line in f:
+            if len(line.strip("\n")) != 0:
+                passwords.append(''.join(findall(r'[@]\w+[.]\w{2,3}[;](.+)$', line, flags=IGNORECASE)))
+
+    return print(f'Десятка часто встречающихся паролей:\n{Counter(passwords).most_common(10)}')
 
 
 # Задача 3. Дана строка с ссылками. Заменить все ссылки на ***** (5 звёздочек).
@@ -37,6 +45,9 @@ def main():
     ]
     for arr in arrays:
         print(count_unique_elems(arr))
+
+    # Задача 2.
+    get_10_popular_password('pwd.txt')
 
 
 if __name__ == '__main__':
