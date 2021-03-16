@@ -1,4 +1,5 @@
 from typing import Any
+from collections import Counter
 
 
 # Решить задачи, выложить .py файл с решениями на github. В личный кабинет прикрепить .txt файл с ссылкой на профиль.
@@ -6,7 +7,7 @@ from typing import Any
 
 # Задача 1. Найти количество различных элементов массива. Пример: для [1 4 5 1 1 3] ответ 4.
 def count_unique_elems(arr: list[Any]) -> int:
-    pass
+    return len(set(arr))
 
 
 # Задача 2. Дан файл с логинами и паролями. Найдите топ10 самых популярных паролей.
@@ -29,7 +30,13 @@ def censor_link(string: str) -> str:
 
 # Здесь писать тесты для функций с решениями
 def main():
-    pass
+    # Задача 1.
+    arrays = [
+        [1, 4, 5, 1, 1, 3],
+        [1, 3, 'aaa', 5, 'gg', 1, 3, 2, 2]
+    ]
+    for arr in arrays:
+        print(count_unique_elems(arr))
 
 
 if __name__ == '__main__':
