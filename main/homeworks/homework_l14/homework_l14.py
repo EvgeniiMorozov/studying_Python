@@ -36,6 +36,10 @@ def censor_link(string: str) -> str:
     return sub(r'(http[s]?://)?(www[.])?[a-z]{1,63}[.][a-z]{2,4}', '*****', string)
 
 
+def censor_link_1(string: str) -> str:
+    return sub(r'(http[s]?://)?(www[.])?(\w+[.])+?[a-z]{1,63}[.][a-z]{2,4}(/\w+)+?/?', '*****', string)
+
+
 # Здесь писать тесты для функций с решениями
 def main():
     # Задача 1.
@@ -57,10 +61,14 @@ def main():
         'http://example.su',
         'https://example.su',
         'ещё одна проверка, example.org, пройдёт?',
-        'а вот так, example.info'
+        'а вот так, example.info',
+        'ertwertewrg https://habr.com/ru/post/547952/ fgdfgdfgdfg'
     ]
+    # for string in strings:
+    #     print(censor_link(string))
+
     for string in strings:
-        print(censor_link(string))
+        print(censor_link_1(string))
 
 
 if __name__ == '__main__':
