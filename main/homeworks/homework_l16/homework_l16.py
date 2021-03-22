@@ -44,3 +44,31 @@ move - выводит надпись "Лодка плывёт", если working
 Все объекты классов никаких дополнительных параметров на вход не получают, то есть их классы вызываются с пустыми скобками.
 У классов-потомков только один родитель - Vehicle.
 """
+
+
+class Vehicle:
+
+    def __init__(self):
+        self.working_engine = False
+
+    def start(self):
+        if not self.working_engine:
+            self.working_engine = True
+            print('Двигатель заведён.')
+
+    def move(self):
+        if self.working_engine:
+            print('Средство передвижения едет.')
+
+    def stop(self):
+        if self.working_engine:
+            self.working_engine = False
+            print('Двигатель остановлен.')
+
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()
