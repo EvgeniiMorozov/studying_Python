@@ -108,6 +108,27 @@ class Car(Vehicle):
             print('Машина заглохла.')
 
 
+class Boat(Vehicle):
+
+    air_pressure = 100
+
+    def start(self):
+        if not self.working_engine:
+            self.working_engine = True
+            print('Мотор лодки гудит.')
+
+        if self.air_pressure <= 0:
+            self.working_engine = False
+            print('Лодка тонет!')
+
+    def move(self):
+        if self.working_engine:
+            self.air_pressure -= 10
+            print('Лодка плывёт.')
+        else:
+            print('Мотор лодки не заведён.')
+
+
 def main():
     pass
 
