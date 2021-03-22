@@ -84,6 +84,30 @@ class Tank(Vehicle):
             print('Снаряды закончились.')
 
 
+class Car(Vehicle):
+
+    fuel = 100
+
+    def start(self):
+        if self.fuel <= 0:
+            print('Бензина нет.')
+
+        if not self.working_engine:
+            self.working_engine = True
+            print('Двигатель машины заведён.')
+
+    def move(self):
+        if self.working_engine:
+            self.fuel -= 10
+            print('Машина поехала.')
+        else:
+            print('Машина не заведена.')
+
+        if self.working_engine and self.fuel <= 0:
+            self.working_engine = False
+            print('Машина заглохла.')
+
+
 def main():
     pass
 
