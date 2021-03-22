@@ -66,6 +66,24 @@ class Vehicle:
             print('Двигатель остановлен.')
 
 
+class Tank(Vehicle):
+
+    count_ammo = 10
+
+    def move(self):
+        if self.working_engine:
+            print('Гусеницы заскрипели от движения.')
+        else:
+            print('Нужно завести двигатель.')
+
+    def shoot(self):
+        if self.count_ammo > 0:
+            print('Танк выстрелил.')
+            self.count_ammo -= 1
+        else:
+            print('Снаряды закончились.')
+
+
 def main():
     pass
 
