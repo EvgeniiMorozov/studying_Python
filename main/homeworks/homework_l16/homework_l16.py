@@ -83,6 +83,10 @@ class Tank(Vehicle):
         else:
             print('Снаряды закончились.')
 
+    # Дополнительно создал метод для проверки кол-ва снарядов.
+    def check_ammo(self):
+        print(f'Осталось {self.count_ammo} снарядов.')
+
 
 class Car(Vehicle):
 
@@ -130,7 +134,14 @@ class Boat(Vehicle):
 
 
 def main():
-    pass
+    tank1 = Tank()
+    tank2 = Tank()
+    # Проверим, как работает поле класса для каждого его экзамплера.
+    tank1.check_ammo()
+    tank2.check_ammo()
+    tank1.shoot()
+    tank1.check_ammo()
+    tank2.check_ammo()
 
 
 if __name__ == '__main__':
