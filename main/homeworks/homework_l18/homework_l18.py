@@ -10,6 +10,7 @@ class FractionNum:
     def __init__(self, dec, frac):
         self.decimal = dec
         self.fraction = frac
+        self.negative = True if self.decimal < 0 else False
 
     # Переопределим метод __str__
     def __str__(self):
@@ -23,6 +24,36 @@ class FractionNum:
     def __add__(self, other):
         # Целые части чисел мы складываем.
         dec = self.decimal + other.decimal
+
+        # Введём два флага, которые будут показывать, является ли число отрицательным.
+        # Т.к. у нас знак числа явным образом указан только у целой части числа.
+        self_negative = True if self.decimal < 0 else False
+        other_negative = True if other.decimal < 0 else False
+
+        # В зависимости от знаков чисел, производим операцию с их дробными частями.
+        if (not self_negative and not other_negative) or (self_negative and other_negative):
+            frac = self.fraction + other.fraction
+
+        elif not self_negative and other_negative:
+            frac = self.fraction - other.fraction
+
+        elif self_negative and not other_negative:
+            frac = -self.fraction + other.fraction
+
+        frac = abs(frac)
+        # по сути у нас максимальное число, которое может получится при сложениии
+        # двух дробных частей, при точности вычислений до сотых, это 198. По этому
+        # ниже от суммы мы вычитаем 100, а к сумме целых частей прибавляем 1.
+
+        if frac > 100:
+            frac -= 100
+            dec += 1
+
+        return FractionNum(dec, frac)
+
+    def __sub__(self, other):
+        # Целые части чисел мы вычитаем.
+        dec = self.decimal - other.decimal
 
         # Введём два флага, которые будут показывать, является ли число отрицательным.
         # Т.к. у нас знак числа явным образом указан только у целой части числа.
