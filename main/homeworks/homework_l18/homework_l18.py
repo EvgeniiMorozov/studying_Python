@@ -15,7 +15,7 @@ class FractionNum:
     def __str__(self):
         # {self.fraction:2} -> :2 - желаемая длина строки, в нашем случае 2 символа.
         # Это необходимо, чтоб корректно отражать сотые доли, такие как 0.01, 0.06.
-        return f'{self.decimal}.{self.fraction:2}'
+        return f'{self.decimal}.{self.fraction:02}'
 
     def __add__(self, other):
         dec = self.decimal + other.decimal
