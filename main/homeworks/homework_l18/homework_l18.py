@@ -88,6 +88,12 @@ class FractionNum:
 
         return FractionNum(dec, frac) if self.negative == other.negative else FractionNum(-dec, frac)
 
+    def __gt__(self, other):
+        if self.decimal != other.decimal:
+            return self.decimal == other.decimal
+        else:
+            return self.fraction == other.fraction
+
 
 def main():
     float1 = FractionNum(1, 25)
@@ -110,6 +116,12 @@ def main():
     print(float1 * float3)
     print(float3 * float1)
     print(float2 * float3)
+
+    print('Проверка метода __gt__')
+    print(float1 > float2)
+    print(float1 < float3)
+    print(float1 > float3)
+    print(float2 > float3)
 
 
 if __name__ == '__main__':
