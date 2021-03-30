@@ -52,6 +52,7 @@ class FractionNum:
         # Целые части чисел мы вычитаем.
         dec = self.decimal - other.decimal
 
+        frac = None
         # В зависимости от знаков чисел, производим операции с их дробными частями.
         if not self.negative and not other.negative:
             frac = self.fraction - other.fraction
@@ -73,6 +74,20 @@ class FractionNum:
 
         return FractionNum(dec, frac)
 
+    def __mul__(self, other):
+        self_str = (str(self.decimal) + str(self.fraction)).strip('-')
+        other_str = (str(other.decimal) + str(other.fraction)).strip('-')
+        result = 0
+        i = 1
+        for num in reversed(other_str):
+            result += int(self_str) * int(num) * i
+            i *= 10
+        # print(result)
+        dec = result // 10000
+        frac = result % 10000
+
+        return FractionNum(dec, frac) if self.negative == other.negative else FractionNum(-dec, frac)
+
 
 def main():
     float1 = FractionNum(1, 25)
@@ -83,11 +98,18 @@ def main():
     print(float1 + float3)
     print(float3 + float1)
     print(float2 + float3)
+
     print('Проверка метода __sub__')
     print(float1 - float2)
     print(float1 - float3)
     print(float3 - float1)
     print(float2 - float3)
+
+    print('Проверка метода __mul__')
+    print(float1 * float2)
+    print(float1 * float3)
+    print(float3 * float1)
+    print(float2 * float3)
 
 
 if __name__ == '__main__':
