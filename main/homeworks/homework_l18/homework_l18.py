@@ -90,9 +90,18 @@ class FractionNum:
 
     def __gt__(self, other):
         if self.decimal != other.decimal:
-            return self.decimal == other.decimal
+            return self.decimal > other.decimal
         else:
-            return self.fraction == other.fraction
+            return self.fraction > other.fraction
+
+    def __ge__(self, other):
+        if self.decimal != other.decimal:
+            return self.decimal >= other.decimal
+        else:
+            return self.fraction >= other.fraction
+
+    def __eq__(self, other):
+        return True if self.decimal == other.decimal and self.fraction == other.fraction else False
 
 
 def main():
@@ -105,23 +114,25 @@ def main():
     print(float3 + float1)
     print(float2 + float3)
 
-    print('Проверка метода __sub__')
+    print('\nПроверка метода __sub__')
     print(float1 - float2)
     print(float1 - float3)
     print(float3 - float1)
     print(float2 - float3)
 
-    print('Проверка метода __mul__')
+    print('\nПроверка метода __mul__')
     print(float1 * float2)
     print(float1 * float3)
     print(float3 * float1)
     print(float2 * float3)
 
-    print('Проверка метода __gt__')
+    print('\nПроверка методов сравнения')
     print(float1 > float2)
     print(float1 < float3)
     print(float1 > float3)
     print(float2 > float3)
+    print(float1 == float1)
+    print(float2 >= float3)
 
 
 if __name__ == '__main__':
