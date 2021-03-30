@@ -69,7 +69,7 @@ class FractionNum:
 
         if frac > 100:
             frac -= 100
-            dec += 1
+            dec = dec - 1 if dec < 0 else dec + 1
 
         return FractionNum(dec, frac)
 
