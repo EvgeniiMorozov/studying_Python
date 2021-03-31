@@ -27,6 +27,7 @@ class FractionNum:
         # Целые части чисел мы складываем.
         dec = self.decimal + other.decimal
 
+        frac = None
         # В зависимости от знаков чисел, производим операции с их дробными частями.
         if (not self.negative and not other.negative) or (self.negative and other.negative):
             frac = self.fraction + other.fraction
