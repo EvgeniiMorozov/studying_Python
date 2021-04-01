@@ -75,6 +75,7 @@ class FractionNum:
 
         return FractionNum(dec, frac)
 
+    # Вобщем для умножения двух десятичных дробей я использовал умножение столбиком.
     def __mul__(self, other):
         self_str = (str(self.decimal) + str(self.fraction)).strip('-')
         other_str = (str(other.decimal) + str(other.fraction)).strip('-')
