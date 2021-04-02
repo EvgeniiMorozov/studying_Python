@@ -252,6 +252,19 @@ def unique_in_order(iterable):
 #     return [k for (k, _) in groupby(iterable)]
 
 
+# Task_16
+# Определить, является ли число простым?
+def is_prime(num):
+    if num == 2:
+        return True
+    elif num < 2:
+        return False
+    elif num != 2 and num % 2 == 0:
+        return False
+    else:
+        return all(num % i for i in range(3, int(num**0.5)+1))
+
+
 def main():
     # Task_1
     # print(count_bits(1234))
@@ -280,7 +293,9 @@ def main():
     # print(is_valid_walk(['n','s','n','s','n','s','n','s','n','s']))
     # print(is_valid_walk(['w','e','w','e','w','e','w','e','w','e','w','e']))
     # Task_15
-    print(unique_in_order('AAAABBBCCDAABBB'))
+    # print(unique_in_order('AAAABBBCCDAABBB'))
+    # Task_16
+    print(is_prime(2))
 
 
 if __name__ == '__main__':
