@@ -106,35 +106,122 @@ class FractionNum:
         return True if self.decimal == other.decimal and self.fraction == other.fraction else False
 
 
+# Update 03.04.2021
+
+class FractionalNum:
+    def __init__(self, dec, frac):
+        self.decimal = dec
+        self.fractional = frac
+
+    def __str__(self):
+        return f'{self.decimal}.{self.fractional}'
+
+    def to_float(self):
+        return float(self.__str__())
+
+    @staticmethod
+    def separate_dec_and_frac(num):
+        nums = str(num).split('.')
+        return int(nums[0]), int(nums[1])
+
+    def __add__(self, other):
+        result = self.to_float() + other.to_float()
+        return FractionalNum(*self.separate_dec_and_frac(result))
+
+
+class FractionNum1:
+    def __init__(self, num):
+        self.decimal = int(num)
+        self.fraction = abs(round(num - int(num), 2))
+        self.negative = num < 0
+        print(num, self.decimal, self.fraction, '<========')
+
+    def __str__(self):
+        if self.negative:
+            dec = f'-{abs(self.decimal)}'
+        else:
+            dec = f'{self.decimal}'
+        return f'{dec}.{str(self.fraction).split(".")[-1]}'
+
+    def __add__(self, other):
+        zero = FractionNum1(0.0)
+        dec = self.decimal + other.decimal
+        frac = 0
+        if self > zero and other > zero:
+            frac = self.fraction + other.fraction
+        elif self > zero and other < zero:
+            frac = self.fraction - other.fraction
+        elif self < zero and other > zero:
+            frac = -self.fraction + other.fraction
+        elif self < zero and other < zero:
+            frac = self.fraction + other.fraction
+
+        return FractionNum1(dec + frac)
+
+    def __gt__(self, other):
+        if self.decimal != other.decimal:
+            return self.decimal > other.decimal
+        else:
+            return self.fraction > other.fraction
+
+    def __mul__(self, other):
+        result = self.decimal * other.decimal + \
+                 self.decimal * other.fraction + \
+                 self.fraction * other.decimal + \
+                 self.fraction * other.fraction
+
+        return FractionNum1(result)
+
+    def __truediv__(self, other):
+        one = int(self.__str__().replace('.', ''))
+        two = int(other.__str__().replace('.', ''))
+        return FractionNum1(one / two)
+
+
 def main():
-    float1 = FractionNum(1, 25)
-    float2 = FractionNum(3, 76)
-    float3 = FractionNum(-5, 77)
-    print('Проверка метода __add__')
-    print(float1 + float2)
-    print(float1 + float3)
-    print(float3 + float1)
-    print(float2 + float3)
+    # float1 = FractionNum(1, 25)
+    # float2 = FractionNum(3, 76)
+    # float3 = FractionNum(-5, 77)
+    # print('Проверка метода __add__')
+    # print(float1 + float2)
+    # print(float1 + float3)
+    # print(float3 + float1)
+    # print(float2 + float3)
 
-    print('\nПроверка метода __sub__')
-    print(float1 - float2)
-    print(float1 - float3)
-    print(float3 - float1)
-    print(float2 - float3)
+    # print('\nПроверка метода __sub__')
+    # print(float1 - float2)
+    # print(float1 - float3)
+    # print(float3 - float1)
+    # print(float2 - float3)
+    #
+    # print('\nПроверка метода __mul__')
+    # print(float1 * float2)
+    # print(float1 * float3)
+    # print(float3 * float1)
+    # print(float2 * float3)
+    #
+    # print('\nПроверка методов сравнения')
+    # print(float1 > float2)
+    # print(float1 < float3)
+    # print(float1 > float3)
+    # print(float2 > float3)
+    # print(float1 == float1)
+    # print(float2 >= float3)
 
-    print('\nПроверка метода __mul__')
-    print(float1 * float2)
-    print(float1 * float3)
-    print(float3 * float1)
-    print(float2 * float3)
+    # upd
+    # num1 = FractionalNum(12, 24)
+    # num2 = FractionalNum(12, 22)
+    #
+    # print(num1)
+    # print(num2)
+    #
+    # print(num1 + num2)
+    # print(type(num1 + num2))
 
-    print('\nПроверка методов сравнения')
-    print(float1 > float2)
-    print(float1 < float3)
-    print(float1 > float3)
-    print(float2 > float3)
-    print(float1 == float1)
-    print(float2 >= float3)
+    fr_num1 = FractionNum1(12.24)
+    fr_num2 = FractionNum1(12.22)
+
+    print(fr_num1 + fr_num2)
 
 
 if __name__ == '__main__':
