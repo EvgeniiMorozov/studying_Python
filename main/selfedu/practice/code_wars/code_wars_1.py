@@ -135,8 +135,13 @@ def disemvowel(string):
 # "The_Stealth_Warrior" gets converted to "TheStealthWarrior"
 
 def to_camel_case(text):
-    text = text.replace('_' and '-', ' ').split()
-    return text[0] + ''.join([text[i].capitalize() for i in range(1, len(text))])
+    if len(text) != 0:
+        text = text.replace('_', ' ')
+        text = text.replace('-', ' ')
+        text = text.split()
+        return text[0] + ''.join([text[i].capitalize() for i in range(1, len(text))])
+    else:
+        return ''
 
 
 # Task_10
@@ -282,7 +287,7 @@ def main():
     # Task_8
     # print(disemvowel("This website is for losers LOL!"))
     # Task_9
-    print(to_camel_case("the-stealth-warrior"))
+    print(to_camel_case("the_stealth_warrior"))
     # Task_10
     # print(solution_1(12))
     # Task_11
