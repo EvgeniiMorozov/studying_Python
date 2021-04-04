@@ -269,6 +269,53 @@ def is_prime(num):
     else:
         return all(num % i for i in range(3, int(num**0.5)+1))
 
+# Task_17 - Break camelCase
+"""
+Complete the solution so that the function will break up camel casing, using a space between words.
+Example
+solution("camelCasing")  ==  "camel Casing"
+"""
+
+def solution_2(string):
+
+    arr = list()
+    word = [string[0]]
+
+    for i in range(1, len(string)):
+        if string[i].isupper():
+            arr.append(''.join(word))
+            word.clear()
+            word.append(string[i])            
+        else:
+            word.append(string[i])
+    
+    arr.append(''.join(word))
+    return ' '.join(arr)
+
+
+# Task_18 - Your order, please
+
+"""
+Your task is to sort a given string. Each word in the string will contain a single number.
+This number is the position the word should have in the result.
+Note: Numbers can be from 1 to 9. So 1 will be the first word (not 0).
+If the input string is empty, return an empty string. The words in the input String will
+only contain valid consecutive numbers.
+Examples
+"is2 Thi1s T4est 3a"  -->  "Thi1s is2 3a T4est"
+"4of Fo1r pe6ople g3ood th5e the2"  -->  "Fo1r the2 g3ood 4of th5e pe6ople"
+""  -->  ""
+"""
+
+def order(sentence):
+    arr = []
+    for word in sentence.split():
+        num = list(filter(lambda x: x.isdigit(), word))[0]
+        arr.append((int(num), word))
+    
+    return ' '.join([el[1] for el in sorted(arr, key= arr[0])])
+
+
 
 def main():
     # Task_1
@@ -287,7 +334,7 @@ def main():
     # Task_8
     # print(disemvowel("This website is for losers LOL!"))
     # Task_9
-    print(to_camel_case("the_stealth_warrior"))
+    # print(to_camel_case("the_stealth_warrior"))
     # Task_10
     # print(solution_1(12))
     # Task_11
@@ -300,7 +347,10 @@ def main():
     # Task_15
     # print(unique_in_order('AAAABBBCCDAABBB'))
     # Task_16
-    print(is_prime(2))
+    # print(is_prime(2))
+    
+    # Task_18
+    print(order("is2 Thi1s T4est 3a"))
 
 
 if __name__ == '__main__':
