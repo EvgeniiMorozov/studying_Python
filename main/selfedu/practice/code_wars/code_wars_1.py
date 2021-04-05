@@ -317,6 +317,39 @@ def order(sentence):
 
 
 
+# Task_19 - Are they the "same"?
+
+def comp(array1, array2):
+    if len(array1) == len(array2):
+        array1.sort()
+        array2.sort()
+        return all([True if array1[i]**2 == array2[i] else False for i in range(len(array1))])
+    else:
+        return False
+
+
+# Task_20 - Elimination Tournament
+
+def tourney(inp):
+    result = []
+    if len(inp) == 1:
+        return result.append(inp)
+
+    else:
+        buffer = []
+        if len(inp) % 2 == 0:
+            buffer = [max(inp[i], inp[i+1]) for i in range(0, len(inp), 2)]
+            result.append(buffer)
+            return tourney(buffer)
+
+        else:
+            buffer = [max(inp[i], inp[i+1]) for i in range(0, len(inp)-1, 2)]
+            result.append(buffer)
+
+
+
+
+
 def main():
     # Task_1
     # print(count_bits(1234))
@@ -350,7 +383,12 @@ def main():
     # print(is_prime(2))
     
     # Task_18
-    print(order("is2 Thi1s T4est 3a"))
+    # print(order("is2 Thi1s T4est 3a"))
+
+    # Task_19
+    a = [121, 144, 19, 161, 19, 144, 19, 11] 
+    b = [11*11, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19]
+    print(comp(a, b))
 
 
 if __name__ == '__main__':
