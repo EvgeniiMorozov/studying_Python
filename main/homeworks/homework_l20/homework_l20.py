@@ -15,3 +15,22 @@
 В личный кабинет приложить .py файл с реализацией или же ссылку на github
 репозиторий.
 """
+
+
+class Person:
+    def __init__(self, health):
+        self.health = health
+
+    def shoot(self):
+        return f"Стреляет из оружия"
+
+    def reload(self):
+        return f"Перезаряжает оружие"
+
+
+def main():
+    pass
+
+
+if __name__ == "__main__":
+    main()
