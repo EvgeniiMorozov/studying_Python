@@ -4,6 +4,7 @@
 #
 # Example: The binary representation of 1234 is 10011010010, so the function should return 5 in this case
 
+
 def count_bits(n: int):
     result = []
     while n:
@@ -12,7 +13,7 @@ def count_bits(n: int):
 
     result.reverse()
     result = [str(el) for el in result]
-    return int(''.join(result))
+    return int("".join(result))
 
 
 # Task_2
@@ -21,8 +22,12 @@ def count_bits(n: int):
 # number of floors (integer and always greater than 0).
 # Tower block is represented as *
 
+
 def tower_builder(n_floors):
-    return [' ' * (n_floors - 1 - n) + '*' * (2 * n + 1) + ' ' * (n_floors - 1 - n) for n in range(n_floors)]
+    return [
+        " " * (n_floors - 1 - n) + "*" * (2 * n + 1) + " " * (n_floors - 1 - n)
+        for n in range(n_floors)
+    ]
 
 
 # Task_3
@@ -34,11 +39,12 @@ def tower_builder(n_floors):
 # solution('abc') # should return ['ab', 'c_']
 # solution('abcdef') # should return ['ab', 'cd', 'ef']
 
+
 def solution(string):
     if len(string) % 2 == 0:
-        return [string[i] + string[i+1] for i in range(0, len(string), 2)]
+        return [string[i] + string[i + 1] for i in range(0, len(string), 2)]
     else:
-        string = string + '_'
+        string = string + "_"
         return [string[i] + string[i + 1] for i in range(0, len(string), 2)]
 
 
@@ -52,10 +58,11 @@ def solution(string):
 # alphabet_position("The sunset sets at twelve o' clock.")
 # Should return "20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11" (as a string)
 
+
 def alphabet_position(text):
-    string = 'abcdefghijklmnopqrstuvwxyz'
+    string = "abcdefghijklmnopqrstuvwxyz"
     text = list(filter(lambda x: x.isalpha(), text))
-    return ' '.join([str(string.index(el.lower()) + 1) for el in text])
+    return " ".join([str(string.index(el.lower()) + 1) for el in text])
 
 
 # Task_5
@@ -80,13 +87,13 @@ def alphabet_position(text):
 # Example Output
 # ["Open", "Open", "Senior", "Open", "Open", "Senior"]
 def open_or_senior(data):
-    return ['Senior' if chunk[0] >= 55 and chunk[1] > 7 else 'Open' for chunk in data]
+    return ["Senior" if chunk[0] >= 55 and chunk[1] > 7 else "Open" for chunk in data]
 
 
 # Task_6
 def find_next_square(sq):
     # Return the next square if sq is a square, -1 otherwise
-    return (sq**0.5 + 1)**2 if int(sq**0.5)**2 == sq else -1
+    return (sq ** 0.5 + 1) ** 2 if int(sq ** 0.5) ** 2 == sq else -1
 
 
 # Task_7
@@ -97,9 +104,10 @@ def find_next_square(sq):
 # If two words score the same, return the word that appears earliest in the original string.
 # All letters will be lowercase and all inputs will be valid.
 
+
 def high(string):
 
-    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
     result = []
     string = string.split()
 
@@ -107,6 +115,7 @@ def high(string):
         result.append(sum([alphabet.index(el.lower()) + 1 for el in word]))
 
     return string[result.index(max(result))]
+
 
 # def high(x):
 #     return max(x.split(), key=lambda k: sum(ord(c) - 96 for c in k))
@@ -120,9 +129,10 @@ def high(string):
 # For example, the string "This website is for losers LOL!" would become "Ths wbst s fr lsrs LL!".
 # Note: for this kata y isn't considered a vowel.
 
+
 def disemvowel(string):
-    vowels = ['a', 'e', 'i', 'o', 'u']
-    return ''.join(list(filter(lambda x: x.lower() not in vowels, string)))
+    vowels = ["a", "e", "i", "o", "u"]
+    return "".join(list(filter(lambda x: x.lower() not in vowels, string)))
 
 
 # Task_9
@@ -134,14 +144,15 @@ def disemvowel(string):
 # "the-stealth-warrior" gets converted to "theStealthWarrior"
 # "The_Stealth_Warrior" gets converted to "TheStealthWarrior"
 
+
 def to_camel_case(text):
     if len(text) != 0:
-        text = text.replace('_', ' ')
-        text = text.replace('-', ' ')
+        text = text.replace("_", " ")
+        text = text.replace("-", " ")
         text = text.split()
-        return text[0] + ''.join([text[i].capitalize() for i in range(1, len(text))])
+        return text[0] + "".join([text[i].capitalize() for i in range(1, len(text))])
     else:
-        return ''
+        return ""
 
 
 # Task_10
@@ -152,8 +163,13 @@ def to_camel_case(text):
 # Note: If the number is a multiple of both 3 and 5, only count it once. Also, if a number is negative,
 # return 0(for languages that do have them)
 
+
 def solution_1(number):
-    return 0 if number < 0 else sum(list(filter(lambda x: x % 3 == 0 or x % 5 == 0, range(number))))
+    return (
+        0
+        if number < 0
+        else sum(list(filter(lambda x: x % 3 == 0 or x % 5 == 0, range(number))))
+    )
 
 
 # Task_11
@@ -166,9 +182,12 @@ def solution_1(number):
 # spinWords( "This is a test") => returns "This is a test"
 # spinWords( "This is another test" )=> returns "This is rehtona test"
 
+
 def spin_words(sentence):
-    result = list(map(lambda word: word if len(word) < 5 else word[::-1], sentence.split()))
-    return ' '.join(result)
+    result = list(
+        map(lambda word: word if len(word) < 5 else word[::-1], sentence.split())
+    )
+    return " ".join(result)
 
 
 # Task_12
@@ -184,17 +203,18 @@ def spin_words(sentence):
 # likes(["Alex", "Jacob", "Mark", "Max"]) # must be "Alex, Jacob and 2 others like this"
 # For 4 or more names, the number in and 2 others simply increases.
 
+
 def likes(names):
     if len(names) == 0:
-        return 'no one likes this'
+        return "no one likes this"
     elif len(names) == 1:
-        return f'{names[0]} likes this'
+        return f"{names[0]} likes this"
     elif len(names) == 2:
-        return f'{names[0]} and {names[1]} like this'
+        return f"{names[0]} and {names[1]} like this"
     elif len(names) == 3:
-        return f'{names[0]}, {names[1]} and {names[2]} like this'
+        return f"{names[0]}, {names[1]} and {names[2]} like this"
     elif len(names) > 4:
-        return f'{names[0]}, {names[1]} and {len(names) - 2} others like this'
+        return f"{names[0]}, {names[1]} and {len(names) - 2} others like this"
 
 
 # Task_13
@@ -231,11 +251,16 @@ def digital_root(number):
 # letters ('n', 's', 'e', or 'w' only). It will never give you
 # an empty array (that's not a walk, that's standing still!).
 
+
 def is_valid_walk(walk):
     if len(walk) != 10:
         return False
     else:
-        return True if walk.count('s') == walk.count('n') and walk.count('w') == walk.count('e') else False
+        return (
+            True
+            if walk.count("s") == walk.count("n") and walk.count("w") == walk.count("e")
+            else False
+        )
 
 
 # Task_15
@@ -247,9 +272,13 @@ def is_valid_walk(walk):
 # unique_in_order('ABBCcAD')         == ['A', 'B', 'C', 'c', 'A', 'D']
 # unique_in_order([1,2,2,3,3])       == [1,2,3]
 
+
 def unique_in_order(iterable):
-    indices = list(filter(lambda i: iterable[i] != iterable[i-1], range(1, len(iterable))))
+    indices = list(
+        filter(lambda i: iterable[i] != iterable[i - 1], range(1, len(iterable)))
+    )
     return [iterable[0]] + [iterable[i] for i in indices] if len(iterable) != 0 else []
+
 
 # from itertools import groupby
 #
@@ -267,7 +296,8 @@ def is_prime(num):
     elif num != 2 and num % 2 == 0:
         return False
     else:
-        return all(num % i for i in range(3, int(num**0.5)+1))
+        return all(num % i for i in range(3, int(num ** 0.5) + 1))
+
 
 # Task_17 - Break camelCase
 """
@@ -276,6 +306,7 @@ Example
 solution("camelCasing")  ==  "camel Casing"
 """
 
+
 def solution_2(string):
 
     arr = list()
@@ -283,14 +314,14 @@ def solution_2(string):
 
     for i in range(1, len(string)):
         if string[i].isupper():
-            arr.append(''.join(word))
+            arr.append("".join(word))
             word.clear()
-            word.append(string[i])            
+            word.append(string[i])
         else:
             word.append(string[i])
-    
-    arr.append(''.join(word))
-    return ' '.join(arr)
+
+    arr.append("".join(word))
+    return " ".join(arr)
 
 
 # Task_18 - Your order, please
@@ -307,28 +338,32 @@ Examples
 ""  -->  ""
 """
 
+
 def order(sentence):
     arr = []
     for word in sentence.split():
         num = list(filter(lambda x: x.isdigit(), word))[0]
         arr.append((int(num), word))
-    
-    return ' '.join([el[1] for el in sorted(arr, key= arr[0])])
 
+    return " ".join([el[1] for el in sorted(arr, key=arr[0])])
 
 
 # Task_19 - Are they the "same"?
+
 
 def comp(array1, array2):
     if len(array1) == len(array2):
         array1.sort()
         array2.sort()
-        return all([True if array1[i]**2 == array2[i] else False for i in range(len(array1))])
+        return all(
+            [True if array1[i] ** 2 == array2[i] else False for i in range(len(array1))]
+        )
     else:
         return False
 
 
 # Task_20 - Elimination Tournament
+
 
 def tourney(inp):
     result = []
@@ -338,16 +373,43 @@ def tourney(inp):
     else:
         buffer = []
         if len(inp) % 2 == 0:
-            buffer = [max(inp[i], inp[i+1]) for i in range(0, len(inp), 2)]
+            buffer = [max(inp[i], inp[i + 1]) for i in range(0, len(inp), 2)]
             result.append(buffer)
             return tourney(buffer)
 
         else:
-            buffer = [max(inp[i], inp[i+1]) for i in range(0, len(inp)-1, 2)]
+            buffer = [max(inp[i], inp[i + 1]) for i in range(0, len(inp) - 1, 2)]
             result.append(buffer)
 
 
+# Task_21 - Magic The Gathering #1: Creatures
 
+# def battle(player1, player2):
+#     result = dict()
+#     max_len = max(len(player1), len(player2))
+#         for i in range(max_len):
+#             if
+#     return result
+
+
+# task_22 - Valid string
+
+
+def valid_word(seq, word):
+    result = all([True if el in word else False for el in seq])
+    return True if len(word) == 0 else False
+
+
+# Task_23 - Meeting
+
+
+def meeting(string):
+    lst = [
+        (el.split(":")[1].upper(), el.split(":")[0].upper()) for el in string.split(";")
+    ]
+    lst = sorted(lst, key=lambda x: x[0])
+    result = [f"({tpl[0]}, {tpl[1]})" for tpl in lst]
+    return "".join(result)
 
 
 def main():
@@ -381,15 +443,19 @@ def main():
     # print(unique_in_order('AAAABBBCCDAABBB'))
     # Task_16
     # print(is_prime(2))
-    
+
     # Task_18
     # print(order("is2 Thi1s T4est 3a"))
 
     # Task_19
-    a = [121, 144, 19, 161, 19, 144, 19, 11] 
-    b = [11*11, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19]
-    print(comp(a, b))
+    # a = [121, 144, 19, 161, 19, 144, 19, 11]
+    # b = [11 * 11, 121 * 121, 144 * 144, 19 * 19, 161 * 161, 19 * 19, 144 * 144, 19 * 19]
+    # print(comp(a, b))
+
+    # Task_23
+    s = "Fred:Corwill;Wilfred:Corwill;Barney:Tornbull;Betty:Tornbull;Bjon:Tornbull;Raphael:Corwill;Alfred:Corwill"
+    print(meeting(s))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
