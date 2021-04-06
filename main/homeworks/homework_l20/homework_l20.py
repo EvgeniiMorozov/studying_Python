@@ -28,6 +28,17 @@ class Person:
         return f"Перезаряжает оружие"
 
 
+class Gun:
+    def __init__(self, ammo):
+        self.ammo = ammo
+
+        def shoot(self):
+            return f"Оружие стреляет"
+
+    def reload(self):
+        return f"Оружие перезаряжается"
+
+
 def main():
     pass
 
