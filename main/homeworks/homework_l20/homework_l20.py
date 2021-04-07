@@ -40,7 +40,7 @@ class Gun:
 
 
 class CounterTerrorist(Person):
-    def __init__(self):
+    def __init__(self, health, gun):
         super(CounterTerrorist, self).__init__(health, gun)
         self.health = health
         self.gun = gun
@@ -50,6 +50,28 @@ class CounterTerrorist(Person):
 
     def reload(self):
         return f"Перезаряжает оружие"
+
+
+class Terrorist(Person):
+    def __init__(self, health, gun):
+        super(CounterTerrorist, self).__init__(health, gun)
+        self.health = health
+        self.gun = gun
+
+    def shoot(self):
+        return f"Стреляет из оружия"
+
+    def reload(self):
+        return f"Перезаряжает оружие"
+
+
+class M4(Gun):
+    def __init__(self, ammo):
+        super(M4, self).__init__(ammo)
+        self.ammo = ammo
+
+    def shoot(self):
+        return f"Винтовка М4 стреляет"   
 
 
 def main():
