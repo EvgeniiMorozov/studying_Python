@@ -18,7 +18,7 @@
 
 
 class Person:
-    def __init__(self, health):
+    def __init__(self, health: int):
         self.health = health
 
     def shoot(self):
@@ -29,7 +29,7 @@ class Person:
 
 
 class Gun:
-    def __init__(self, ammo):
+    def __init__(self, ammo: int):
         self.ammo = ammo
 
         def shoot(self):
@@ -40,7 +40,7 @@ class Gun:
 
 
 class CounterTerrorist(Person):
-    def __init__(self, health, gun):
+    def __init__(self, health: int, gun: int):
         super(CounterTerrorist, self).__init__(health, gun)
         self.health = health
         self.gun = gun
@@ -53,7 +53,7 @@ class CounterTerrorist(Person):
 
 
 class Terrorist(Person):
-    def __init__(self, health, gun):
+    def __init__(self, health: int, gun: int):
         super(CounterTerrorist, self).__init__(health, gun)
         self.health = health
         self.gun = gun
@@ -66,7 +66,7 @@ class Terrorist(Person):
 
 
 class M4(Gun):
-    def __init__(self, ammo):
+    def __init__(self, ammo: int):
         super(M4, self).__init__(ammo)
         self.ammo = ammo
 
@@ -75,7 +75,7 @@ class M4(Gun):
 
 
 class AK(Gun):
-    def __init__(self, ammo):
+    def __init__(self, ammo: int):
         super(AK, self).__init__(ammo)
         self.ammo = ammo
 
