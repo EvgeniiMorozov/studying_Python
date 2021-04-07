@@ -71,7 +71,16 @@ class M4(Gun):
         self.ammo = ammo
 
     def shoot(self):
-        return f"Винтовка М4 стреляет"   
+        return f"Винтовка М4 стреляет"
+
+
+class AK(Gun):
+    def __init__(self, ammo):
+        super(AK, self).__init__(ammo)
+        self.ammo = ammo
+
+    def shoot(self):
+        return f"Автомат АК стреляет"
 
 
 def main():
