@@ -39,6 +39,19 @@ class Gun:
         return f"Оружие перезаряжается"
 
 
+class CounterTerrorist(Person):
+    def __init__(self):
+        super(CounterTerrorist, self).__init__(health, gun)
+        self.health = health
+        self.gun = gun
+
+    def shoot(self):
+        return f"Стреляет из оружия"
+
+    def reload(self):
+        return f"Перезаряжает оружие"
+
+
 def main():
     pass
 
