@@ -54,7 +54,7 @@ class CounterTerrorist(Person):
 
 class Terrorist(Person):
     def __init__(self, health: int):
-        super(CounterTerrorist, self).__init__(health)
+        super(Terrorist, self).__init__(health)
         self.health = health
         self.gun = AK
 
@@ -89,7 +89,6 @@ def main():
 
     policeman.shoot()
     bandit.reload()
-
 
 
 if __name__ == "__main__":
