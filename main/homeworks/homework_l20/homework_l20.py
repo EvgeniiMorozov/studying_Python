@@ -22,10 +22,10 @@ class Person:
         self.health = health
 
     def shoot(self):
-        return f"Стреляет из оружия"
+        print(f"Стреляет из оружия")
 
     def reload(self):
-        return f"Перезаряжает оружие"
+        print(f"Перезаряжает оружие")
 
 
 class Gun:
@@ -33,36 +33,36 @@ class Gun:
         self.ammo = ammo
 
     def shoot(self):
-        return f"Оружие стреляет"
+        print(f"Оружие стреляет")
 
     def reload(self):
-        return f"Оружие перезаряжается"
+        print(f"Оружие перезаряжается")
 
 
 class CounterTerrorist(Person):
-    def __init__(self, health, ammo,):
-        super().__init__(health, ammo)
+    def __init__(self, health, ammo):
+        super().__init__(health)
         self.health = health
         self.gun = M4(ammo)
 
     def shoot(self):
-        return f"Стреляет из оружия"
+       print(f"Полицейский стреляет из оружия")
 
     def reload(self):
-        return f"Перезаряжает оружие"
+        print(f"Полицейский перезаряжает оружие")
 
 
 class Terrorist(Person):
     def __init__(self, health, ammo):
-        super().__init__(health, ammo)
+        super().__init__(health)
         self.health = health
         self.gun = AK(ammo)
 
     def shoot(self):
-        return f"Стреляет из оружия"
+        print(f"Бандит стреляет из оружия")
 
     def reload(self):
-        return f"Перезаряжает оружие"
+        print(f"Бандит перезаряжает оружие")
 
 
 class M4(Gun):
@@ -71,7 +71,7 @@ class M4(Gun):
         self.ammo = ammo
 
     def shoot(self):
-        return f"Винтовка М4 стреляет"
+        print(f"Винтовка М4 стреляет")
 
 
 class AK(Gun):
@@ -80,7 +80,7 @@ class AK(Gun):
         self.ammo = ammo
 
     def shoot(self):
-        return f"Автомат АК стреляет"
+        print(f"Автомат АК стреляет")
 
 
 def main():
