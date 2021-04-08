@@ -40,10 +40,10 @@ class Gun:
 
 
 class CounterTerrorist(Person):
-    def __init__(self, health: int, gun: int):
-        super(CounterTerrorist, self).__init__(health, gun)
+    def __init__(self, health: int):
+        super(CounterTerrorist, self).__init__(health)
         self.health = health
-        self.gun = gun
+        self.gun = M4
 
     def shoot(self):
         return f"Стреляет из оружия"
@@ -53,10 +53,10 @@ class CounterTerrorist(Person):
 
 
 class Terrorist(Person):
-    def __init__(self, health: int, gun: int):
-        super(CounterTerrorist, self).__init__(health, gun)
+    def __init__(self, health: int):
+        super(CounterTerrorist, self).__init__(health)
         self.health = health
-        self.gun = gun
+        self.gun = AK
 
     def shoot(self):
         return f"Стреляет из оружия"
@@ -84,7 +84,12 @@ class AK(Gun):
 
 
 def main():
-    pass
+    policeman = CounterTerrorist(100, 50)
+    bandit = Terrorist(95, 60)
+
+    policeman.shoot()
+    bandit.reload()
+
 
 
 if __name__ == "__main__":
