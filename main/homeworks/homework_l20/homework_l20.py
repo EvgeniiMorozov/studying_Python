@@ -21,10 +21,10 @@ class Person:
     def __init__(self, health):
         self.health = health
 
-    def shoot(self):
+    def shoot():
         print(f"Стреляет из оружия")
 
-    def reload(self):
+    def reload():
         print(f"Перезаряжает оружие")
 
 
