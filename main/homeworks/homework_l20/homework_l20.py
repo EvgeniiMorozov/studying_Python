@@ -25,7 +25,7 @@ class Person:
         print(f"Стреляет из оружия")
 
     def reload():
-        print(f"Перезаряжает оружие")
+        print(f"Щёлкнул магазин, лязгнул затвор")
 
 
 class Gun:
