@@ -33,10 +33,12 @@ class Gun:
         self.ammo = ammo
 
     def shoot(self):
+        self.ammo -= 1
         print(f"Оружие стреляет")
 
     def reload(self):
         print(f"Оружие перезаряжается")
+        self.ammo = 30
 
 
 class CounterTerrorist(Person):
@@ -47,9 +49,11 @@ class CounterTerrorist(Person):
 
     def shoot(self):
        print(f"Полицейский стреляет из оружия")
+       self.gun.shoot()
 
     def reload(self):
         print(f"Полицейский перезаряжает оружие")
+        self.gun.reload()
 
 
 class Terrorist(Person):
@@ -59,10 +63,11 @@ class Terrorist(Person):
         self.gun = AK(ammo)
 
     def shoot(self):
-        print(f"Бандит стреляет из оружия")
+        self.gun.shoot()
 
     def reload(self):
         print(f"Бандит перезаряжает оружие")
+        self.gun.reload()
 
 
 class M4(Gun):
@@ -71,7 +76,8 @@ class M4(Gun):
         self.ammo = ammo
 
     def shoot(self):
-        print(f"Винтовка М4 стреляет")
+        self.ammo -= 2
+        print(f"М4 стреляет бодро")
 
 
 class AK(Gun):
@@ -80,12 +86,13 @@ class AK(Gun):
         self.ammo = ammo
 
     def shoot(self):
-        print(f"Автомат АК стреляет")
+        print(f"АК стреляет бодро")
+        self.ammo -= 3
 
 
 def main():
-    policeman = CounterTerrorist(100, 50)
-    bandit = Terrorist(95, 60)
+    policeman = CounterTerrorist(100, 30)
+    bandit = Terrorist(95, 30)
 
     policeman.shoot()
     bandit.reload()
