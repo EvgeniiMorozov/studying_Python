@@ -81,6 +81,20 @@ def inside_out(string):
     return " ".join(new_list)
 
 
+# Task_4 - Sums of Parts
+
+
+def parts_sums(sequence):
+    if len(sequence) == 0:
+        return [0]
+    result = [0]
+    acc = 0
+    for el in reversed(sequence):
+        acc += el
+        result.insert(0, acc)
+    return result
+
+
 def main():
     # Task_1
     # print(first_n_smallest([2, 1, 2, 3, 4, 2], 4))
@@ -88,8 +102,11 @@ def main():
     # Task_2
     # print(leaderboard_sort(["John", "Brian", "Jim", "Dave", "Fred"], ["Dave +1", "Fred +4", "Brian -1"]))
 
-    # Task_23
-    print(inside_out("man i need a taxi up to ubud"))
+    # Task_3
+    # print(inside_out("man i need a taxi up to ubud"))
+
+    # Task_4
+    print(parts_sums([1, 2, 3, 4, 5, 6]))
 
 
 if __name__ == "__main__":
