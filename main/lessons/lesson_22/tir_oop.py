@@ -90,18 +90,20 @@ class Scope:
             self.x_scope_pos, self.y_scope_pos = event_pos
 
     def blit(self, surface):
+        # горизонтальная линия
         pygame.draw.line(
             surface,
             self.line_color,
             (self.x_scope_pos - self.scope_size, self.y_scope_pos),
             (self.x_scope_pos + self.scope_size, self.y_scope_pos)
-        )  # горизонтальная линия
+        )
+        # вертикальная линия
         pygame.draw.line(
             surface,
             self.line_color,
             (self.x_scope_pos, self.y_scope_pos - self.scope_size),
             (self.x_scope_pos, self.y_scope_pos + self.scope_size)
-        )  # вертикальная линия
+        )
 
     def update(self):
         pass
