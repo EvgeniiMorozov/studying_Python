@@ -55,8 +55,7 @@ def main():
             if event.type == pygame.MOUSEMOTION:
                 x_scope_pos, y_scope_pos = event.pos
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     shot = pygame.Rect(x_scope_pos, y_scope_pos, 1, 1)
                     if shot.colliderect(target_rect):
                         score += 10
