@@ -95,6 +95,66 @@ def parts_sums(sequence):
     return result
 
 
+# Task_5 - Counting Duplicates
+
+
+def duplicate_count(text):
+    if len([el.lower() for el in text]) == len({el.lower() for el in text}):
+        return 0
+    list_of_duplicates = list(filter(lambda x: [el.lower() for el in text].count(x) > 1, {el.lower() for el in text}))
+    return len(list_of_duplicates)
+
+
+"""
+def duplicate_count(s):
+      return len([c for c in set(s.lower()) if s.lower().count(c)>1])
+"""
+
+
+# Task_6 - Find The Parity Outlier
+
+
+def find_outlier(integers):
+    remapped = ["even" if num % 2 == 0 else "odd" for num in integers]
+    return integers.pop(remapped.index("even")) if remapped.count("even") == 1 else integers.pop(remapped.index("odd"))
+
+
+"""
+def find_outlier(int):
+    odds = [x for x in int if x%2!=0]
+    evens= [x for x in int if x%2==0]
+    return odds[0] if len(odds)<len(evens) else evens[0]
+"""
+
+
+# Task_7 - Equal Sides Of An Array
+
+
+def find_even_index(arr):
+    for i in range(len(arr)):
+        if sum(arr[i :]) == sum(arr[: i + 1]):
+            return i
+    return -1
+
+
+# Task_8 - Vasya - Clerk
+
+def tickets(people):
+    if people[0] != 25:
+        return 'NO'
+    cash = 0
+    for payment in people:
+        if payment == 25:
+            cash += 25
+        else:
+            if payment - 25 > cash:
+                return 'NO'
+            else:
+                cash -= payment - 25
+    return 'YES'
+
+
+
 def main():
     # Task_1
     # print(first_n_smallest([2, 1, 2, 3, 4, 2], 4))
@@ -106,7 +166,11 @@ def main():
     # print(inside_out("man i need a taxi up to ubud"))
 
     # Task_4
-    print(parts_sums([1, 2, 3, 4, 5, 6]))
+    # print(parts_sums([1, 2, 3, 4, 5, 6]))
+
+    # Task_7
+    print(find_even_index([1,100,50,-51,1,1]))
+    print(find_even_index([20,10,-80,10,10,15,35]))
 
 
 if __name__ == "__main__":
