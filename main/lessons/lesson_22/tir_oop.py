@@ -10,17 +10,22 @@ class Game:
         self.caption = caption
         self.background = background
         self.frame_rate = frame_rate
-        self.surface = pygame.display.set_mode((width, height))
+
+        # Добавил поля для ширины и высоты экрана, т.к. они дальше понадобятся для использования в других классах.
+        self.width = width
+        self.height = height
+
+        self.surface = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption(self.caption)
         pygame.mouse.set_visible(False)
         self.clock = pygame.time.Clock()
         self.game_objects = []
         self.mouse_handlers = defaultdict(list)  # dct = {"нажали на мышку": [obj1, obj2],
-                            # "передвинули мышку": [handle_mouse, obj2]} - вместо obj будут функции-обработчики событий
+        # "передвинули мышку": [handle_mouse, obj2]} - вместо obj будут функции-обработчики событий
 
     # функция, запускающая игру
     def start_game(self):
-        pygame.mixer.music.load('music/Highway_to_Hell.mp3')
+        pygame.mixer.music.load("music/Highway_to_Hell.mp3")
         pygame.mixer.music.set_volume(0.1)
         pygame.mixer.music.play(-1)
 
@@ -58,13 +63,15 @@ class Game:
 
 class Tir(Game):
     def __init__(self):
-        super().__init__('TIR', 640, 400, (0, 0, 0), 60)
+        super().__init__("TIR", 640, 400, (0, 0, 0), 60)
         self.score = 0
         self.scope = None
+        self.target = None
         self.create_objects()
 
     def create_objects(self):
         self.create_scope()
+        self.create_target()
 
     def create_scope(self):
         scope = Scope()
@@ -73,6 +80,16 @@ class Tir(Game):
 
         self.scope = scope
         self.game_objects.append(self.scope)
+
+    def create_target(self):
+        target = Target()
+        self.target = target
+        # target с помощью list.insert помещаем перед объектом scope, чтоб прицел отрисовывался сверху обезьянки
+        self.game_objects.insert(0, self.target)
+
+    # def create_score(self):
+    #     score = Score()
+    #     self.score = score
 
 
 class Scope:
@@ -95,19 +112,44 @@ class Scope:
             surface,
             self.line_color,
             (self.x_scope_pos - self.scope_size, self.y_scope_pos),
-            (self.x_scope_pos + self.scope_size, self.y_scope_pos)
+            (self.x_scope_pos + self.scope_size, self.y_scope_pos),
         )
         # вертикальная линия
         pygame.draw.line(
             surface,
             self.line_color,
             (self.x_scope_pos, self.y_scope_pos - self.scope_size),
-            (self.x_scope_pos, self.y_scope_pos + self.scope_size)
+            (self.x_scope_pos, self.y_scope_pos + self.scope_size),
         )
 
     def update(self):
         pass
 
 
-if __name__ == '__main__':
+class Target:
+    def __init__(self) -> None:
+        self.target_img = pygame.image.load("DK.bmp")
+        self.target_rect = self.target_img.get_rect()
+        self.target_rect.x = random.randint(0, 640 - 48)
+        self.target_rect.y = random.randint(0, 400 - 32)
+
+    def blit(self, surface):
+        surface.blit(self.target_img, self.target_rect)
+
+    def update(self):
+        self.target_rect.x = random.randint(0, 640 - 48)
+        self.target_rect.y = random.randint(0, 400 - 32)
+
+
+# class Score:
+#     def __init__(self) -> None:
+#         self.score_obj = pygame.font.Font('scootchover-sans.ttf', 24)
+#         self.score = 0
+
+#     def blit(self, surface):
+#         self.score_text = self.score_obj.render(f'Score: {score}', True, (160, 200, 50))
+#         surface.blit(self.score_text, (0, 0))
+
+
+if __name__ == "__main__":
     Tir().start_game()
