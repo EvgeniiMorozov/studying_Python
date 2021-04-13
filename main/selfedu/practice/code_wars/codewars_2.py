@@ -132,27 +132,80 @@ def find_outlier(int):
 
 def find_even_index(arr):
     for i in range(len(arr)):
-        if sum(arr[i :]) == sum(arr[: i + 1]):
+        if sum(arr[i:]) == sum(arr[: i + 1]):
             return i
     return -1
 
 
 # Task_8 - Vasya - Clerk
 
+
 def tickets(people):
     if people[0] != 25:
-        return 'NO'
+        return "NO"
     cash = 0
     for payment in people:
         if payment == 25:
             cash += 25
         else:
             if payment - 25 > cash:
-                return 'NO'
+                return "NO"
             else:
                 cash -= payment - 25
-    return 'YES'
+    return "YES"
 
+
+# Task_9 - Moving Zeros To The End
+
+
+def move_zeros(array):
+    count_zeros = array.count(0)
+    return list(filter(lambda x: x != 0, array)) + [0 for _ in range(count_zeros)]
+
+
+# Task_10 - RGB To Hex Conversion
+
+
+def rgb(r, g, b):
+
+    arr = r, g, b
+    result = []
+
+    for i in arr:
+
+        if 0 <= i <= 255:
+            buffer = hex(i).replace("0x", "").upper()
+            result.append(buffer if len(buffer) == 2 else "0" + buffer)
+
+        elif i < 0:
+            result.append("00")
+
+        else:
+            result.append("FF")
+
+    return "".join(result)
+
+
+"""
+def rgb(r, g, b):
+    round = lambda x: min(255, max(x, 0))
+    return ("{:02X}" * 3).format(round(r), round(g), round(b))
+"""
+
+
+# Task_11 - First non-repeating character
+
+
+def first_non_repeating_letter(string):
+
+    if len(string) == 0:
+        return ""
+
+    for i in string:
+        if [el.lower() for el in string].count(i.lower()) == 1:
+            return i
+
+    return ""
 
 
 def main():
@@ -169,8 +222,17 @@ def main():
     # print(parts_sums([1, 2, 3, 4, 5, 6]))
 
     # Task_7
-    print(find_even_index([1,100,50,-51,1,1]))
-    print(find_even_index([20,10,-80,10,10,15,35]))
+    # print(find_even_index([1,100,50,-51,1,1]))
+    # print(find_even_index([20,10,-80,10,10,15,35]))
+
+    # Task_9
+    # print(move_zeros([1, 2, 0, 1, 0, 1, 0, 3, 0, 1]))
+
+    # Task_10
+    # print(rgb(148, 0, 211))
+
+    # Task_11
+    print(first_non_repeating_letter("Go hang a salami, I'm a lasagna hog!"))
 
 
 if __name__ == "__main__":
