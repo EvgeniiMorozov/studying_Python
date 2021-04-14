@@ -12,6 +12,7 @@ class Game:
         self.frame_rate = frame_rate
 
         # Добавил поля для ширины и высоты экрана, т.к. они дальше понадобятся для использования в других классах.
+        # И это не сработало.
         self.width = width
         self.height = height
 
@@ -75,14 +76,12 @@ class Tir(Game):
 
     def create_scope(self):
         scope = Scope()
-
         self.mouse_handlers[pygame.MOUSEMOTION].append(scope.handle_mouse)
-
         self.scope = scope
         self.game_objects.append(self.scope)
 
     def create_target(self):
-        target = Target()
+        target = Target(self.window_width, self.window_height)
         self.target = target
         # target с помощью list.insert помещаем перед объектом scope, чтоб прицел отрисовывался сверху обезьянки
         self.game_objects.insert(0, self.target)
@@ -90,6 +89,16 @@ class Tir(Game):
     # def create_score(self):
     #     score = Score()
     #     self.score = score
+
+    # Два нижних метода с декоратором @property под вопросом, сдаётся мне, что можно было обойтись без них
+    # Двумя этими методами, я хотел "расшарить" ширину и высоту игрового экрана, чтоб они были доступны извне
+    @property
+    def window_width(self):
+        return self.width
+
+    @property
+    def window_height(self):
+        return self.height
 
 
 class Scope:
@@ -101,10 +110,25 @@ class Scope:
         self.x_scope_pos = 0
         self.y_scope_pos = 0
         self.scope_size = 20
+        self.shot = None
+        self.shoot_sound = pygame.mixer.Sound("weapons/awp.wav")
+        self.shoot_sound.set_volume(0.05)
 
     def handle_mouse(self, event_type, event_pos):
         if event_type == pygame.MOUSEMOTION:
             self.x_scope_pos, self.y_scope_pos = event_pos
+
+        if event_type == pygame.MOUSEBUTTONDOWN and event_type.button == 1:
+
+            shot = pygame.Rect(self.x_scope_pos, self.y_scope_pos, 1, 1)
+            self.shot = shot
+
+            if shot.colliderect():
+                pass
+
+        self.shoot_sound.play()
+
+
 
     def blit(self, surface):
         # горизонтальная линия
@@ -127,18 +151,30 @@ class Scope:
 
 
 class Target:
-    def __init__(self) -> None:
+    def __init__(self, width, height) -> None:
+        self.window_width = width
+        self.window_height = height
+
         self.target_img = pygame.image.load("DK.bmp")
         self.target_rect = self.target_img.get_rect()
-        self.target_rect.x = random.randint(0, 640 - 48)
-        self.target_rect.y = random.randint(0, 400 - 32)
+        self.target_rect.x = random.randint(0, self.window_width - 48)
+        self.target_rect.y = random.randint(0, self.window_height - 32)
 
     def blit(self, surface):
         surface.blit(self.target_img, self.target_rect)
 
     def update(self):
-        self.target_rect.x = random.randint(0, 640 - 48)
-        self.target_rect.y = random.randint(0, 400 - 32)
+        # self.target_rect.x = random.randint(0, 640 - 48)
+        # self.target_rect.y = random.randint(0, 400 - 32)
+        pass
+
+    def get_new_coords(self):
+        self.target_rect.x = random.randint(0, self.window_width - 48)
+        self.target_rect.y = random.randint(0, self.window_height - 32)
+
+    @property
+    def target_polygon(self):
+        return self.target_rect
 
 
 # class Score:
