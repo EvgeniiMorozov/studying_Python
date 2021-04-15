@@ -119,7 +119,6 @@ class Scope:
             self.x_scope_pos, self.y_scope_pos = event_pos
 
         if event_type == pygame.MOUSEBUTTONDOWN and event_type.button == 1:
-
             shot = pygame.Rect(self.x_scope_pos, self.y_scope_pos, 1, 1)
             self.shot = shot
 
@@ -127,8 +126,6 @@ class Scope:
                 pass
 
         self.shoot_sound.play()
-
-
 
     def blit(self, surface):
         # горизонтальная линия
