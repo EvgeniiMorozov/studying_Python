@@ -76,7 +76,11 @@ class Tir(Game):
 
     def create_scope(self):
         scope = Scope()
+
         self.mouse_handlers[pygame.MOUSEMOTION].append(scope.handle_mouse)
+
+        self.mouse_handlers[pygame.MOUSEBUTTONDOWN].append(scope.handle_mouse)
+
         self.scope = scope
         self.game_objects.append(self.scope)
 
@@ -122,10 +126,10 @@ class Scope:
             shot = pygame.Rect(self.x_scope_pos, self.y_scope_pos, 1, 1)
             self.shot = shot
 
-            if shot.colliderect():
-                pass
+            # if shot.colliderect():
+            #     pass
 
-        self.shoot_sound.play()
+            self.shoot_sound.play()
 
     def blit(self, surface):
         # горизонтальная линия
