@@ -12,7 +12,7 @@ class Game:
         self.frame_rate = frame_rate
 
         # Добавил поля для ширины и высоты экрана, т.к. они дальше понадобятся для использования в других классах.
-        # И это не сработало.
+        # (для отрисовки прицела, цели)
         self.width = width
         self.height = height
 
@@ -124,7 +124,7 @@ class Scope:
         self.x_scope_pos = 0
         self.y_scope_pos = 0
         self.scope_size = 20
-        self.shot = None
+        # self.shot = None
         self.shoot_sound = pygame.mixer.Sound("weapons/awp.wav")
         self.shoot_sound.set_volume(0.05)
 
@@ -156,6 +156,11 @@ class Scope:
     def update(self):
         pass
 
+    # Этим методом или свойством, я хочу передать координаты прицела во время выстрела.
+    @property
+    def shot(self):
+        return self.x_scope_pos, self.y_scope_pos
+
 
 class Target:
     def __init__(self, width, height) -> None:
@@ -171,16 +176,19 @@ class Target:
         surface.blit(self.target_img, self.target_rect)
 
     def update(self):
+        # Добавлял, проверял, не понравилось )
         # self.target_rect.x = random.randint(0, 640 - 48)
         # self.target_rect.y = random.randint(0, 400 - 32)
         pass
 
+    # Этим методом я хочу изменить координаты цели, после попадания в неё
     def get_new_coords(self):
         self.target_rect.x = random.randint(0, self.window_width - 48)
         self.target_rect.y = random.randint(0, self.window_height - 32)
 
+    # Этим свойством я хочу передать "хитбокс" цели
     @property
-    def target_polygon(self):
+    def get_hitbox(self):
         return self.target_rect
 
 
