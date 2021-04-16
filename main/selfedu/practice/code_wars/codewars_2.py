@@ -215,6 +215,26 @@ def pig_it(text):
     return " ".join(word[1:] + word[0] + "ay" if word.isalnum() else word for word in text.split())
 
 
+# Task_13 - Detect Pangram
+
+import string
+
+
+def is_pangram(s):
+    template = list(filter(lambda x: x.lower() in string.ascii_lowercase, s))
+    buffer = list(string.ascii_lowercase)
+    for el in template:
+        if el.lower() in buffer:
+            buffer.remove(el.lower())
+    return len(buffer) == 0
+
+
+"""
+def is_pangram(s):
+    return set(string.lowercase) <= set(s.lower())
+"""
+
+
 def main():
     # Task_1
     # print(first_n_smallest([2, 1, 2, 3, 4, 2], 4))
@@ -242,7 +262,10 @@ def main():
     # print(first_non_repeating_letter("Go hang a salami, I'm a lasagna hog!"))
 
     # Task_12
-    print(pig_it("Quis custodiet ipsos custodes ?"))
+    # print(pig_it("Quis custodiet ipsos custodes ?"))
+
+    # Task_13
+    print(is_pangram("The quick, brown fox jumps over the lazy dog!"))
 
 
 if __name__ == "__main__":
