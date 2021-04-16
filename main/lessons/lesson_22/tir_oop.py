@@ -57,9 +57,20 @@ class Game:
                 pygame.quit()
                 sys.exit()
 
-            if event.type in (pygame.MOUSEMOTION, pygame.MOUSEBUTTONDOWN):
+            # if event.type in (pygame.MOUSEMOTION, pygame.MOUSEBUTTONDOWN):
+            #     for handler in self.mouse_handlers[event.type]:
+            #         handler(event.type, event.pos)
+
+            # Я разделил обработку событий мыши на два ветвления, так как мне необходимо было получить
+            # номер кнопки, чтоб выстрел происходил ТОЛЬКО при нажатии левой кнопки мыши. А у событий
+            # MOUSEMOTION и MOUSEBUTTONDOWN разные аттрибуты.
+            if event.type == pygame.MOUSEMOTION:
                 for handler in self.mouse_handlers[event.type]:
-                    handler(event.type, event.pos)
+                    handler(event.type, event.pos, event.rel)
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                for handler in self.mouse_handlers[event.type]:
+                    handler(event.type, event.pos, event.button)
 
 
 class Tir(Game):
@@ -78,7 +89,6 @@ class Tir(Game):
         scope = Scope()
 
         self.mouse_handlers[pygame.MOUSEMOTION].append(scope.handle_mouse)
-
         self.mouse_handlers[pygame.MOUSEBUTTONDOWN].append(scope.handle_mouse)
 
         self.scope = scope
@@ -118,17 +128,13 @@ class Scope:
         self.shoot_sound = pygame.mixer.Sound("weapons/awp.wav")
         self.shoot_sound.set_volume(0.05)
 
-    def handle_mouse(self, event_type, event_pos):
+    # Добавил ещё один аргумент event_optional, в MOUSEMOTION - это будет соответствовать event.rel,
+    # а в MOUSEBUTTONDOWN - event.button
+    def handle_mouse(self, event_type, event_pos, event_optional):
         if event_type == pygame.MOUSEMOTION:
             self.x_scope_pos, self.y_scope_pos = event_pos
 
-        if event_type == pygame.MOUSEBUTTONDOWN and event_type.button == 1:
-            shot = pygame.Rect(self.x_scope_pos, self.y_scope_pos, 1, 1)
-            self.shot = shot
-
-            # if shot.colliderect():
-            #     pass
-
+        if event_type == pygame.MOUSEBUTTONDOWN and event_optional == 1:
             self.shoot_sound.play()
 
     def blit(self, surface):
