@@ -208,6 +208,13 @@ def first_non_repeating_letter(string):
     return ""
 
 
+# Task_12 - Simple Pig Latin
+
+
+def pig_it(text):
+    return " ".join(word[1:] + word[0] + "ay" if word.isalnum() else word for word in text.split())
+
+
 def main():
     # Task_1
     # print(first_n_smallest([2, 1, 2, 3, 4, 2], 4))
@@ -232,7 +239,10 @@ def main():
     # print(rgb(148, 0, 211))
 
     # Task_11
-    print(first_non_repeating_letter("Go hang a salami, I'm a lasagna hog!"))
+    # print(first_non_repeating_letter("Go hang a salami, I'm a lasagna hog!"))
+
+    # Task_12
+    print(pig_it("Quis custodiet ipsos custodes ?"))
 
 
 if __name__ == "__main__":
