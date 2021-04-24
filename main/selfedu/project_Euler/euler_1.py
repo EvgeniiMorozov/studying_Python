@@ -16,12 +16,19 @@ def task_1():
 # Начиная с 1 и 2, первые 10 элементов будут:
 # 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
 # Найдите сумму всех четных элементов ряда Фибоначчи, которые не превышают четыре миллиона.
-def sum_fibonacci():
-    pass
+def even_sum_fibonacci(n):
+    a, b = 0, 1
+    for _ in range(n):
+
+        if b % 2 == 0:
+            yield b
+
+        a, b = b, a + b
 
 
 def main():
-    print(task_1())
+    # print(task_1())
+    print(sum(even_sum_fibonacci(4000000)))
 
 
 if __name__ == '__main__':
