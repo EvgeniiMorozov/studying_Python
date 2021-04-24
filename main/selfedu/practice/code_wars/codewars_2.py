@@ -235,6 +235,90 @@ def is_pangram(s):
 """
 
 
+# Task_14 - Roman Numerals Encoder
+
+def solution_1(number):
+    template = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+    digit = len(str(number))
+    array = []
+    for i in reversed(range(digit)):
+        # print(i)
+        divider = 10**i
+        print(divider)
+        array.append(number // 10**i)
+        number %= 10**i
+    print(array)
+    return number
+
+
+# Task_15 - Create Phone Number
+
+
+def create_phone_number(array):
+    array = [str(el) for el in array]
+    return f"({''.join(array[:3])}) {''.join(array[3:6])}-{''.join(array[6:])}"
+
+
+"""
+def create_phone_number(n):
+    return "({}{}{}) {}{}{}-{}{}{}{}".format(*n)
+"""
+
+
+# Task_16 - Strip Comments
+
+
+def solution(string, markers):
+    sep = "\n"
+    sep_indices = list(filter(lambda i: sep == string[i], range(len(string))))
+    markers_indices = list(filter(lambda i: string[i] in markers, range(len(string))))
+
+    result = []
+    buffer = []
+    is_writable = markers_indices[0] != 0
+
+    for i in range(len(string)):
+        if is_writable and i in markers_indices:
+            result.append(''.join(buffer).rstrip())
+            is_writable = False
+            buffer.clear()
+        elif not is_writable and i in sep_indices:
+            buffer.append(string[i])
+            is_writable = True
+        elif is_writable:
+            buffer.append(string[i])
+
+    result.append(''.join(buffer).rstrip())
+    return ' '.join(result).rstrip()
+
+
+# Task_17 - Range Extraction
+
+def solution_2(args):
+
+    buffer = []
+    result = []
+
+    j = args[0]
+
+    for i in range(len(args)):
+        # print(f"{j=}")
+        # print(buffer)
+        if args[i] == j:
+            buffer.append(str(args[i]))
+        else:
+            j = args[i]
+            if 0 < len(buffer) <= 2:
+                result.append(''.join(buffer))
+                buffer.clear()
+            elif len(buffer) >= 3:
+                result.append(f"{buffer[0]}-{buffer[-1]}")
+            result.append(str(args[i]))
+        j += 1
+
+    return result
+
+
 def main():
     # Task_1
     # print(first_n_smallest([2, 1, 2, 3, 4, 2], 4))
@@ -265,7 +349,19 @@ def main():
     # print(pig_it("Quis custodiet ipsos custodes ?"))
 
     # Task_13
-    print(is_pangram("The quick, brown fox jumps over the lazy dog!"))
+    # print(is_pangram("The quick, brown fox jumps over the lazy dog!"))
+
+    # Task_14
+    # print(solution_1(1883))
+
+    # Task_15
+    # print(create_phone_number([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]))
+
+    # Task_16
+    # print(solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"]))
+
+    # Task_17
+    print(solution_2([-6,-3,-2,-1,0,1,3,4,5,7,8,9,10,11,14,15,17,18,19,20]))
 
 
 if __name__ == "__main__":
