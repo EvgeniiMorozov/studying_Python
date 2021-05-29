@@ -32,16 +32,16 @@ def build_xml_schema(data: list[dict], filename: str):
         user = ET.SubElement(users, 'User')
 
         user_id = ET.SubElement(user, 'id')
-        user_id.text = chunk['id']
+        user_id.text = str(chunk['id'])
 
         user_login = ET.SubElement(user, 'login')
-        user_login.text = chunk['login']
+        user_login.text = str(chunk['login'])
 
         user_password = ET.SubElement(user, 'password')
-        user_password.text = chunk['password']
+        user_password.text = str(chunk['password'])
 
         user_token = ET.SubElement(user, 'token')
-        user_token.text = chunk['token']
+        user_token.text = str(chunk['token'])
 
     # ET.dump(users)
     tree = ET.ElementTree(users)
@@ -55,6 +55,7 @@ def main():
     for chunk in unpack_pickle(pickle_file):
         if chunk['login'] == 'it_shag':
             print(chunk['password'])
+            print(chunk['token'])
 
 
 if __name__ == '__main__':
