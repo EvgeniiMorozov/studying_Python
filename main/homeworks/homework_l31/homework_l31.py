@@ -15,6 +15,33 @@
 
 
 from abc import ABC, abstractmethod
+from collections import namedtuple
+
+
+CARBONARA = {
+    'pasta': 'спагетти',
+    'sauce': 'яичный соус',
+    'topping': 'бекон',
+    'additive': 'сыр Пармезан'
+}
+BOLOGNESE = {
+    'pasta': 'спагетти',
+    'sauce': 'томатный соус',
+    'topping': ('морковь', 'сельдерей', 'мясной фарш'),
+    'additive': 'сыр Пармезан'
+}
+FETTUCCINE_ALFREDO ={
+    'pasta': 'фетучини',
+    'sauce': 'сливочный соус',
+    'topping': 'сыр Пармезан',
+    'additive': 'перец'
+}
+PASTA_MUSHROOMS_AND_SPINACH = {
+    'pasta': 'фузилли',
+    'sauce': 'сливочный соус',
+    'topping': ('грибы', 'шпинат'),
+    'additive': ('сыр Пармезан', 'перец', 'петрушка')
+}
 
 
 class IPastaBuilder(ABC):
@@ -34,6 +61,18 @@ class IPastaBuilder(ABC):
     @abstractmethod
     def add_additive(self):
         pass
+
+
+class Pasta:
+    def __init__(self, name, sauce, topping, additive):
+        self.name = name
+        self.sauce = sauce
+        self.topping = topping
+        self.additive = additive
+
+    def __str__(self):
+        pass
+
 
 
 def main():
