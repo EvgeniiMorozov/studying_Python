@@ -14,37 +14,27 @@
 """
 
 
+import enum
 from abc import ABC, abstractmethod
 from collections import namedtuple
 
 
-CARBONARA = {
-    'pasta': 'спагетти',
-    'sauce': 'яичный соус',
-    'topping': 'бекон',
-    'additive': 'сыр Пармезан'
-}
-BOLOGNESE = {
-    'pasta': 'спагетти',
-    'sauce': 'томатный соус',
-    'topping': ('морковь', 'сельдерей', 'мясной фарш'),
-    'additive': 'сыр Пармезан'
-}
-FETTUCCINE_ALFREDO ={
-    'pasta': 'фетучини',
-    'sauce': 'сливочный соус',
-    'topping': 'сыр Пармезан',
-    'additive': 'перец'
-}
-PASTA_MUSHROOMS_AND_SPINACH = {
-    'pasta': 'фузилли',
-    'sauce': 'сливочный соус',
-    'topping': ('грибы', 'шпинат'),
-    'additive': ('сыр Пармезан', 'перец', 'петрушка')
-}
+CARBONARA = ('Паста Карбонара', 'спагетти', 'яичный соус', 'бекон', 'сыр Пармезан')
+BOLOGNESE = ('Паста Болоньезе', 'спагетти', 'томатный соус', 'морковь, сельдерей, мясной фарш', 'сыр Пармезан')
+FETTUCCINE_ALFREDO = ('Фетучини Альфредо', 'фетучини', 'сливочный соус', 'сыр Пармезан', 'перец')
+MUSHROOMS_AND_SPINACH = (
+    'Паста с грибами и шпинатом',
+    'фузилли',
+    'сливочный соус',
+    'грибы, шпинат',
+    'сыр Пармезан, перец, петрушка'
+)
 
 
 class IPastaBuilder(ABC):
+    """
+    Абстрактный класс, задающий интерфейса строителя.
+    """
 
     @abstractmethod
     def add_pasta(self):
@@ -64,8 +54,18 @@ class IPastaBuilder(ABC):
 
 
 class Pasta:
-    def __init__(self, name, sauce, topping, additive):
+    def __init__(self, name, pasta, sauce, topping, additive):
+        """
+        Конструктор класса пасты.
+
+        :param name: название пасты
+        :param pasta: тип макарон
+        :param sauce: соус
+        :param topping: начинка
+        :param additive: добавка
+        """
         self.name = name
+        self.type = pasta
         self.sauce = sauce
         self.topping = topping
         self.additive = additive
@@ -73,6 +73,9 @@ class Pasta:
     def __str__(self):
         pass
 
+
+class PastaBologneseBuilder(IPastaBuilder):
+    pass
 
 
 def main():
