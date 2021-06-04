@@ -14,11 +14,11 @@
 """
 
 
-import enum
 from abc import ABC, abstractmethod
-from collections import namedtuple
 
+# from collections import namedtuple
 
+"""
 CARBONARA = ('Паста Карбонара', 'спагетти', 'яичный соус', 'бекон', 'сыр Пармезан')
 BOLOGNESE = ('Паста Болоньезе', 'спагетти', 'томатный соус', 'морковь, сельдерей, мясной фарш', 'сыр Пармезан')
 FETTUCCINE_ALFREDO = ('Фетучини Альфредо', 'фетучини', 'сливочный соус', 'сыр Пармезан', 'перец')
@@ -29,32 +29,24 @@ MUSHROOMS_AND_SPINACH = (
     'грибы, шпинат',
     'сыр Пармезан, перец, петрушка'
 )
+"""
 
-
-class IPastaBuilder(ABC):
-    """
-    Абстрактный класс, задающий интерфейса строителя.
-    """
-
-    @abstractmethod
-    def add_pasta(self):
-        pass
-
-    @abstractmethod
-    def add_sauce(self):
-        pass
-
-    @abstractmethod
-    def add_topping(self):
-        pass
-
-    @abstractmethod
-    def add_additive(self):
-        pass
+PASTA = {"spaghetti": "спагетти", "fettuccine": "фетучини", "fusilli": "фузилли"}
+SAUCE = {"cream_sauce": "сливочный соус", "egg_sauce": "яичный соус", "tomato_sauce": "томатный соус"}
+TOPPING = {
+    "bacon": "бекон",
+    "carrot": "морковь",
+    "celery": "сельдерей",
+    "parmesan": "сыр Пармезан",
+    "chopped_meat": "мясной фарш",
+    "mushrooms": "грибы",
+    "spinach": "шпинат",
+}
+ADDITIVE = {"pepper": "перец", "parsley": "петрушка", "parmesan": "сыр Пармезан"}
 
 
 class Pasta:
-    def __init__(self, name, pasta, sauce, topping, additive):
+    def __init__(self, name):
         """
         Конструктор класса пасты.
 
@@ -65,22 +57,165 @@ class Pasta:
         :param additive: добавка
         """
         self.name = name
-        self.type = pasta
-        self.sauce = sauce
-        self.topping = topping
-        self.additive = additive
+        self.pasta_type = None
+        self.sauce = None
+        self.topping = None
+        self.additive = None
 
     def __str__(self):
+        info: str = (
+            f"{self.name} состоит из:\n"
+            f"\t- паста: {self.pasta_type};\n"
+            f"\t- соус: {self.sauce};\n"
+            f"\t- начинка: {self.topping};\n"
+            f"\t- по желанию можно добавить {self.additive}."
+        )
+        return info
+
+
+class IPastaBuilder(ABC):
+    """
+    Абстрактный класс, задающий интерфейса строителя.
+    """
+
+    @abstractmethod
+    def add_pasta(self):
+        """Метод, добавляющий пасту (макароны) в приготовляемое блюдо."""
+        pass
+
+    @abstractmethod
+    def add_sauce(self):
+        """Метод, добавляющий соус в приготовляемое блюдо."""
+        pass
+
+    @abstractmethod
+    def add_topping(self):
+        """Метод, добавляющий начинку в приготовляемое блюдо."""
+        pass
+
+    @abstractmethod
+    def add_additive(self):
+        """Метод, добавляющий различные добавки в приготовляемое блюдо."""
+        pass
+
+    @abstractmethod
+    def get_cooked_pasta(self):
+        """Метод, возвращающий приготовленное блюдо (пасту)."""
         pass
 
 
+class Director:
+
+    """ Класс Director, отвечающий за поэтапное приготовление пасты."""
+
+    def __init__(self):
+        self.builder = None
+
+    def set_builder(self, builder: IPastaBuilder):
+        self.builder = builder
+
+    def cook_pasta(self):
+        if not self.builder:
+            raise ValueError('Рецепт (builder) не выбран!')
+        self.builder.add_pasta()
+        self.builder.add_sauce()
+        self.builder.add_topping()
+        self.builder.add_additive()
+
+
+# Реализация конкретных строителей для приготовления паст.
+
+
 class PastaBologneseBuilder(IPastaBuilder):
-    pass
+    def __init__(self):
+        self.pasta = Pasta("Паста Болоньезе")
+
+    def add_pasta(self):
+        self.pasta.pasta_type = PASTA['spaghetti']
+        
+    def add_sauce(self):
+        self.pasta.sauce = SAUCE['tomato_sauce']
+
+    def add_topping(self):
+        self.pasta.topping = [TOPPING['carrot'], TOPPING['celery'], TOPPING['chopped_meat']]
+
+    def add_additive(self):
+        self.pasta.additive = [ADDITIVE['parmesan']]
+
+    def get_cooked_pasta(self):
+        return self.pasta
+
+
+class PastaCarbonaraBuilder(IPastaBuilder):
+    def __init__(self):
+        self.pasta = Pasta("Паста Карбонара")
+
+    def add_pasta(self):
+        self.pasta.pasta_type = PASTA['spaghetti']
+
+    def add_sauce(self):
+        self.pasta.sauce = SAUCE['egg_sauce']
+
+    def add_topping(self):
+        self.pasta.topping = TOPPING['bacon']
+
+    def add_additive(self):
+        self.pasta.additive = [ADDITIVE['parmesan']]
+
+    def get_cooked_pasta(self):
+        return self.pasta
+
+
+class FettuccineAlfredoBuilder(IPastaBuilder):
+    def __init__(self):
+        self.pasta = Pasta("Фетучини Альфредо")
+
+    def add_pasta(self):
+        self.pasta.pasta_type = PASTA['fettuccine']
+
+    def add_sauce(self):
+        self.pasta.sauce = SAUCE['cream_sauce']
+
+    def add_topping(self):
+        self.pasta.topping = TOPPING['parmesan']
+
+    def add_additive(self):
+        self.pasta.additive = ADDITIVE['pepper']
+
+    def get_cooked_pasta(self):
+        return self.pasta
+
+
+class MashroomsSpinachBuilder(IPastaBuilder):
+    def __init__(self):
+        self.pasta = Pasta("Паста с грибами и шпинатом")
+
+    def add_pasta(self):
+        self.pasta.pasta_type = PASTA['fusilli']
+
+    def add_sauce(self):
+        self.pasta.sauce = SAUCE['cream_sauce']
+
+    def add_topping(self):
+        self.pasta.topping = [TOPPING['mushrooms'], TOPPING['spinach']]
+
+    def add_additive(self):
+        self.pasta.additive = [ADDITIVE['pepper'], ADDITIVE['parmesan'], ADDITIVE['parsley']]
+
+    def get_cooked_pasta(self):
+        return self.pasta
 
 
 def main():
-    pass
+    cooks = (PastaBologneseBuilder, PastaCarbonaraBuilder, FettuccineAlfredoBuilder, MashroomsSpinachBuilder)
+    director = Director()
+    for cook in cooks:
+        builder = cook()
+        director.set_builder(builder)
+        director.cook_pasta()
+        pasta = builder.get_cooked_pasta()
+        print(pasta)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
