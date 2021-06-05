@@ -105,7 +105,7 @@ class Director:
 
     def cook_pasta(self):
         if not self.builder:
-            raise ValueError('Рецепт (builder) не выбран!')
+            raise ValueError("Рецепт (builder) не выбран!")
         self.builder.add_pasta()
         self.builder.add_sauce()
         self.builder.add_topping()
@@ -120,16 +120,16 @@ class PastaBologneseBuilder(IPastaBuilder):
         self.pasta = Pasta("Паста Болоньезе")
 
     def add_pasta(self):
-        self.pasta.pasta_type = PASTA['spaghetti']
-        
+        self.pasta.pasta_type = PASTA["spaghetti"]
+
     def add_sauce(self):
-        self.pasta.sauce = SAUCE['tomato_sauce']
+        self.pasta.sauce = SAUCE["tomato_sauce"]
 
     def add_topping(self):
-        self.pasta.topping = [TOPPING['carrot'], TOPPING['celery'], TOPPING['chopped_meat']]
+        self.pasta.topping = [TOPPING["carrot"], TOPPING["celery"], TOPPING["chopped_meat"]]
 
     def add_additive(self):
-        self.pasta.additive = [ADDITIVE['parmesan']]
+        self.pasta.additive = [ADDITIVE["parmesan"]]
 
     def get_cooked_pasta(self):
         return self.pasta
@@ -140,16 +140,16 @@ class PastaCarbonaraBuilder(IPastaBuilder):
         self.pasta = Pasta("Паста Карбонара")
 
     def add_pasta(self):
-        self.pasta.pasta_type = PASTA['spaghetti']
+        self.pasta.pasta_type = PASTA["spaghetti"]
 
     def add_sauce(self):
-        self.pasta.sauce = SAUCE['egg_sauce']
+        self.pasta.sauce = SAUCE["egg_sauce"]
 
     def add_topping(self):
-        self.pasta.topping = TOPPING['bacon']
+        self.pasta.topping = TOPPING["bacon"]
 
     def add_additive(self):
-        self.pasta.additive = [ADDITIVE['parmesan']]
+        self.pasta.additive = [ADDITIVE["parmesan"]]
 
     def get_cooked_pasta(self):
         return self.pasta
@@ -160,16 +160,16 @@ class FettuccineAlfredoBuilder(IPastaBuilder):
         self.pasta = Pasta("Фетучини Альфредо")
 
     def add_pasta(self):
-        self.pasta.pasta_type = PASTA['fettuccine']
+        self.pasta.pasta_type = PASTA["fettuccine"]
 
     def add_sauce(self):
-        self.pasta.sauce = SAUCE['cream_sauce']
+        self.pasta.sauce = SAUCE["cream_sauce"]
 
     def add_topping(self):
-        self.pasta.topping = TOPPING['parmesan']
+        self.pasta.topping = TOPPING["parmesan"]
 
     def add_additive(self):
-        self.pasta.additive = ADDITIVE['pepper']
+        self.pasta.additive = ADDITIVE["pepper"]
 
     def get_cooked_pasta(self):
         return self.pasta
@@ -180,16 +180,16 @@ class MashroomsSpinachBuilder(IPastaBuilder):
         self.pasta = Pasta("Паста с грибами и шпинатом")
 
     def add_pasta(self):
-        self.pasta.pasta_type = PASTA['fusilli']
+        self.pasta.pasta_type = PASTA["fusilli"]
 
     def add_sauce(self):
-        self.pasta.sauce = SAUCE['cream_sauce']
+        self.pasta.sauce = SAUCE["cream_sauce"]
 
     def add_topping(self):
-        self.pasta.topping = [TOPPING['mushrooms'], TOPPING['spinach']]
+        self.pasta.topping = [TOPPING["mushrooms"], TOPPING["spinach"]]
 
     def add_additive(self):
-        self.pasta.additive = [ADDITIVE['pepper'], ADDITIVE['parmesan'], ADDITIVE['parsley']]
+        self.pasta.additive = [ADDITIVE["pepper"], ADDITIVE["parmesan"], ADDITIVE["parsley"]]
 
     def get_cooked_pasta(self):
         return self.pasta
