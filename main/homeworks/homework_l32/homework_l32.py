@@ -37,32 +37,47 @@ BOOK_NAMES = [
 
 class Book:
     def __init__(self):
-        self.author = None
-        self.genre = None
-        self.name = None
+        self.author: str = str()
+        self.genre: str = str()
+        self.name: str = str()
 
     def __str__(self):
-        pass
+        info = f'Эта книга называется: {self.name},\n' \
+               f'\tнаписал её выдающийся автор: {self.author},\n' \
+               f'\t непревзойдённый мастер жанра {self.genre}.'
+        return info
 
 
 class Reader:
-    def choose_book(self):
-        pass
+    def __init__(self, name):
+        self.__name = name
 
-    def read_book(self):
-        pass
+    def choose_book(self, genre):
+        print(f'Читатель {self.__name} хочет почитать что-нибудь из {genre}.')
+
+    def read_book(self, book):
+        print(f'Читатель {self.__name} читает книгу {book}.')
+
+    def get_name(self):
+        return self.__name
 
 
 class Librarian:
+    def add_book(self):
+        pass
+
+    def change_book(self):
+        pass
+
+    def delete_book(self):
+        pass
+
+    def __create_book(self):
+        pass
+
+
+class LibraryFacade:
     pass
-
-
-def generate_books():
-    list_of_books = []
-    for name in BOOK_NAMES:
-        book = dict()
-        book.update()
-
 
 
 def main():
