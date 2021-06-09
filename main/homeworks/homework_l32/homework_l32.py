@@ -63,17 +63,24 @@ class Reader:
 
 
 class Librarian:
-    def add_book(self):
-        pass
+    def __init__(self):
+        self.book = None
+
+    def add_book(self, genre):
+        if genre not in BOOK_GENRES:
+            print('У нас нет книг такого жанра.')
+        self.book = Book()
+        self.book.genre = genre
+        self.book.author = choice(BOOK_AUTHORS)
+        self.book.name = choice(BOOK_NAMES)
+        return self.book
 
     def change_book(self):
         pass
 
-    def delete_book(self):
-        pass
-
-    def __create_book(self):
-        pass
+    def delete_book(self, book):
+        print('Библиотекарь забрал книгу у читателя.')
+        return book.kill()
 
 
 class LibraryFacade:
