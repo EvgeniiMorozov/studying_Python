@@ -43,14 +43,14 @@ class Book:
 
     def __str__(self):
         info = f'Эта книга называется: {self.name},\n' \
-               f'\tнаписал её выдающийся автор: {self.author},\n' \
-               f'\t непревзойдённый мастер жанра {self.genre}.'
+               f'написал её выдающийся автор: {self.author},\n' \
+               f'непревзойдённый мастер жанра {self.genre}.'
         return info
 
 
 class Reader:
     def __init__(self, name):
-        self.__name = name
+        self.__name: str = name
 
     def choose_book(self, genre):
         print(f'Читатель {self.__name} хочет почитать что-нибудь из {genre}.')
@@ -67,8 +67,6 @@ class Librarian:
         self.book = None
 
     def add_book(self, genre):
-        if genre not in BOOK_GENRES:
-            print('У нас нет книг такого жанра.')
         self.book = Book()
         self.book.genre = genre
         self.book.author = choice(BOOK_AUTHORS)
@@ -84,7 +82,19 @@ class Librarian:
 
 
 class LibraryFacade:
-    pass
+    def __init__(self):
+        self.librarian = Librarian()
+        self.book = Book()
+
+    def search_book_by_genre(self, genre):
+        if genre not in BOOK_GENRES:
+            print('У нас нет книг такого жанра.')
+
+
+
+    def search_book_by_author(self, author):
+        if author not in BOOK_AUTHORS:
+            print('У нас нет книг этого автора.')
 
 
 def main():
