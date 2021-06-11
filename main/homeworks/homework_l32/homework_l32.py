@@ -44,7 +44,7 @@ class Book:
     def __str__(self) -> str:
         info = f'Эта книга называется: {self.name},\n' \
                f'написал её выдающийся автор: {self.author},\n' \
-               f'непревзойдённый мастер жанра {self.genre}.'
+               f'непревзойдённый мастер жанра {self.genre}'
         return info
 
     def __del__(self):
@@ -62,17 +62,24 @@ class Reader:
     #     return Reader, genre
 
     def choose_book(self, genre: str):
+        """ Читатель, выбирает книгу. """
         print(f'Читатель {self.__name} хочет почитать что-нибудь из {genre}.')
         return genre
 
-    def read_book(self, book: str):
-        print(f'Читатель {self.__name} читает книгу {book}.')
+    def read_book(self, book: Book):
+        """ Читатель, читает книгу. """
+        print(f'Читатель {self.__name} читает книгу "{book.name}".')
+
+    def got_upset(self):
+        """ Реакция читателя на отсутствие книги. """
+        print(f'Читатель {self.__name} расстроился и отказался от книги.')
 
     def get_name(self) -> str:
+        """ Геттер, возвращающий имя читателя. """
         return self.__name
 
     def __del__(self):
-        print(f'Довольный читатель {self.__name} покинул библиотеку.')
+        print(f'Читатель {self.__name} покинул библиотеку.')
 
 
 class Librarian:
@@ -96,10 +103,7 @@ class Librarian:
 
     def delete_book(self, book: Book):
         """ Метод, удаляющий экземпляр книги. """
-        print('Библиотекарь забрал книгу у читателя. ' + book.__del__())
-
-    # def __del__(self):
-    #     return f'Библиотекарь взглянул на часы и начал собираться домой.'
+        print('Библиотекарь забрал книгу у читателя.\n' + book.__del__())
 
 
 class LibraryFacade:
@@ -108,22 +112,18 @@ class LibraryFacade:
         self.book = None
 
     def take_order(self, reader: Reader, genre: str):
-        self.search_book_by_genre(reader, genre)
-        reader.read_book(self.book)
-
-    def reader_returns_book(self):
-        self.librarian.delete_book(self.book)
-
-    def search_book_by_genre(self, reader, genre):
-        """Поиск книги по жанру."""
+        """ Метод, отвечающий за выдачу книги читателю. """
         if genre not in BOOK_GENRES:
             print(f'У нас нет книг такого жанра. Но книга "{choice(BOOK_NAMES)}" очень интересная, советуем прочитать.')
+            reader.got_upset()
         else:
             self.book = self.librarian.add_book(genre)
             self.librarian.give_book(reader, self.book)
+            reader.read_book(self.book)
 
-    # def __del__(self):
-    #     return f'Библиотека закрывается.'
+    def reader_returns_book(self):
+        """ Метод, отвечающий за приём книги у читателя. """
+        self.librarian.delete_book(self.book)
 
 
 def main():
@@ -134,14 +134,12 @@ def main():
     library.take_order(reader1, choice1)
     library.reader_returns_book()
 
-    # reader2 = Reader('Станислав')
-    # choice2 = reader2.choose_book('Мистика')
-    # library.search_book_by_genre(reader2, choice2)
+    print('\n')
+
+    reader2 = Reader('Станислав')
+    choice2 = reader2.choose_book('Мистика')
+    library.take_order(reader2, choice2)
 
 
 if __name__ == '__main__':
     main()
-
-
-
-
