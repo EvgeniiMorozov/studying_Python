@@ -38,3 +38,10 @@ RecipesApplication
     ├───model.py (здесь функционал модели)
     └───view.py (здесь функционал представления)
 """
+
+def main():
+    pass
+
+
+if __name__ == "__main__":
+    main()
