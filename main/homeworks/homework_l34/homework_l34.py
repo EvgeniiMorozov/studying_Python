@@ -38,9 +38,12 @@ RecipesApplication
     ├───model.py (здесь функционал модели)
     └───view.py (здесь функционал представления)
 """
+from controller import Controller
+
 
 def main():
-    pass
+    controller = Controller()
+    controller.run()
 
 
 if __name__ == "__main__":
