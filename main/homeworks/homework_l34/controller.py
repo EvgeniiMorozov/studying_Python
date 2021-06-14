@@ -18,4 +18,5 @@ class Controller:
             self.quit()
 
     def quit(self):
-        pass
+        self.recipes_base.safe_quit()
+        self.user_interface.say_bay()

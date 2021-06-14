@@ -31,3 +31,6 @@ class UserInterface:
 
         print("=" * 40)
         return recipe
+
+    def say_bay(self):
+        print(" До скорых встреч! ".center(40, "="))

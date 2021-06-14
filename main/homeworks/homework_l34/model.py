@@ -15,6 +15,9 @@ class RecipeDatabase:
     def __init__(self):
         self.recipes: dict = dict()
 
-    def add_recipe(self, dict_recipe: dict):
+    def add_recipe(self, dict_recipe: dict) -> None:
         recipe = Recipe(*dict_recipe.values())
         self.recipes[recipe.title] = recipe
+
+    def safe_quit(self):
+        pass
