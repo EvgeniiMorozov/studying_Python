@@ -15,6 +15,10 @@ class UserInterface:
         print("=" * 40)
         return user_answer
 
+    @staticmethod
+    def say_bay():
+        print(" До скорых встреч! ".center(40, "="))
+
     def add_recipe(self):
         recipe = {
             "Название рецепта": None,
@@ -32,5 +36,11 @@ class UserInterface:
         print("=" * 40)
         return recipe
 
-    def say_bay(self):
-        print(" До скорых встреч! ".center(40, "="))
+    def get_recipe_by_title(self):
+        print(" Выбор рецепта ".center(40, "="))
+        recipe_title = input("Введите название рецепта: ")
+        print("=" * 40)
+        return recipe_title
+
+    def show_all_recipes(self, recipes: list):
+        pass
