@@ -20,8 +20,10 @@ class Controller:
             self.add_recipe()
         elif answer == "2":
             self.remove_recipe()
-        elif answer == "3":
+        elif answer == "4":
             self.show_all_recipes()
+        elif answer == "3":
+            self.show_user_recipe()
 
     def quit(self):
         """Корректный выход из программы"""
@@ -42,3 +44,8 @@ class Controller:
         """Показать все рецепты"""
         recipes = self.recipes_base.get_all_recipes()
         self.user_interface.show_all_recipes(recipes)
+
+    def show_user_recipe(self):
+        """Показать выбранный рецепт"""
+        recipe_title = self.user_interface.get_recipe_by_title()
+        self.user_interface.show_user_recipe(recipe_title)

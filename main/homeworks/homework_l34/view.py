@@ -36,11 +36,14 @@ class UserInterface:
         print("=" * 40)
         return recipe
 
-    def get_recipe_by_title(self):
+    def get_recipe_by_title(self) -> str:
         print(" Выбор рецепта ".center(40, "="))
         recipe_title = input("Введите название рецепта: ")
         print("=" * 40)
         return recipe_title
 
-    def show_all_recipes(self, recipes: list):
+    def show_all_recipes(self, recipes: list) -> None:
+        pass
+
+    def show_user_recipe(self, recipe_title: str) -> None:
         pass

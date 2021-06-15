@@ -31,12 +31,12 @@ class RecipeDatabase:
         self.recipes: dict = self.load_data()
 
     def save_data(self):
-        """Сохранение данных в пикл-файл"""
+        """Сохранение данных в pickle-файл"""
         with open("data.pkl", "wb") as f:
             pickle.dump(self.recipes, f)
 
     def load_data(self):
-        """Загрузка данных из пикл-файла"""
+        """Загрузка данных из pickle-файла"""
         data_path = pathlib.Path().cwd() / "data.pkl"
 
         # Если файла не существует, то возвращаем словарь
@@ -58,3 +58,16 @@ class RecipeDatabase:
     def get_all_recipes(self):
         """Возвращает все рецепты из базы"""
         return self.recipes.values()
+
+    def get_recipe_by_title(self, recipe_title) -> dict:
+        """Возвращает рецепт и подробную информацию о нём"""
+        recipe = self.recipes[recipe_title]
+        detailed_recipe = {
+            "Название рецепта": recipe.title,
+            "Автор": recipe.author,
+            "Тип блюда": recipe.course,
+            "Кухня": recipe.culinary_cuisine,
+            "Ингредиенты": recipe.ingredients,
+            "Описание": recipe.description,
+        }
+        return detailed_recipe
