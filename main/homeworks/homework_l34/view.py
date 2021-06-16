@@ -19,11 +19,12 @@ class UserInterface:
     def say_bay():
         print(" До скорых встреч! ".center(40, "="))
 
-    def add_recipe(self):
+    def add_recipe(self) -> dict:
         recipe = {
             "Название рецепта": None,
             "Автор рецепта": None,
             "тип блюда": None,
+            "Кулинарная кухня": None,
             "Описание рецепта": None,
             "Ингредиенты": None,
         }
@@ -31,7 +32,7 @@ class UserInterface:
         print(" Добавление рецепта ".center(40, "="))
 
         for key in recipe:
-            recipe[key] = input(f"Введите {key}")
+            recipe[key] = input(f"Введите {key}: ")
 
         print("=" * 40)
         return recipe
@@ -43,7 +44,20 @@ class UserInterface:
         return recipe_title
 
     def show_all_recipes(self, recipes: list) -> None:
-        pass
+        print(" Рецепты: ".center(40, "="))
 
-    def show_user_recipe(self, recipe_title: str) -> None:
-        pass
+        if not recipes:
+            print("Рецептов нет!")
+
+        for i, recipe in enumerate(recipes, start=1):
+            print(f"{i}) {recipe}")
+
+        print('=' * 40)
+
+    def show_user_recipe(self, recipe: dict) -> None:
+        print(" Информация о рецепте ".center(40, "="))
+
+        for key in recipe:
+            print(f"{key}: {recipe[key]}")
+
+        print('=' * 40)

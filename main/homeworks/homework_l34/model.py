@@ -51,7 +51,7 @@ class RecipeDatabase:
         recipe = Recipe(*dict_recipe.values())
         self.recipes[recipe.title] = recipe
 
-    def remove_recipe_by_title(self, recipe_title: str):
+    def remove_recipe_by_title(self, recipe_title: str) -> None:
         """Удаление рецепта из базы"""
         self.recipes.pop(recipe_title)
 
