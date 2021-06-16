@@ -48,4 +48,5 @@ class Controller:
     def show_user_recipe(self):
         """Показать выбранный рецепт"""
         recipe_title = self.user_interface.get_recipe_by_title()
-        self.user_interface.show_user_recipe(recipe_title)
+        recipe = self.recipes_base.get_recipe_by_title(recipe_title)
+        self.user_interface.show_user_recipe(recipe)
