@@ -55,11 +55,11 @@ class RecipeDatabase:
         """Удаление рецепта из базы"""
         self.recipes.pop(recipe_title)
 
-    def get_all_recipes(self):
+    def get_all_recipes(self) -> str:
         """Возвращает все рецепты из базы"""
         return self.recipes.values()
 
-    def get_recipe_by_title(self, recipe_title) -> dict:
+    def get_recipe_by_title(self, recipe_title: str) -> dict:
         """Возвращает рецепт и подробную информацию о нём"""
         recipe = self.recipes[recipe_title]
         detailed_recipe = {

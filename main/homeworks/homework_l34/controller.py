@@ -24,6 +24,8 @@ class Controller:
             self.show_all_recipes()
         elif answer == "3":
             self.show_user_recipe()
+        else:
+            self.show_incorrect_answer_error(answer)
 
     def quit(self):
         """Корректный выход из программы"""
@@ -38,7 +40,10 @@ class Controller:
     def remove_recipe(self):
         """Удаление рецепта"""
         recipe_title = self.user_interface.get_recipe_by_title()
-        self.recipes_base.remove_recipe_by_title(recipe_title)
+        try:
+            self.recipes_base.remove_recipe_by_title(recipe_title)
+        except KeyError:
+            self.user_interface.show_incorrect_title_error(recipe_title)
 
     def show_all_recipes(self):
         """Показать все рецепты"""
@@ -48,5 +53,13 @@ class Controller:
     def show_user_recipe(self):
         """Показать выбранный рецепт"""
         recipe_title = self.user_interface.get_recipe_by_title()
-        recipe = self.recipes_base.get_recipe_by_title(recipe_title)
-        self.user_interface.show_user_recipe(recipe)
+        try:
+            recipe = self.recipes_base.get_recipe_by_title(recipe_title)
+        except KeyError:
+            self.user_interface.show_incorrect_title_error(recipe_title)
+        else:
+            self.user_interface.show_user_recipe(recipe)
+
+    def show_incorrect_answer_error(self, answer):
+        """Показываем ошибку о неправильном (несуществующем) действием"""
+        self.user_interface.show_incorrect_answer_error(answer)
