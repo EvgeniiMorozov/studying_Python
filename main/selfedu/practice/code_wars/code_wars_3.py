@@ -9,10 +9,22 @@ def duplicate_encode(word):
 # Task-2 Valid string - https://www.codewars.com/kata/52f3bb2095d6bfeac2002196/train/python
 
 
+# def valid_word(seq, word):
+#     for chunk in seq:
+#         word = word.replace(chunk, "")
+#     return len(word) == 0
+
+
 def valid_word(seq, word):
     for chunk in seq:
-        word = word.replace(chunk, "")
-    return len(word) == 0
+        temp_word = word.replace(chunk, "")
+        temp_seq = seq.remove(chunk)
+        for elem in temp_seq:
+            temp_word = temp_word.replace(elem, "")
+
+        if len(temp_word) == 0:
+            return True
+    return False
 
 
 def main():
