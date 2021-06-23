@@ -1,4 +1,4 @@
-from product import IProduct
+from .product import IProduct
 
 
 class RelishTopping(IProduct):
