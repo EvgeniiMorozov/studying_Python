@@ -44,21 +44,3 @@ class DzatzikiSause(IProduct):
 
     def __str__(self):
         return "Соус Дзадзики"
-
-
-class RelishSause(IProduct):
-    def __init__(self):
-        super().__init__()
-        self.price = 100
-
-    def __str__(self):
-        return "Релиш"
-
-
-class SweetChiliSause(IProduct):
-    def __init__(self):
-        super().__init__()
-        self.price = 105
-
-    def __str__(self):
-        return "Сладкий Чили"
