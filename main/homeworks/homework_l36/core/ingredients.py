@@ -40,7 +40,7 @@ class SauceIngredient(Ingredients):
             return MayonnaiseSauce()
         elif ingredient == 'кетчуп':
             return KetchupSauce()
-        elif ingredient == 'гуакомоле':
+        elif ingredient == 'гуакамоле':
             return GuacamoleSauce()
         elif ingredient == 'дзадзики':
             return DzatzikiSauce()
@@ -53,7 +53,7 @@ class SausageIngredient(Ingredients):
 
         if ingredient == 'баварская':
             return BavarianSausage()
-        elif ingredient == 'полукопченная':
+        elif ingredient == 'полукопченая':
             return SemiSmokedSausage()
         elif ingredient == 'соевая':
             return SoySausage()
