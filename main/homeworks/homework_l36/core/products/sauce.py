@@ -1,7 +1,7 @@
 from product import IProduct
 
 
-class MustardSause(IProduct):
+class MustardSauce(IProduct):
     def __init__(self):
         super().__init__()
         self.price = 70
@@ -10,7 +10,7 @@ class MustardSause(IProduct):
         return "Горчица"
 
 
-class MayonnaiseSause(IProduct):
+class MayonnaiseSauce(IProduct):
     def __init__(self):
         super().__init__()
         self.price = 80
@@ -19,7 +19,7 @@ class MayonnaiseSause(IProduct):
         return "Майонез"
 
 
-class KetchupSause(IProduct):
+class KetchupSauce(IProduct):
     def __init__(self):
         super().__init__()
         self.price = 90
@@ -28,7 +28,7 @@ class KetchupSause(IProduct):
         return "Кетчуп"
 
 
-class GuacamoleSause(IProduct):
+class GuacamoleSauce(IProduct):
     def __init__(self):
         super().__init__()
         self.price = 95
@@ -37,7 +37,7 @@ class GuacamoleSause(IProduct):
         return "Гуакамоле"
 
 
-class DzatzikiSause(IProduct):
+class DzatzikiSauce(IProduct):
     def __init__(self):
         super().__init__()
         self.price = 100
