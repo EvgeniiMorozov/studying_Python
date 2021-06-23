@@ -16,7 +16,7 @@ class SemiSmokedSausage(IProduct):
         self.price = 105
 
     def __str__(self) -> str:
-        return "Полукопчёная соситка"
+        return "Полукопчёная сосиска"
 
 
 class SoySausage(IProduct):
