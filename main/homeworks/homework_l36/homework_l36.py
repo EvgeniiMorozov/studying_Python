@@ -11,10 +11,15 @@
 
 Приложение можно создать как с нуля, так и переделав приложение для пиццы, что находится в архиве
 """
+from core.hot_dog_kiosk import KioskFacade
+from core.client import Client
 
 
 def main():
-    pass
+    kiosk = KioskFacade()
+    client = Client('Василий', 1000)
+    hot_dog = kiosk.make_order(client, 'хот-дог с гуакамоле')
+    print(hot_dog, hot_dog.get_price())
 
 
 if __name__ == "__main__":
