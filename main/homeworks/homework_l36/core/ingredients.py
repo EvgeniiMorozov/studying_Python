@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 
 from .products.product import IProduct
-from .products.sause import DzatzikiSause
-from .products.sause import GuacamoleSause
-from .products.sause import KetchupSause
-from .products.sause import MayonnaiseSause
-from .products.sause import MustardSause
+from .products.sauce import DzatzikiSauce
+from .products.sauce import GuacamoleSauce
+from .products.sauce import KetchupSauce
+from .products.sauce import MayonnaiseSauce
+from .products.sauce import MustardSauce
 from .products.sausage import BavarianSausage
 from .products.sausage import SemiSmokedSausage
 from .products.sausage import SoySausage
@@ -29,21 +29,21 @@ class Ingredients(ABC):
         ...
 
 
-class SauseIngredient(Ingredients):
+class SauceIngredient(Ingredients):
     """Фабрика соусов"""
 
     def create_ingredient(self, ingredient: str) -> IProduct:
 
         if ingredient == 'горчица':
-            return MustardSause()
+            return MustardSauce()
         elif ingredient == 'майонез':
-            return MayonnaiseSause()
+            return MayonnaiseSauce()
         elif ingredient == 'кетчуп':
-            return KetchupSause()
+            return KetchupSauce()
         elif ingredient == 'гуакомоле':
-            return GuacamoleSause()
+            return GuacamoleSauce()
         elif ingredient == 'дзадзики':
-            return DzatzikiSause()
+            return DzatzikiSauce()
 
 
 class SausageIngredient(Ingredients):
