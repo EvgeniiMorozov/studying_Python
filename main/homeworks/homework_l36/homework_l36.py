@@ -21,6 +21,9 @@ def main():
     hot_dog = kiosk.make_order(client, 'хот-дог с гуакамоле')
     print(hot_dog, hot_dog.get_price())
 
+    hot_dog = kiosk.make_order(client, 'индивидуальный')
+    print(hot_dog, hot_dog.get_price())
+
 
 if __name__ == "__main__":
     main()
