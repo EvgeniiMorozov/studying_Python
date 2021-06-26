@@ -97,8 +97,7 @@ def inside_out(string):
 def parts_sums(sequence):
     if len(sequence) == 0:
         return [0]
-    new_var = reversed(range(len(sequence)+1))
-    return list(reversed([sum(sequence[i:]) for i in new_var]))
+    return [sum(sequence[i:]) for i in range(len(sequence)+1)]
 
 
 # Task_5 - Counting Duplicates
