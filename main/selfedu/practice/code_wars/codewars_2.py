@@ -84,15 +84,21 @@ def inside_out(string):
 # Task_4 - Sums of Parts
 
 
+# def parts_sums(sequence):
+#     if len(sequence) == 0:
+#         return [0]
+#     result = [0]
+#     acc = 0
+#     for el in reversed(sequence):
+#         acc += el
+#         result.insert(0, acc)
+#     return result
+
 def parts_sums(sequence):
     if len(sequence) == 0:
         return [0]
-    result = [0]
-    acc = 0
-    for el in reversed(sequence):
-        acc += el
-        result.insert(0, acc)
-    return result
+    new_var = reversed(range(len(sequence)+1))
+    return list(reversed([sum(sequence[i:]) for i in new_var]))
 
 
 # Task_5 - Counting Duplicates
@@ -335,7 +341,7 @@ def main():
     # print(inside_out("man i need a taxi up to ubud"))
 
     # Task_4
-    # print(parts_sums([1, 2, 3, 4, 5, 6]))
+    print(parts_sums([1, 2, 3, 4, 5, 6]))
 
     # Task_7
     # print(find_even_index([1,100,50,-51,1,1]))
@@ -366,7 +372,7 @@ def main():
     # print(solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"]))
 
     # Task_17
-    print(solution_2([-6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]))
+    # print(solution_2([-6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]))
 
 
 if __name__ == "__main__":
