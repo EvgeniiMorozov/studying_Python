@@ -84,20 +84,15 @@ def inside_out(string):
 # Task_4 - Sums of Parts
 
 
-# def parts_sums(sequence):
-#     if len(sequence) == 0:
-#         return [0]
-#     result = [0]
-#     acc = 0
-#     for el in reversed(sequence):
-#         acc += el
-#         result.insert(0, acc)
-#     return result
-
 def parts_sums(sequence):
     if len(sequence) == 0:
         return [0]
-    return [sum(sequence[i:]) for i in range(len(sequence)+1)]
+    max_sum = sum(sequence)
+    result = [max_sum]
+    for _ in range(len(sequence)):
+        max_sum -= sequence.pop(0)
+        result.append(max_sum)
+    return result
 
 
 # Task_5 - Counting Duplicates
