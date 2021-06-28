@@ -24,10 +24,7 @@ def count_bits(n: int):
 
 
 def tower_builder(n_floors):
-    return [
-        " " * (n_floors - 1 - n) + "*" * (2 * n + 1) + " " * (n_floors - 1 - n)
-        for n in range(n_floors)
-    ]
+    return [" " * (n_floors - 1 - n) + "*" * (2 * n + 1) + " " * (n_floors - 1 - n) for n in range(n_floors)]
 
 
 # Task_3
@@ -165,11 +162,7 @@ def to_camel_case(text):
 
 
 def solution_1(number):
-    return (
-        0
-        if number < 0
-        else sum(list(filter(lambda x: x % 3 == 0 or x % 5 == 0, range(number))))
-    )
+    return 0 if number < 0 else sum(list(filter(lambda x: x % 3 == 0 or x % 5 == 0, range(number))))
 
 
 # Task_11
@@ -184,9 +177,7 @@ def solution_1(number):
 
 
 def spin_words(sentence):
-    result = list(
-        map(lambda word: word if len(word) < 5 else word[::-1], sentence.split())
-    )
+    result = list(map(lambda word: word if len(word) < 5 else word[::-1], sentence.split()))
     return " ".join(result)
 
 
@@ -256,11 +247,7 @@ def is_valid_walk(walk):
     if len(walk) != 10:
         return False
     else:
-        return (
-            True
-            if walk.count("s") == walk.count("n") and walk.count("w") == walk.count("e")
-            else False
-        )
+        return True if walk.count("s") == walk.count("n") and walk.count("w") == walk.count("e") else False
 
 
 # Task_15
@@ -274,9 +261,7 @@ def is_valid_walk(walk):
 
 
 def unique_in_order(iterable):
-    indices = list(
-        filter(lambda i: iterable[i] != iterable[i - 1], range(1, len(iterable)))
-    )
+    indices = list(filter(lambda i: iterable[i] != iterable[i - 1], range(1, len(iterable))))
     return [iterable[0]] + [iterable[i] for i in indices] if len(iterable) != 0 else []
 
 
@@ -355,9 +340,7 @@ def comp(array1, array2):
     if len(array1) == len(array2):
         array1.sort()
         array2.sort()
-        return all(
-            [True if array1[i] ** 2 == array2[i] else False for i in range(len(array1))]
-        )
+        return all([True if array1[i] ** 2 == array2[i] else False for i in range(len(array1))])
     else:
         return False
 
@@ -365,21 +348,29 @@ def comp(array1, array2):
 # Task_20 - Elimination Tournament
 
 
-def tourney(inp):
+# def tourney(inp):
+#     result = []
+#     buffer = []
+#     if len(inp) % 2 == 0:
+#         buffer = [max(inp[i], inp[i + 1]) for i in range(0, len(inp), 2)]
+#         result.append(buffer)
+#         return tourney(buffer)
+
+#     else:
+#         buffer = [max(inp[i], inp[i + 1]) for i in range(0, len(inp) - 1, 2)]
+#         result.append(buffer)
+
+
+def tourney(inp: list):
     result = []
-    if len(inp) == 1:
-        return result.append(inp)
-
-    else:
-        buffer = []
-        if len(inp) % 2 == 0:
-            buffer = [max(inp[i], inp[i + 1]) for i in range(0, len(inp), 2)]
-            result.append(buffer)
-            return tourney(buffer)
-
-        else:
-            buffer = [max(inp[i], inp[i + 1]) for i in range(0, len(inp) - 1, 2)]
-            result.append(buffer)
+    if len(inp) % 2 == 0:
+        inp_even = inp[::2]
+        inp_odd = inp[1::2]
+    print(inp_odd)
+    print(inp_even)
+    arr = [(i, j) for i in inp_odd for j in inp_even]
+    print(arr)
+    return result
 
 
 # Task_21 - Magic The Gathering #1: Creatures
@@ -404,9 +395,8 @@ def valid_word(seq, word):
 
 
 def meeting(string):
-    lst = [
-        (el.split(":")[1].upper(), el.split(":")[0].upper()) for el in string.split(";")
-    ]
+    lst = [(el.split(":")[1].upper(), el.split(":")[0].upper()) for el in string.split(";")]
+    lst = sorted(lst, key=lambda x: x[1])
     lst = sorted(lst, key=lambda x: x[0])
     result = [f"({tpl[0]}, {tpl[1]})" for tpl in lst]
     return "".join(result)
@@ -452,9 +442,12 @@ def main():
     # b = [11 * 11, 121 * 121, 144 * 144, 19 * 19, 161 * 161, 19 * 19, 144 * 144, 19 * 19]
     # print(comp(a, b))
 
+    # Task_20
+    print(tourney([9, 5, 4, 7, 6, 3, 8, 2]))
+
     # Task_23
     s = "Fred:Corwill;Wilfred:Corwill;Barney:Tornbull;Betty:Tornbull;Bjon:Tornbull;Raphael:Corwill;Alfred:Corwill"
-    print(meeting(s))
+    # print(meeting(s))
 
 
 if __name__ == "__main__":

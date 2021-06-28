@@ -94,12 +94,11 @@ def order(sentence: str):
     if len(sentence) == 0:
         return ""
     array = []
-    for i in range(1, len(sentence.split())+1):
+    for i in range(1, len(sentence.split()) + 1):
         for chunk in sentence.split():
             if str(i) in chunk:
                 array.append(chunk)
     return " ".join(array)
-
 
 
 def main():
