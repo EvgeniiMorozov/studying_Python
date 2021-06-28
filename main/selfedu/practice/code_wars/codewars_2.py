@@ -266,12 +266,11 @@ def create_phone_number(n):
 """
 
 
-# Task_16 - Strip Comments
+# Task_16 - Strip Comments - https://www.codewars.com/kata/51c8e37cee245da6b40000bd
 
 
 def solution(string, markers):
-    sep = "\n"
-    sep_indices = list(filter(lambda i: sep == string[i], range(len(string))))
+    sep_indices = list(filter(lambda i: string[i] == "\n", range(len(string))))
     markers_indices = list(filter(lambda i: string[i] in markers, range(len(string))))
 
     result = []
