@@ -101,6 +101,31 @@ def order(sentence: str):
     return " ".join(array)
 
 
+# Task-7 - Persistent Bugger. - https://www.codewars.com/kata/55bf01e5a717a0d57e0000ec/train/python
+def persistence(num):
+    if len(str(num)) == 1:
+        return 0
+    counter = 0
+    while len(str(num)) > 1:
+        counter += 1
+        tmp = 1
+        for i in str(num):
+            tmp *= int(i)
+        num = tmp
+    return counter
+
+
+"""
+import operator
+def persistence(n):
+    i = 0
+    while n>=10:
+        n=reduce(operator.mul,[int(x) for x in str(n)],1)
+        i+=1
+    return i
+"""
+
+
 def main():
     # Task-1
     # print(duplicate_encode("din"))

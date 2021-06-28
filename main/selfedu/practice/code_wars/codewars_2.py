@@ -293,35 +293,52 @@ def solution(string, markers):
     return " ".join(result).rstrip()
 
 
-# Task_17 - Range Extraction
+# Task_17 - Range Extraction - https://www.codewars.com/kata/51ba717bb08c1cd60f00002f/train/python
 
 
 def solution_2(args):
-
     buffer = []
     result = []
-
     j = args[0]
 
-    for i in range(len(args)):
+    def _pass_buffer(buffer: list, result: list):
+        if 0 < len(buffer) <= 2:
+            result.append(",".join(buffer))
+            buffer.clear()
+        elif len(buffer) >= 3:
+            result.append(f"{buffer[0]}-{buffer[-1]}")
+            buffer.clear()
 
+    for i in range(len(args)):
         if args[i] == j:
             buffer.append(str(args[i]))
         else:
             j = args[i]
-
-            if 0 < len(buffer) <= 2:
-                result.append("".join(buffer))
-                buffer.clear()
-            elif len(buffer) >= 3:
-                result.append(f"{buffer[0]}-{buffer[-1]}")
-                buffer.clear()
-
-            result.append(str(args[i]))
-
+            _pass_buffer(buffer, result)
+            buffer.append(str(args[i]))
         j += 1
+    _pass_buffer(buffer, result)
+    return ",".join(result)
 
-    return result
+
+"""
+def solution(args):
+    out = []
+    beg = end = args[0]
+
+    for n in args[1:] + [""]:
+        if n != end + 1:
+            if end == beg:
+                out.append( str(beg) )
+            elif end == beg + 1:
+                out.extend( [str(beg), str(end)] )
+            else:
+                out.append( str(beg) + "-" + str(end) )
+            beg = n
+        end = n
+
+    return ",".join(out)
+"""
 
 
 def main():
@@ -335,7 +352,7 @@ def main():
     # print(inside_out("man i need a taxi up to ubud"))
 
     # Task_4
-    print(parts_sums([1, 2, 3, 4, 5, 6]))
+    # print(parts_sums([1, 2, 3, 4, 5, 6]))
 
     # Task_7
     # print(find_even_index([1,100,50,-51,1,1]))
@@ -366,7 +383,8 @@ def main():
     # print(solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"]))
 
     # Task_17
-    # print(solution_2([-6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]))
+    print(solution_2([-6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]))
+    print(solution_2([-3, -2, -1, 2, 10, 15, 16, 18, 19, 20]))
 
 
 if __name__ == "__main__":
