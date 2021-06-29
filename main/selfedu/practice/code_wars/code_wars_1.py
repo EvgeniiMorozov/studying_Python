@@ -6,14 +6,7 @@
 
 
 def count_bits(n: int):
-    result = []
-    while n:
-        result.append(n % 2)
-        n //= 2
-
-    result.reverse()
-    result = [str(el) for el in result]
-    return int("".join(result))
+    return str(bin(n)).count("1")
 
 
 # Task_2
@@ -404,7 +397,7 @@ def meeting(string):
 
 def main():
     # Task_1
-    # print(count_bits(1234))
+    print(count_bits(1234))
     # Task_2
     # print(tower_builder(3))
     # Task_3
@@ -443,7 +436,7 @@ def main():
     # print(comp(a, b))
 
     # Task_20
-    print(tourney([9, 5, 4, 7, 6, 3, 8, 2]))
+    # print(tourney([9, 5, 4, 7, 6, 3, 8, 2]))
 
     # Task_23
     s = "Fred:Corwill;Wilfred:Corwill;Barney:Tornbull;Betty:Tornbull;Bjon:Tornbull;Raphael:Corwill;Alfred:Corwill"

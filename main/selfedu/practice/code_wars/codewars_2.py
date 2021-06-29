@@ -348,7 +348,11 @@ def main():
     # print(leaderboard_sort(["John", "Brian", "Jim", "Dave", "Fred"], ["Dave +1", "Fred +4", "Brian -1"]))
 
     # Task_3
-    # print(inside_out("man i need a taxi up to ubud"))
+    print(inside_out("man i need a taxi up to ubud"))
+    print(inside_out("what time are we climbing up the volcano"))
+    print("hwta item are we milcgnib up the lovcona")
+    print(inside_out("take me to semynak"))
+    print("atek me to mesykan")
 
     # Task_4
     # print(parts_sums([1, 2, 3, 4, 5, 6]))
@@ -382,8 +386,8 @@ def main():
     # print(solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"]))
 
     # Task_17
-    print(solution_2([-6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]))
-    print(solution_2([-3, -2, -1, 2, 10, 15, 16, 18, 19, 20]))
+    # print(solution_2([-6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]))
+    # print(solution_2([-3, -2, -1, 2, 10, 15, 16, 18, 19, 20]))
 
 
 if __name__ == "__main__":
