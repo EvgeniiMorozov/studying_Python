@@ -379,9 +379,22 @@ def tourney(inp: list):
 # task_22 - Valid string
 
 
-def valid_word(seq, word):
-    result = all([True if el in word else False for el in seq])
-    return True if len(word) == 0 else False
+def valid_word(seq: list, word: str):
+    for chunk in seq:
+        word = word.replace(chunk, "")
+    return all(word.count(chunk) for chunk in seq) and len(word) == 0
+
+"""
+def valid_word(seq: list, word: str):
+    f_word = r_word = word
+    for chunk in seq:
+        f_word = f_word.replace(chunk, "")
+    f_res = len(f_word) == 0
+    for chunk in reversed(seq):
+        r_word = r_word.replace(chunk, "")
+    r_res = len(r_word) == 0
+    return False if f_res == False and r_res == False else True
+"""
 
 
 # Task_23 - Meeting
@@ -397,7 +410,7 @@ def meeting(string):
 
 def main():
     # Task_1
-    print(count_bits(1234))
+    # print(count_bits(1234))
     # Task_2
     # print(tower_builder(3))
     # Task_3
@@ -437,6 +450,9 @@ def main():
 
     # Task_20
     # print(tourney([9, 5, 4, 7, 6, 3, 8, 2]))
+
+    # Task_22
+    print(valid_word(["ab", "a", "bc"], "abc"))
 
     # Task_23
     s = "Fred:Corwill;Wilfred:Corwill;Barney:Tornbull;Betty:Tornbull;Bjon:Tornbull;Raphael:Corwill;Alfred:Corwill"
