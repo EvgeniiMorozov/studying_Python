@@ -27,6 +27,14 @@ def generate_rand_nums(length: int):
 
 
 def multithread_work():
+    """
+    Решение 1го задания. С помощью контекстного менеджера инициализируется многопоточный пул с числом воркеров 3.
+    Выдаем им 3 задачи:
+    - С помощью ранее созданной функции generate_rand_nums формируем список и результат записываем в future1;
+    - Воспользовавшись данными из future1 (future1.result()) считаем среднее арифметическое списка и сумму
+      его членов и записываем их в переменные future2 и future3 соответственно.
+    С помощью функции print организован вывод данных.
+    """
     with cf.ThreadPoolExecutor(max_workers=3) as executor:
         future1 = executor.submit(generate_rand_nums, 30)
         future2 = executor.submit(lambda lst: sum(lst)/len(lst), future1.result())
