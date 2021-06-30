@@ -60,8 +60,18 @@ def isprime(num: int) -> bool:
     """Проверяет, является ли число, простым"""
     if num == 1:
         return False
-    for x in range(2, ceil(num/2)):
+    for x in range(2, ceil(num / 2)):
         return num % x != 0
+
+
+def fill_file(file: str) -> None:
+    with open(file, "w", encoding="utf-8") as f:
+        f.write(" ".join(generate_rand_nums(100)))
+
+
+def multithread_work_2(file: str):
+    with cf.ThreadPoolExecutor(max_workers=3) as executor:
+        executor.submit(fill_file, file)
 
 
 def main():
