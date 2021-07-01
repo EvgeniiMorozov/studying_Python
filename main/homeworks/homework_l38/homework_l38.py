@@ -67,7 +67,7 @@ def isprime(num: int) -> bool:
 def fill_file(file: str) -> None:
     """Заполняет файл строкой со случайными числами"""
     with open(file, "w", encoding="utf-8") as f:
-        f.write(" ".join(generate_rand_nums(100)))
+        f.write(" ".join(map(str, generate_rand_nums(100))))
 
 
 def read_file(file: str) -> list:
