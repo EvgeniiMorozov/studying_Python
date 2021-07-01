@@ -78,8 +78,15 @@ def read_file(file: str) -> list:
 
 
 def multithread_work_2(file: str):
-    with cf.ThreadPoolExecutor(max_workers=3) as executor:
-        executor.submit(fill_file, file)
+    # with cf.ThreadPoolExecutor(max_workers=3) as executor:
+    #     executor.submit(fill_file, file)
+    fill_file(file)
+    with cf.ThreadPoolExecutor(max_workers=None) as executor:
+        future1 = executor.submit(isprime, *read_file(file))
+        future2 = executor.submit(fact, *read_file(file))
+    with open("result.txt", "w", encoding="utf-8") as f:
+        f.write(f"Список простых чисел: {future1.result()}\n")
+        f.write(f"Факториалы чисел: {future2.result()}\n")
 
 
 def main():
@@ -89,7 +96,9 @@ def main():
     # multithread_work()
 
     # Task-2
-    print(isprime(11))
+    # print(isprime(11))
+    filename = input("Введите имя файла: ")
+    multithread_work_2(filename)
 
 
 if __name__ == "__main__":
