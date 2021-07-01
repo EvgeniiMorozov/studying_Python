@@ -65,8 +65,16 @@ def isprime(num: int) -> bool:
 
 
 def fill_file(file: str) -> None:
+    """Заполняет файл строкой со случайными числами"""
     with open(file, "w", encoding="utf-8") as f:
         f.write(" ".join(generate_rand_nums(100)))
+
+
+def read_file(file: str) -> list:
+    """Считывает файл и возвращает список чисел"""
+    with open(file, "r", encoding="utf-8") as f:
+        result = f.read()
+    return [int(el) for el in result.split()]
 
 
 def multithread_work_2(file: str):
