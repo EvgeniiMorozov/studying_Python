@@ -25,7 +25,7 @@ from math import ceil
 
 def generate_rand_nums(length: int) -> list:
     """Генерирует список со случайными числами от 1 до 1000 заданной длины length"""
-    return [randint(1, 1000) for _ in range(length)]
+    return [randint(1, 100) for _ in range(length)]
 
 
 def multithread_work():
@@ -64,6 +64,24 @@ def isprime(num: int) -> bool:
         return num % x != 0
 
 
+
+
+# def list_wrapper(func, array: list) -> list:
+#     """Декоратор, для передачи элементов списка на вход функции, принимающей число"""
+#     def wrapper(func):
+#         for num in array:
+#             func(num)
+#     return wrapper
+
+
+def factorials_list(nums: list) -> list:
+    return [fact(num) for num in nums]
+
+
+def primes_list(nums: list) -> list:
+    return list(filter(lambda num: isprime(num) == True, nums))
+
+
 def fill_file(file: str) -> None:
     """Заполняет файл строкой со случайными числами"""
     with open(file, "w", encoding="utf-8") as f:
@@ -82,8 +100,8 @@ def multithread_work_2(file: str):
     #     executor.submit(fill_file, file)
     fill_file(file)
     with cf.ThreadPoolExecutor(max_workers=None) as executor:
-        future1 = executor.submit(isprime, *read_file(file))
-        future2 = executor.submit(fact, *read_file(file))
+        future1 = executor.submit(primes_list, read_file(file))
+        future2 = executor.submit(factorials_list, read_file(file))
     with open("result.txt", "w", encoding="utf-8") as f:
         f.write(f"Список простых чисел: {future1.result()}\n")
         f.write(f"Факториалы чисел: {future2.result()}\n")
@@ -93,10 +111,11 @@ def main():
 
     # Task-1
     # print(generate_rand_nums(30))
-    # multithread_work()
+    multithread_work()
 
     # Task-2
     # print(isprime(11))
+    # print(fact(58))
     filename = input("Введите имя файла: ")
     multithread_work_2(filename)
 
