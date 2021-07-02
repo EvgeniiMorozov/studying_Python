@@ -75,10 +75,12 @@ def isprime(num: int) -> bool:
 
 
 def factorials_list(nums: list) -> list:
+    """Получает на вход список с числами, отдает список с факториалами чисел"""
     return [fact(num) for num in nums]
 
 
 def primes_list(nums: list) -> list:
+    """Получает на вход список с числами, на выходе список с простыми числами"""
     return list(filter(lambda num: isprime(num) == True, nums))
 
 
@@ -96,8 +98,14 @@ def read_file(file: str) -> list:
 
 
 def multithread_work_2(file: str):
-    # with cf.ThreadPoolExecutor(max_workers=3) as executor:
-    #     executor.submit(fill_file, file)
+    """
+    Решение 2 задачи ДЗ. Ждём от пользователя ввода имени файла, далее с помощью функции fill_file
+    создаём файл с заданным названием и записываем туда строку с числами.
+    Попутно реализуем функцию read_file, которая считывает информацию из файла и преобразует его в список с числами.
+    Далее инициализируем многопоточный пул и выдаём на исполнение 2 задачи: на вычисление факториалов;
+    на определение простых чисел из списка чисел.
+    Результаты вычислений записываем в файл - result.txt.
+    """
     fill_file(file)
     with cf.ThreadPoolExecutor(max_workers=None) as executor:
         future1 = executor.submit(primes_list, read_file(file))
