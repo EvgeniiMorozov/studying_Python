@@ -126,6 +126,16 @@ def persistence(n):
 """
 
 
+# Task-8 - Magic The Gathering #1: Creatures - https://www.codewars.com/kata/567af2c8b46252f78400004d/train/python
+def battle(player1: list, player2: list) -> dict:
+    min_len = min(len(player1), min(player2))
+    for i in range(min_len):
+        if player1[i][0] >= player2[i][1]:
+            player2.remove(player2[i])
+        elif 
+    return {}
+
+
 def main():
     # Task-1
     # print(duplicate_encode("din"))
