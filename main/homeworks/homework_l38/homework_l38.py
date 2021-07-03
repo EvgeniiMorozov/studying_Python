@@ -18,6 +18,8 @@
 import concurrent.futures as cf
 from random import randint
 from math import ceil
+import time
+import threading
 
 
 # Task-1
@@ -46,6 +48,36 @@ def multithread_work():
     print(f"Сумма всех членов списка: {future3.result()}")
 
 
+# Альтернативное решение
+
+def create_file(event: threading.Event):
+    event.set()
+    with open('nums.txt', "w", encoding="utf-8") as f:
+        for _ in range(100000):
+            num = str(randint(1, 10000)) + "\n"
+            f.write(num)
+    event.clear()
+
+
+def sum_nums(event):
+    event.wait()
+    sum = 0
+    with open("nums.txt") as f:
+        for line in f:
+            sum += int(line.strip())
+    return sum
+
+
+def mean_nums(event):
+    event.wait()
+    sum = 0
+    count = 0
+    with open("nums.txt") as f:
+        for line in f:
+            sum += int(line.strip())
+            count += 1
+    return sum / count
+
 # Task-2
 
 
@@ -62,8 +94,6 @@ def isprime(num: int) -> bool:
         return False
     for x in range(2, ceil(num / 2)):
         return num % x != 0
-
-
 
 
 # def list_wrapper(func, array: list) -> list:
@@ -119,13 +149,28 @@ def main():
 
     # Task-1
     # print(generate_rand_nums(30))
-    multithread_work()
+    # multithread_work()
 
     # Task-2
     # print(isprime(11))
     # print(fact(58))
-    filename = input("Введите имя файла: ")
-    multithread_work_2(filename)
+    # filename = input("Введите имя файла: ")
+    # multithread_work_2(filename)
+    # create_file()
+
+    start_time = time.time()
+    # lock = threading.Lock()
+    event = threading.Event()
+    with cf.ThreadPoolExecutor() as executor:
+        future1 = executor.submit(create_file)
+        future2 = executor.submit(sum_nums)
+        future3 = executor.submit(mean_nums)
+    end_time = time.time()
+    print(future2.result())
+    print(future3.result())
+    print(f"Время: {end_time - start_time}")
+
+    print(f"Проверка суммы: {sum_nums(event)}")
 
 
 if __name__ == "__main__":
