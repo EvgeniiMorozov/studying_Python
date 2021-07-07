@@ -155,7 +155,7 @@ def quadratic_builder(expression: str) -> str:
     a = factors[0] * factors[2] if factors[0] * factors[2] != 1 else ""
     b = factors[0] * factors[3] + factors[1] * factors[2]
     c = factors[1] * factors[3]
-    return f"{a if a > 1 else ''}{letter}^2{'+' + str(b) if b > 0 else str(b)}{letter}{'+' + str(c) if c > 0 else str(c)}"
+    return f"{a}{letter}^2{'+' + str(b) if b > 0 else str(b)}{letter}{'+' + str(c) if c > 0 else str(c)}"
 
 
 def main():
