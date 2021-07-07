@@ -270,6 +270,10 @@ def create_phone_number(n):
 
 
 def solution(string, markers):
+    if len(string) == 0:
+        return string
+    if len(markers) == 0:
+        return string
     sep_indices = list(filter(lambda i: string[i] == "\n", range(len(string))))
     markers_indices = list(filter(lambda i: string[i] in markers, range(len(string))))
 
@@ -289,7 +293,35 @@ def solution(string, markers):
             buffer.append(string[i])
 
     result.append("".join(buffer).rstrip())
-    return " ".join(result).rstrip()
+    return "".join(result).strip()
+
+
+"""
+def solution(string, markers):
+    if len(string) == 0:
+        return "\n"
+    sep = "\n"
+    sep_indices = list(filter(lambda i: sep == string[i], range(len(string))))
+    markers_indices = list(filter(lambda i: string[i] in markers, range(len(string))))
+
+    result = []
+    buffer = []
+    is_writable = markers_indices[0] != 0
+
+    for i in range(len(string)):
+        if is_writable and i in markers_indices:
+            result.append(''.join(buffer).rstrip())
+            is_writable = False
+            buffer.clear()
+        elif not is_writable and i in sep_indices:
+            buffer.append(string[i])
+            is_writable = True
+        elif is_writable:
+            buffer.append(string[i])
+
+    result.append(''.join(buffer).rstrip())
+    return ''.join(result).rstrip()
+"""
 
 
 # Task_17 - Range Extraction - https://www.codewars.com/kata/51ba717bb08c1cd60f00002f/train/python
@@ -348,11 +380,11 @@ def main():
     # print(leaderboard_sort(["John", "Brian", "Jim", "Dave", "Fred"], ["Dave +1", "Fred +4", "Brian -1"]))
 
     # Task_3
-    print(inside_out("man i need a taxi up to ubud"))
-    print(inside_out("what time are we climbing up the volcano"))
-    print("hwta item are we milcgnib up the lovcona")
-    print(inside_out("take me to semynak"))
-    print("atek me to mesykan")
+    # print(inside_out("man i need a taxi up to ubud"))
+    # print(inside_out("what time are we climbing up the volcano"))
+    # print("hwta item are we milcgnib up the lovcona")
+    # print(inside_out("take me to semynak"))
+    # print("atek me to mesykan")
 
     # Task_4
     # print(parts_sums([1, 2, 3, 4, 5, 6]))
@@ -383,7 +415,7 @@ def main():
     # print(create_phone_number([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]))
 
     # Task_16
-    # print(solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"]))
+    print(solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"]))
 
     # Task_17
     # print(solution_2([-6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]))

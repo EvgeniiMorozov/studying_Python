@@ -62,7 +62,7 @@ def sort_sequence(sequence):
 """
 
 # Task-4 - Twice linear - https://www.codewars.com/kata/5672682212c8ecf83e000050
-def dbl_linear(num):
+def dbl_linear(num: int) -> int:
     def _y(n):
         return 2 * n + 1
 
@@ -127,13 +127,35 @@ def persistence(n):
 
 
 # Task-8 - Magic The Gathering #1: Creatures - https://www.codewars.com/kata/567af2c8b46252f78400004d/train/python
+# (strenght, agility)
 def battle(player1: list, player2: list) -> dict:
     min_len = min(len(player1), min(player2))
     for i in range(min_len):
         if player1[i][0] >= player2[i][1]:
             player2.remove(player2[i])
-        elif 
+
     return {}
+
+
+# Task-9 - Build a quadratic equation - https://www.codewars.com/kata/60a9148187cfaf002562ceb8/train/python
+def quadratic_builder(expression: str) -> str:
+    factors = []
+    for i in range(len(expression)):
+        if expression[i].isdigit():
+            if expression[i - 1] == "-":
+                factors.append(int(expression[i]) * -1)
+            else:
+                factors.append(int(expression[i]))
+        elif expression[i].isalpha():
+            letter = expression[i]
+            if expression[i - 1] == "-":
+                factors.append(-1)
+            if expression[i - 1] == "(":
+                factors.append(1)
+    a = factors[0] * factors[2]
+    b = factors[0] * factors[3] + factors[1] * factors[2]
+    c = factors[1] * factors[3]
+    return f"{a}{letter}^2{'+' + str(b) if b > 0 else str(b)}{'+' + str(c) if c > 0 else str(c)}"
 
 
 def main():
@@ -156,7 +178,11 @@ def main():
     # print(song_decoder("WUBAWUBWUBBWUBCWUB"))
 
     # Task-6
-    print(order("4of Fo1r pe6ople g3ood th5e the2"))
+    # print(order("4of Fo1r pe6ople g3ood th5e the2"))
+
+    # Task-9
+    print(quadratic_builder("(3y+2)(y+5)"))
+    print(quadratic_builder("(-h-7)(4h+3)"))
 
 
 if __name__ == "__main__":
