@@ -139,23 +139,42 @@ def battle(player1: list, player2: list) -> dict:
 
 # Task-9 - Build a quadratic equation - https://www.codewars.com/kata/60a9148187cfaf002562ceb8/train/python
 def quadratic_builder(expression: str) -> str:
-    factors = []
+    nums = []
     for i in range(len(expression)):
         if expression[i].isdigit():
             if expression[i - 1] == "-":
-                factors.append(int(expression[i]) * -1)
+                nums.append(int(expression[i]) * -1)
             else:
-                factors.append(int(expression[i]))
+                nums.append(int(expression[i]))
         elif expression[i].isalpha():
             letter = expression[i]
             if expression[i - 1] == "-":
-                factors.append(-1)
+                nums.append(-1)
             if expression[i - 1] == "(":
-                factors.append(1)
-    a = factors[0] * factors[2] if factors[0] * factors[2] != 1 else ""
-    b = factors[0] * factors[3] + factors[1] * factors[2]
-    c = factors[1] * factors[3]
-    return f"{a}{letter}^2{'+' + str(b) if b > 0 else str(b)}{letter}{'+' + str(c) if c > 0 else str(c)}"
+                nums.append(1)
+
+    multipliers = [nums[0] * nums[2], nums[0] * nums[3] + nums[1] * nums[2], nums[1] * nums[3]]
+
+    chunks = []
+    for i, num in enumerate(multipliers, start=1):
+        if num == 0:
+            chunks.append("")
+        elif num == [1, -1]:
+            if i == 1:
+                chunks.append(f"{letter}^2") if num == 1 else chunks.append(f"-{letter}^2")
+            elif i == 2:
+                chunks.append(f"+{letter}") if num == 1 else chunks.append(f"-{letter}")
+            elif i == 3:
+                chunks.append(str(num))
+        elif num > 1 or num < -1:
+            if i == 1:
+                chunks.append(f"{num}{letter}^2") if num > 1 else chunks.append(f"{num}{letter}^2")
+            elif i == 2:
+                chunks.append(f"+{num}{letter}") if num > 1 else chunks.append(f"{num}{letter}")
+            elif i == 3:
+                chunks.append(f"+{num}") if num > 1 else chunks.append(f"{num}")
+
+    return "".join(chunks)
 
 
 def main():
