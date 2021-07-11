@@ -31,3 +31,19 @@ Task 8. 1-861-958-4949
 которая асинхронно качает несколько картинок. Нужно разобраться, что он делает и
 переделать его под данную задачу. Код прокомментирован.
 """
+
+import asyncio
+
+import aiohttp
+
+
+URL = "https://random-data-api.com/api/phone_number/random_phone_number"
+
+
+def write_data(data: str, filename: str):
+    with open(filename, "w", encoding="utf-8") as f:
+        f.write(data + "\n")
+
+
+if __name__ == '__main__':
+    ...
