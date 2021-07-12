@@ -33,11 +33,10 @@ Task 8. 1-861-958-4949
 """
 
 import asyncio
+import json
+import time
 
 import aiohttp
-
-
-URL = "https://random-data-api.com/api/phone_number/random_phone_number"
 
 
 def write_data(data: str, filename: str):
@@ -45,5 +44,30 @@ def write_data(data: str, filename: str):
         f.write(data + "\n")
 
 
-if __name__ == '__main__':
-    ...
+async def fetch_content(url: str, filename: str, session, index: int):
+    async with session.get(url) as response:
+        data = await response.read()
+        data = json.loads(data)
+        write_data(f"Task{index}. {data['cell_phone']}", filename)
+
+
+async def collect_data():
+    url = "https://random-data-api.com/api/phone_number/random_phone_number"
+    filename = "data.txt"
+    tasks = []
+
+    async with aiohttp.ClientSession() as session:
+        for index in range(500):
+            task = asyncio.create_task(fetch_content(url, filename, session, index))
+            tasks.append(task)
+        await asyncio.gather(*tasks)
+
+
+if __name__ == "__main__":
+    start_time = time.time()
+
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(collect_data())
+
+    end_time = time.time()
+    print(f'Время: {end_time - start_time} сек.')
