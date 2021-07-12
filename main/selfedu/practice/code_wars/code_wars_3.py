@@ -84,6 +84,57 @@ def dbl_linear(num: int) -> int:
     return lst[num]
 
 
+"""
+def dbl_linear(n) :
+    list = [1]
+    x = 0
+    y = 0
+
+    while(len(list)<=n) :
+        a = 2*list[x] + 1
+        b = 3*list[y] + 1
+
+        if a>b :
+            list.append(b)
+            y+= 1
+        elif a<b :
+            list.append(a)
+            x += 1
+        else :
+            list.append(a)
+            x += 1
+            y += 1
+
+    return list[n]
+
+
+
+from collections import deque
+
+def dbl_linear(n):
+    h = 1; cnt = 0; q2, q3 = deque([]), deque([])
+    while True:
+        if (cnt >= n):
+            return h
+        q2.append(2 * h + 1)
+        q3.append(3 * h + 1)
+        h = min(q2[0], q3[0])
+        if h == q2[0]: h = q2.popleft()
+        if h == q3[0]: h = q3.popleft()
+        cnt += 1
+
+
+def dbl_linear(n):
+  num_list = [1]
+  for i in num_list:
+    num_list.append((i * 2) + 1)
+    num_list.append((i * 3) + 1)
+    if len(num_list) > n *10:
+      break
+  return sorted(list(set(num_list)))[n]
+"""
+
+
 # Task-5 - Dubstep - https://www.codewars.com/kata/551dc350bf4e526099000ae5/train/python
 def song_decoder(song: str):
     return (" ").join(song.replace("WUB", " ").split())
@@ -178,7 +229,6 @@ def quadratic_builder(expression: str) -> str:
 
 
 # Task-10 - Calculating with Functions - https://www.codewars.com/kata/525f3eda17c7cd9f9e000b39/train/python
-
 
 
 def main():
