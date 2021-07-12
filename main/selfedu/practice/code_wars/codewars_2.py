@@ -293,34 +293,23 @@ def solution(string, markers):
             buffer.append(string[i])
 
     result.append("".join(buffer).rstrip())
-    return "".join(result).strip()
+    return "\n".join(result).strip()
 
 
 """
-def solution(string, markers):
-    if len(string) == 0:
-        return "\n"
-    sep = "\n"
-    sep_indices = list(filter(lambda i: sep == string[i], range(len(string))))
-    markers_indices = list(filter(lambda i: string[i] in markers, range(len(string))))
+def solution(string,markers):
+    s_list = string.split("\n")
+    n_list = []
 
-    result = []
-    buffer = []
-    is_writable = markers_indices[0] != 0
-
-    for i in range(len(string)):
-        if is_writable and i in markers_indices:
-            result.append(''.join(buffer).rstrip())
-            is_writable = False
-            buffer.clear()
-        elif not is_writable and i in sep_indices:
-            buffer.append(string[i])
-            is_writable = True
-        elif is_writable:
-            buffer.append(string[i])
-
-    result.append(''.join(buffer).rstrip())
-    return ''.join(result).rstrip()
+    for item in s_list:
+        s = ""
+        for char in item:
+            if char in markers:
+                break
+            else:
+                s = s + char
+        n_list.append(s.strip())
+    return "\n".join(n_list)
 """
 
 
