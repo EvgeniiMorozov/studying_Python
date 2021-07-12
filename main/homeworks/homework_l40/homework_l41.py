@@ -40,11 +40,16 @@ import aiohttp
 
 
 def write_data(data: str, filename: str):
-    with open(filename, "w", encoding="utf-8") as f:
+    """Записывает данные в файл"""
+    with open(filename, "a+", encoding="utf-8") as f:
         f.write(data + "\n")
 
 
 async def fetch_content(url: str, filename: str, session, index: int):
+    """
+    Пользуясь переданной сессией session делает get-запрос, получает данные в формате
+    json, дессериализует их, извлекает из них нужные нам данные и записывает их в файл.
+    """
     async with session.get(url) as response:
         data = await response.read()
         data = json.loads(data)
