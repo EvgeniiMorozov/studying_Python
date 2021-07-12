@@ -177,6 +177,10 @@ def quadratic_builder(expression: str) -> str:
     return "".join(chunks)
 
 
+# Task-10 - Calculating with Functions - https://www.codewars.com/kata/525f3eda17c7cd9f9e000b39/train/python
+
+
+
 def main():
     # Task-1
     # print(duplicate_encode("din"))
