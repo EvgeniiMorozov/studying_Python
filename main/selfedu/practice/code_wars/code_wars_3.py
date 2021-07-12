@@ -228,7 +228,17 @@ def quadratic_builder(expression: str) -> str:
     return "".join(chunks)
 
 
-# Task-10 - Calculating with Functions - https://www.codewars.com/kata/525f3eda17c7cd9f9e000b39/train/python
+# Task-10 - Sort only integers in Nested List - https://www.codewars.com/kata/5a4bdd73d8e145f17d000035/train/python
+
+
+def sort_nested_list(arrays):
+    new_arr = []
+    for array in arrays:
+        for arr in array:
+            for i in arr:
+                new_arr.append(i)
+    result = [[sorted(new_arr)[i], sorted(new_arr)[i+1]] for i in range(0, len(new_arr), 2)]
+    return [result[:int(len(result)/2)], result[int(len(result)/2):]]
 
 
 def main():
@@ -254,8 +264,11 @@ def main():
     # print(order("4of Fo1r pe6ople g3ood th5e the2"))
 
     # Task-9
-    print(quadratic_builder("(3y+2)(y+5)"))
-    print(quadratic_builder("(-h-7)(4h+3)"))
+    # print(quadratic_builder("(3y+2)(y+5)"))
+    # print(quadratic_builder("(-h-7)(4h+3)"))
+
+    # Task-10
+    print(sort_nested_list([[[29, 32], [82, 61], [75, 91]], [[69, 99], [74, 23], [70, 97]]]))
 
 
 if __name__ == "__main__":
