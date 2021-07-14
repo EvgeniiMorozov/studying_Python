@@ -19,3 +19,4 @@ INSERT INTO usersusersusers (user_name, ip_address, comp_name, domain) VALUES
 ("Lilia", "192.168.312.33", "auditor", "buh_office"),
 ("Alexey", "192.168.311.27", "law", "office_1"),
 ("Nikolay", "192.168.311.28", "prorab", "office_1");
+/* Работа с таблицей */
