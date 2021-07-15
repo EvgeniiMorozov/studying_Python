@@ -10,7 +10,7 @@ CREATE TABLE users (
 	comp_name VARCHAR(40) NOT NULL,
 	domain VARCHAR(40) NOT NULL);
 /* Наполнение таблицы данными */
-INSERT INTO usersusersusers (user_name, ip_address, comp_name, domain) VALUES
+INSERT INTO users (user_name, ip_address, comp_name, domain) VALUES
 ("Andrew", "192.168.311.23", "sysadm", "office_1"),
 ("Vasilii", "192.168.311.25", "energo", "office_1"),
 ("Marina", "192.168.312.30", "glav_buh", "buh_office"),
