@@ -1,7 +1,9 @@
 /* Создание базы данных */
 CREATE DATABASE local_network;
+
 /* Подключаемся к созданной БД */
 USE local_network;
+
 /* Создаём таблицу local_network */
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -9,6 +11,7 @@ CREATE TABLE users (
     ip_address VARCHAR(15) NOT NULL,
 	comp_name VARCHAR(40) NOT NULL,
 	domain VARCHAR(40) NOT NULL);
+
 /* Наполнение таблицы данными */
 INSERT INTO users (user_name, ip_address, comp_name, domain) VALUES
 ("Andrew", "192.168.311.23", "sysadm", "office_1"),
@@ -19,4 +22,14 @@ INSERT INTO users (user_name, ip_address, comp_name, domain) VALUES
 ("Lilia", "192.168.312.33", "auditor", "buh_office"),
 ("Alexey", "192.168.311.27", "law", "office_1"),
 ("Nikolay", "192.168.311.28", "prorab", "office_1");
+
 /* Работа с таблицей */
+
+-- Сменим название столбца domain на offices
+alter table users change column domain offices varchar(40) not null;
+
+-- Общая выборка по таблице users
+select * from users;
+
+-- Выборка по полю user_name
+select user_name from users;
