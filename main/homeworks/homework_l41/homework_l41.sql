@@ -33,3 +33,6 @@ select * from users;
 
 -- Выборка по полю user_name
 select user_name from users;
+
+-- Выборка по условию id > 2 и id < 5
+select * from users where id > 2 and id < 5;
