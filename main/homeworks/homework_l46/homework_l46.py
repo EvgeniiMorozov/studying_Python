@@ -14,3 +14,13 @@
 
 В личный кабинет загрузить .py файл с исходным ходом программы.
 """
+
+import mysql.connector
+
+
+def main():
+    pass
+
+
+if __name__ == "__main__":
+    main()
