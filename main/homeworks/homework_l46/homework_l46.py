@@ -23,7 +23,7 @@ from sqlalchemy.sql.sqltypes import Integer, String
 
 
 def create_database():
-    db_connection = mysql.connector.connect(host="localhost", user="root", password="12345")
+    db_connection = mysql.connector.connect(host="localhost", user="root", password="")
     db_cursor = db_connection.cursor()
     db_cursor.execute("CREATE DATABASE players")
     db_cursor.close()
@@ -77,13 +77,13 @@ def create_player() -> tuple:
     dexterity = randint(5, 15)
     mind = randint(5, 15)
     for name in nicknames:
-        yield (name, choice(roles), level, strenght, dexterity, mind)
+        yield name, choice(roles), level, strenght, dexterity, mind
 
 
 def main():
-    create_database()
+    # create_database()
 
-    engine = create_engine("mysql+mysqlconnector://root:12345@localhost/players", echo=True)
+    engine = create_engine("mysql+mysqlconnector://root:@localhost/players", echo=True)
     metadata = MetaData()
 
     conn = engine.connect()
