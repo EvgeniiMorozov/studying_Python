@@ -21,6 +21,13 @@ from sqlalchemy.engine import create_engine
 from sqlalchemy.sql.schema import Column, MetaData, Table
 from sqlalchemy.sql.sqltypes import Integer, String
 
+NICKNAMES = [
+    "David", "Robert", "Mario", "Lawrence", "Anita", "Carlson", "Cedric", "Ortega",
+    "Elliot", "Robles", "Emilio", "May", "Elisabeth", "Riley", "Robyn", "Contreras",
+    "Sean", "Robbin", "Ashlee", "Kelly",
+]
+ROLES = ["wizard", "warrior", "priest", "dark knight", "archer", "cleric"]
+
 
 def create_database():
     db_connection = mysql.connector.connect(host="localhost", user="root", password="")
@@ -48,52 +55,31 @@ def create_table(metadata, engine):
     return player
 
 
-def create_player() -> tuple:
-    nicknames = [
-        "David",
-        "Robert",
-        "Mario",
-        "Lawrence",
-        "Anita",
-        "Carlson",
-        "Cedric",
-        "Ortega",
-        "Elliot",
-        "Robles",
-        "Emilio",
-        "May",
-        "Elisabeth",
-        "Riley",
-        "Robyn",
-        "Contreras",
-        "Sean",
-        "Robbin",
-        "Ashlee",
-        "Kelly",
-    ]
-    roles = ["wizard", "warrior", "priest", "dark knight", "archer"]
-    level = randint(1, 30)
-    strenght = randint(5, 15)
-    dexterity = randint(5, 15)
-    mind = randint(5, 15)
-    for name in nicknames:
-        yield name, choice(roles), level, strenght, dexterity, mind
-
-
 def main():
     # create_database()
 
-    engine = create_engine("mysql+mysqlconnector://root:@localhost/players", echo=True)
+    # engine = create_engine("mysql+mysqlconnector://root:@localhost/players", echo=True)
+    sqlite_engine = create_engine("sqlite:///app.sqlite")
     metadata = MetaData()
 
-    conn = engine.connect()
+    # conn = engine.connect()
+    sqlite_conn = sqlite_engine.connect()
 
-    players = create_table(metadata, engine)
+    # players = create_table(metadata, engine)
+    players = create_table(metadata, sqlite_engine)
 
-    for _ in range(20):
-        player_data = players.insert().values(*create_player)
-        conn.execute(player_data)
-        print(player_data.nickname)
+    #  "Заливаем" данные в нашу БД
+    # for i in range(len(NICKNAMES)):
+    #     insert_query = players.insert().values(
+    #         nickname=f"{NICKNAMES[i]}",
+    #         role=f"{choice(ROLES)}",
+    #         level=randint(1, 30),
+    #         strenght = randint(5, 15),
+    #         dexterity = randint(5, 15),
+    #         mind = randint(5, 15)
+    #     )
+    #     print(insert_query)
+    #     result = sqlite_conn.execute(insert_query)
 
 
 if __name__ == "__main__":
