@@ -15,21 +15,31 @@
 В личный кабинет загрузить .py файл с исходным ходом программы.
 """
 
+
+from os.path import exists
+from random import choice
+from random import randint
+
 import mysql.connector
-from random import choice, randint
 from sqlalchemy.engine import create_engine
-from sqlalchemy.sql.schema import Column, MetaData, Table
-from sqlalchemy.sql.sqltypes import Integer, String
+from sqlalchemy.sql.expression import select
+from sqlalchemy.sql.schema import Column
+from sqlalchemy.sql.schema import MetaData
+from sqlalchemy.sql.schema import Table
+from sqlalchemy.sql.sqltypes import Integer
+from sqlalchemy.sql.sqltypes import String
 
 NICKNAMES = [
-    "David", "Robert", "Mario", "Lawrence", "Anita", "Carlson", "Cedric", "Ortega",
-    "Elliot", "Robles", "Emilio", "May", "Elisabeth", "Riley", "Robyn", "Contreras",
-    "Sean", "Robbin", "Ashlee", "Kelly",
+    "David", "Robert", "Mario", "Lawrence", "Anita", "Carlson", "Cedric", "Ortega", "Sean", "Robbin",
+    "Elliot", "Robles", "Emilio", "May", "Elisabeth", "Riley", "Robyn", "Contreras", "Ashlee", "Kelly"
 ]
 ROLES = ["wizard", "warrior", "priest", "dark knight", "archer", "cleric"]
 
 
 def create_database():
+    """
+    Создание базы данных на сервере MySQL
+    """
     db_connection = mysql.connector.connect(host="localhost", user="root", password="")
     db_cursor = db_connection.cursor()
     db_cursor.execute("CREATE DATABASE players")
@@ -37,7 +47,18 @@ def create_database():
     db_connection.close()
 
 
+def create_sqlite_database():
+    pass
+
+
 def create_table(metadata, engine):
+    """
+    Создание таблицы player
+        nickname - имя игрока
+        role - тип персонажа
+        level - уровень персонажа
+        strenght, dexterity, mind - сила, ловкость и интеллект персонажа
+    """
     player = Table(
         "player",
         metadata,
@@ -58,19 +79,26 @@ def create_table(metadata, engine):
 def main():
     # create_database()
 
-    # engine = create_engine("mysql+mysqlconnector://root:@localhost/players", echo=True)
-    sqlite_engine = create_engine("sqlite:///app.sqlite")
-    metadata = MetaData()
+    if not exists("app.sqlite"):
+        print("Создайте файл: app.sqlite")
 
+    # Драйвер для подключения к БД MySQL
+    # engine = create_engine("mysql+mysqlconnector://root:@localhost/players", echo=True)
     # conn = engine.connect()
+
+    # Драйвер для подключения к БД SQLITE3
+    sqlite_engine = create_engine("sqlite:///app.sqlite")
     sqlite_conn = sqlite_engine.connect()
 
-    # players = create_table(metadata, engine)
-    players = create_table(metadata, sqlite_engine)
+    metadata = MetaData()
+
+    # player = create_table(metadata, engine)
+
+    player = create_table(metadata, sqlite_engine)
 
     #  "Заливаем" данные в нашу БД
     # for i in range(len(NICKNAMES)):
-    #     insert_query = players.insert().values(
+    #     insert_query = player.insert().values(
     #         nickname=f"{NICKNAMES[i]}",
     #         role=f"{choice(ROLES)}",
     #         level=randint(1, 30),
@@ -80,6 +108,27 @@ def main():
     #     )
     #     print(insert_query)
     #     result = sqlite_conn.execute(insert_query)
+
+    # Выполнение подзапросов к БД
+
+    # Отобразить "всю" таблицу
+    select_all = player.select()
+    result = sqlite_conn.execute(select_all)
+
+    # print(result.fetchmany(5))
+    # print(result.fetchmany(3))
+
+    for row in result:
+        print(row)
+
+    # Запросы с условием
+    where_query = select([player]).where(player.columns.role != "dark knight")
+    result_where = sqlite_conn.execute(where_query)
+    print(result_where.fetchall())
+
+    where_query_1 = select([player]).where((player.columns.role != "dark knight") and (player.columns.level >= 15))
+    result_where_1 = sqlite_conn.execute(where_query_1)
+    print(result_where_1.fetchall())
 
 
 if __name__ == "__main__":
