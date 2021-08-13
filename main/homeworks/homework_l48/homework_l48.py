@@ -22,8 +22,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql.schema import Column
 from sqlalchemy.sql.sqltypes import Integer, String
-from stuff import LOCATION
-from stuff import PRODUCTS
+from stuff import LOCATION, PRODUCTS
 
 
 Base = declarative_base()
@@ -61,8 +60,26 @@ def main():
     # engine = create_engine("mysql+mysqlconnector://root:@localhost/product")
     engine = create_engine("sqlite:///app.sqlite")
     Base.metadata.create_all(engine)
+
     with sessionmaker(engine).begin() as session:
-        fill_data(session, Product)
+        # Заливаем данные в созданную таблицу
+        # fill_data(session, Product)
+
+        # Запросы в БД
+
+        for row in session.query(Product).all():
+            print(row.title)
+
+        query1 = session.query(Product).filter(
+                Product.location == "М-н СЕЛЬПО"
+            ).all()
+        for row in query1:
+            print(f"{row.id}\t\t\t{row.title}\t\t\t{row.location}")
+
+        query2 = session.query(Product).filter(
+            Product.title.like("Печ%")
+        ).all()
+        print([row.title for row in query2])
 
 
 if __name__ == "__main__":
